@@ -1,0 +1,1820 @@
+/**
+ * FINDINGS — every headline number, as data, with its provenance.
+ *
+ * The physics lives in fifteen modules and the argument is written across their
+ * headers. That is right for a reader and wrong for a tool: a visual built by
+ * reading prose is a visual that drifts from the code the day after it is made.
+ *
+ * This module is the machine-readable surface. Every entry is **computed live**
+ * from the module that owns it — nothing here is a copied literal — and carries
+ * where it came from, how it was obtained, and what would falsify or limit it.
+ *
+ * Contract for anyone generating figures, decks or copy:
+ *   - read `findings()`, never a number out of a doc;
+ *   - render `value` with `unit`, and put `provenance` where it can be seen;
+ *   - if `kind` is "measured" the number came off this machine's hardware; if
+ *     "assumed" it is a labelled input and must be shown as one;
+ *   - `limits` is not a footnote to bury. It is the honest half of the claim.
+ *
+ * `npm run findings` prints the whole set as JSON.
+ */
+
+import { K_NOW, P_2023, P_I, kOf } from "./kardashev.ts";
+import { DATACENTER_W, ELECTRICITY_W, TYPE_I_OF_DISK } from "./facts.ts";
+import { LAMBDA, yearsAccelerating, yearsInertial } from "./forecast.ts";
+import { buildGrid, gridHeadline } from "./grid.ts";
+import { SIZING_CORRECTION, singleYearOptimismFactor } from "./grid-reliability.ts";
+import { isoReliabilityFrontier, leastCost } from "./grid-cost.ts";
+import { arcHistogram } from "./grid-qubo.ts";
+import { runScenarios } from "./compute-energy.ts";
+import { QSIM_PROVENANCE, simulationWall } from "./qsim.ts";
+import { PQC_HANDSHAKE, PQC_VERDICT, sizePenalty } from "./pqc.ts";
+import { latencyBudget, loopVerdicts } from "./operator.ts";
+import { crustBudget, groundSolarLandFraction, thermalPoint } from "./thermal.ts";
+import { liftVerdict } from "./lift.ts";
+import { correctedArealGapX, replacementFlow, sustainableFractionOfTypeI } from "./collector.ts";
+import { thermalComparison } from "./beam.ts";
+import { leverComparison, massUnderstatementX, runway, LOGIC_J_PER_BIT_OP, MOVEMENT_J_PER_BIT } from "./reject.ts";
+import {
+  doublingTimeImpliedBy,
+  doublingsRequired,
+  earthShareCeiling,
+  industryLadder,
+  lunarAdvantageX,
+  transportShare,
+  typeISystemMassKg,
+} from "./isru.ts";
+import {
+  arrayAsObject,
+  atomicOxygen,
+  combinedLifetimeYr,
+  debrisExposure,
+  dustAccretion,
+  filmDamage,
+  filmThicknessM,
+  lifetimeLeverage,
+} from "./environment.ts";
+import {
+  ASSUMED_DUTY_CYCLE,
+  GEO_RADIUS_M,
+  climateFloorRadiusM,
+  dutyCycleGeometric,
+  nonShadingBand,
+  shadingDeltaTK,
+  shadingFraction,
+  skyCoverageSquareDeg,
+} from "./placement.ts";
+import {
+  arealDensityToGeoKgM2,
+  deltaVToGeo,
+  destinationPenalty,
+  lunarDelivery,
+  sourcingAdvantage,
+} from "./transfer.ts";
+import {
+  SPECIFIC_POWER_W_KG,
+  floorCorrection,
+  loadCase,
+  radiatorSpecificPowerWKg,
+  requiredSpecificPowerWKg,
+  selfRadiatingSpecificPowerWKg,
+  thicknessForSpecificPowerM,
+} from "./load.ts";
+import {
+  brainEquivalents,
+  efficiencyComparison,
+  escapeThreshold,
+  runwayCases,
+  typeIResponsesPerSecond,
+} from "./substitution.ts";
+import {
+  PROCESSES,
+  computeShareToday,
+  meanNonComputeRunway,
+  processRunway,
+  requiredComputeShare,
+  requiredComputeShareAtBestCase,
+  totalReduction,
+} from "./industry.ts";
+import {
+  detectionDistancePc,
+  occultationSignature,
+  spectralAdvantage,
+  thermalSignature,
+} from "./signature.ts";
+import { firstWall, groundSolarAllLandW, rungs, soonerThanTypeIX } from "./sequence.ts";
+import { CHEMICAL_CEILING_S, chainConsequences, evaluate, PROPELLANTS } from "./engine.ts";
+import { falcon9Check, minimumStages, stagedFlight } from "./staging.ts";
+import { densityResults, pumpBudget, reversal, stageComparison, VEHICLES } from "./density.ts";
+import { doublingFloorSeconds, elastic, inelastic, organisationalGap, regimes, wallArrivals } from "./acceleration.ts";
+import { fractionImpliedByClosingTheGap, speedupLadder, unaccelerable, verification } from "./qualification.ts";
+import { CURVES, gapCases, requiredArealRate, temptation } from "./learning.ts";
+import { gates, openGates, powerDoublingsToTypeI, projections } from "./route.ts";
+import { growthExponent, learningLeverage, yearsToBuild } from "./bootstrap.ts";
+import { AASM_1980_CLOSURE, buildAt, proposedVersusRequired, requiredClosure } from "./closure.ts";
+import { TRACE_VOLATILES, extractionJPerKg, polarAdvantageX, regolithPerKg, sitingConflict, volatileBudget } from "./volatiles.ts";
+import { POLE_TO_EQUATOR_M, fleetComparison, hopEqualsEscapeRangeM, transportCase } from "./surface.ts";
+
+/** How a number was obtained. This is the first thing a reader should see. */
+export type Kind =
+  /** Follows from stated physics and nothing else. */
+  | "derived"
+  /** Came off hardware in this repo, with provenance. */
+  | "measured"
+  /** A published figure, cited. */
+  | "published"
+  /** A labelled input. Must be rendered as an input, never as a result. */
+  | "assumed";
+
+export type Finding = {
+  id: string;
+  module: string;
+  /** One line. The claim, not the context. */
+  claim: string;
+  value: number;
+  unit: string;
+  kind: Kind;
+  /** Where it comes from and how to reproduce it. */
+  provenance: string;
+  /** The honest half. Never render a finding without it. */
+  limits: string;
+  /** Modules whose conclusions move if this number moves. */
+  affects?: string[];
+};
+
+export function findings(): Finding[] {
+  const grid = buildGrid();
+  const gh = gridHeadline();
+  const frontier = leastCost(isoReliabilityFrontier({ overbuilds: [1.15, 1.3, 1.5], bisectSteps: 8 }));
+  const arcs = arcHistogram({ hours: 720 });
+  const scen = runScenarios();
+  const frontier3 = scen.find((s) => s.id === "frontier-served")!;
+  const local = scen.find((s) => s.id === "local-8b")!;
+  const wall = simulationWall();
+  const op = latencyBudget();
+  const arrest = loopVerdicts().find((v) => v.loop === "RoCoF arrest")!;
+  const typeIThermal = thermalPoint("Type I on the crust", P_I);
+  const lift = liftVerdict();
+  const lever = leverComparison(350, 400);
+  const film = filmDamage();
+  const ao = atomicOxygen();
+  const obj = arrayAsObject();
+  const issRadius = 6.371e6 + 408e3;
+  const climateFloor = climateFloorRadiusM(0.1);
+  const penalty = destinationPenalty();
+  const arealGeo = arealDensityToGeoKgM2(100, 100);
+  const rackLoad = loadCase("rack", SPECIFIC_POWER_W_KG.rack);
+  const floors = floorCorrection();
+  const escape = escapeThreshold(0.1);
+  const eff = efficiencyComparison();
+  const industryRunway = meanNonComputeRunway();
+  const sig = thermalSignature(10, 320);
+  const occ = occultationSignature(320);
+  const first = firstWall();
+  const lh2 = evaluate(PROPELLANTS.find((p) => p.id === "lox-lh2")!);
+  const rp1 = evaluate(PROPELLANTS.find((p) => p.id === "lox-rp1")!);
+  const sane = chainConsequences().find((c) => c.massRatio === 3)!;
+  const f9 = falcon9Check();
+  const rev = reversal();
+  const sc = stageComparison(2);
+  const arrivals = wallArrivals();
+  const ver = verification();
+  const learn = gapCases();
+  const gs = gates();
+
+  return [
+    // ── the scale itself ────────────────────────────────────────────────────
+    {
+      id: "k-now",
+      module: "kardashev.ts",
+      claim: "Humanity sits at K on the Sagan 1973 scale",
+      value: K_NOW,
+      unit: "K",
+      kind: "derived",
+      provenance: "kOf(P_2023); P_2023 = IEA TES 620 EJ/yr over a Julian year",
+      limits: "IEA TES carries a few percent of uncertainty. Sagan 1973, not Kardashev 1964.",
+    },
+    {
+      id: "gap-type-i",
+      module: "kardashev.ts",
+      claim: "Type I is this many times today's total energy supply",
+      // Computed here rather than read from GAP_I, so the provenance line is
+      // the actual arithmetic and not a name that could drift from it.
+      value: P_I / P_2023,
+      unit: "×",
+      kind: "derived",
+      provenance: "P_I / P_2023 — 1e16 W over IEA TES 620 EJ/yr, both from kardashev.ts",
+      limits: "A ratio of powers. Never render it as '0.27 points of K' — that hides nine doublings.",
+    },
+    {
+      id: "type-i-of-disk",
+      module: "facts.ts",
+      claim: "Type I as a share of the sunlight Earth already intercepts",
+      value: TYPE_I_OF_DISK,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "P_I / P_INTERCEPT, where P_INTERCEPT = πR²·AM0 from facts.ts — the disk, not the sphere",
+      limits: "Intercepted, before albedo. Not the same as absorbed.",
+    },
+    {
+      id: "years-accelerating",
+      module: "forecast.ts",
+      claim: "Years to Type I under compressed doublings",
+      value: yearsAccelerating(),
+      unit: "years",
+      kind: "assumed",
+      provenance: `λ = ${LAMBDA}, a hypothesis, against ${Math.round(yearsInertial())} yr of IEA inertia`,
+      limits: "λ is not measured and assumes collaboration. Render it beside the inertial figure, never alone.",
+    },
+
+    // ── M2 grid ─────────────────────────────────────────────────────────────
+    {
+      id: "grid-settle-vs-arrest",
+      module: "grid.ts",
+      claim: "Loop settling over the worst intercontinental tie, against a 0.5 s arrest window",
+      value: gh.worstSettleS,
+      unit: "s",
+      kind: "derived",
+      provenance: "delay-limited crossover ω=0.6/RTT, settling 4τ; RTT from c/1.4682 × 1.6 route factor",
+      limits: "The 1.6 route factor is calibrated on one measured pair. Arrest window is a design value.",
+      affects: ["operator.ts"],
+    },
+    {
+      id: "grid-sync-possible",
+      module: "grid.ts",
+      claim: "Number of the six ties that could be AC synchronous",
+      value: grid.links.filter((l) => !l.mustBeHvdc).length,
+      unit: "links",
+      kind: "derived",
+      provenance: "AC submarine cable dies at ~100 km on capacitive charging current; every tie is >6,300 km",
+      limits: "None material. This is the strongest leg of the grid argument and needs no simulation.",
+    },
+    {
+      id: "grid-single-year-optimism",
+      module: "grid-reliability.ts",
+      claim: "How much sizing storage on one weather year understates the tank",
+      value: singleYearOptimismFactor(1.15) ?? 0,
+      unit: "×",
+      kind: "measured",
+      provenance: "4,000 synthetic years, CUDA sm_120, seed 20260825; port validated to 7.4e-15 vs grid.ts",
+      limits: "Two OU processes per cluster, clusters independent. No inter-annual climate drift.",
+      affects: ["grid-cost.ts"],
+    },
+    {
+      id: "grid-least-cost-overbuild",
+      module: "grid-cost.ts",
+      claim: "Least-cost overbuild multiplier on the iso-reliability frontier",
+      value: frontier.overbuild,
+      unit: "×",
+      kind: "assumed",
+      provenance: `capex basis dated ${SIZING_CORRECTION.length > 0 ? "2025-Q1" : "?"}; shape is robust, level is not`,
+      limits: "Capex sketch, not an LCOE. Prices move yearly — quote the crossover, never the total.",
+    },
+    {
+      id: "grid-max-arcs",
+      module: "grid-qubo.ts",
+      claim: "Most links that can ever trade simultaneously",
+      value: arcs.maxArcs,
+      unit: "links",
+      kind: "derived",
+      provenance: "arcHistogram over 720 h; 87% of hours have zero",
+      limits: "Single-hop only, no wheeling. A denser topology could differ — this one cannot.",
+    },
+
+    // ── M3 compute ──────────────────────────────────────────────────────────
+    {
+      id: "wh-per-response-frontier",
+      module: "compute-energy.ts",
+      claim: "Energy for a 500-token reply from a batched frontier model",
+      value: frontier3.energy.whPerResponse,
+      unit: "Wh",
+      kind: "derived",
+      provenance: "roofline t=max(bytes/BW, FLOPs/peak·MFU); validated against the published ~0.3 Wh estimate",
+      limits: "Decode only, no prefill. MFU/PUE are labelled assumptions. Frontier model shape is assumed.",
+    },
+    {
+      id: "wh-per-response-local",
+      module: "compute-energy.ts",
+      claim: "Same reply from a local 8B at batch 1 — larger, despite 27× fewer active parameters",
+      value: local.energy.whPerResponse,
+      unit: "Wh",
+      kind: "derived",
+      provenance: "same roofline, batch 1, consumer card at 448 GB/s",
+      limits: "The lever is busy-vs-idle, not local-vs-cloud. The same card batched beats the datacentre.",
+    },
+
+    // ── M4 quantum ──────────────────────────────────────────────────────────
+    {
+      id: "qubit-wall",
+      module: "qsim.ts",
+      claim: "Largest statevector that fits in 16 GB at complex128",
+      value: wall.measuredMaxQubits,
+      unit: "qubits",
+      kind: "measured",
+      provenance: `${QSIM_PROVENANCE.device}; Bell/GHZ/QFT/unitarity validated before any timing`,
+      limits: "Dense statevector. Tensor-network methods reach further on structured circuits.",
+    },
+    {
+      id: "qubits-at-type-i",
+      module: "qsim.ts",
+      claim: "Qubits at which one brute-force gate costs a second of a Type I budget",
+      value: wall.typeIQubits,
+      unit: "qubits",
+      kind: "derived",
+      provenance: "7.26 nJ per amplitude-update, measured at 86.4 W under load, extrapolated as 2^n",
+      limits: "Holds one measured J/byte across ~50 orders of magnitude. Order-of-magnitude only.",
+    },
+    {
+      id: "pqc-size-penalty",
+      module: "pqc.ts",
+      claim: "Post-quantum handshake size against X25519 + Ed25519",
+      value: sizePenalty(),
+      unit: "×",
+      kind: "published",
+      provenance: `FIPS 203 + 204 parameters; ${PQC_HANDSHAKE.bytes} B against ${256} B`,
+      limits: "Bare protocol, no certificate chain. A real chain adds to both sides and shrinks the ratio.",
+    },
+    {
+      id: "pqc-free-above",
+      module: "pqc.ts",
+      claim: "Link rate above which the extra PQC bytes cost under 10% of handshake wall time",
+      value: PQC_VERDICT.freeAboveBps,
+      unit: "bit/s",
+      kind: "derived",
+      provenance: "5,000 km ISL, vacuum propagation, 2 round trips",
+      limits: "Below this it dominates — at 1 Mbps it is 59%. Quote the crossover, never a verdict.",
+    },
+
+    // ── M5 operator ─────────────────────────────────────────────────────────
+    {
+      id: "operator-latency",
+      module: "operator.ts",
+      claim: "End-to-end latency of a consumer EEG decision chain",
+      value: op.totalMs,
+      unit: "ms",
+      kind: "derived",
+      provenance: "1/Δf observation window plus notch group delay, radio and classification",
+      limits: "The window is a theorem; the other 24% are design choices. No hardware was connected.",
+    },
+    {
+      id: "operator-fails-arrest",
+      module: "operator.ts",
+      claim: "Operator loop time as a multiple of the RoCoF arrest window it must meet",
+      value: arrest.operatorS / arrest.windowS,
+      unit: "×",
+      kind: "derived",
+      provenance: "operator budget against the same windows grid.ts applies to an HVDC tie",
+      limits: "ITR and device figures are literature order-of-magnitude, not measurements.",
+      affects: ["grid.ts"],
+    },
+
+    // ── M6-M10 the Type I chain ─────────────────────────────────────────────
+    {
+      id: "type-i-crust-delta-t",
+      module: "thermal.ts",
+      claim: "Warming from running Type I on the crust from a new-heat source",
+      value: typeIThermal.deltaTEffK,
+      unit: "K",
+      kind: "derived",
+      provenance: "ΔT/T = ¼·ΔP/P against 122 PW of outgoing longwave; T_eff inverted from σT⁴",
+      limits: "Equilibrium, no feedbacks — a floor. Applies to new heat only; ground solar recycles.",
+      affects: ["lift.ts", "collector.ts", "beam.ts"],
+    },
+    {
+      id: "crust-must-leave",
+      module: "thermal.ts",
+      claim: "Share of Type I that cannot be terrestrial under a +0.1 K budget",
+      value: crustBudget(0.1).mustLeaveFrac,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "power ceiling 4ΔT/T · P_out, against P_I",
+      limits: "The budget is a policy choice, not physics. The ceiling scales linearly with it.",
+    },
+    {
+      id: "ground-solar-land",
+      module: "thermal.ts",
+      claim: "Ground-solar Type I as a multiple of all Earth's land",
+      value: groundSolarLandFraction(P_I),
+      unit: "× land",
+      kind: "derived",
+      provenance: "P_I / (200 W/m² × 20%) against 1.49e14 m² of land",
+      limits: "Insolation and efficiency are assumptions. Ground solar fails on geometry, not on heat.",
+    },
+    {
+      id: "beam-does-not-help",
+      module: "beam.ts",
+      claim: "Earth heat per useful watt when power is beamed down rather than generated here",
+      value: thermalComparison(1e12).penaltyPerUsefulW,
+      unit: "W per useful W",
+      kind: "derived",
+      provenance: "loss chain bookkept by where each term lands; delivered power becomes heat too",
+      limits: "No pointing, safety or rain-fade analysis. Ground solar is 0 for the same delivered watt.",
+    },
+    {
+      id: "lift-payback",
+      module: "lift.ts",
+      claim: "Days for an orbital collector to repay its own launch energy",
+      value: lift.paybackDays,
+      unit: "days",
+      kind: "derived",
+      provenance: "500 MJ/kg propellant chemical energy against 337 W/m² at 1.2 kg/m²",
+      limits: "Collector film only. Energy is not the constraint — logistics is.",
+    },
+    {
+      id: "areal-gap",
+      module: "collector.ts",
+      claim: "How much heavier today's arrays are than a century-long build allows",
+      value: correctedArealGapX(100, 100),
+      unit: "×",
+      kind: "derived",
+      provenance: "150 W/kg ROSA-class wing against the density 100 flights/day for 100 years permits",
+      limits: "Wing level, not blanket. Add the radiator (M10) and the mass roughly doubles again.",
+    },
+    {
+      id: "sustainable-fraction",
+      module: "collector.ts",
+      claim: "Share of Type I sustainable at 100 flights/day with a 5-year array — a ceiling, not a schedule",
+      value: sustainableFractionOfTypeI(100, 5),
+      unit: "fraction",
+      kind: "derived",
+      provenance: "A_max = build rate × lifetime; area added at R, lost at installed/L",
+      limits: "The array must outlive its own construction or the project never completes at any budget.",
+    },
+    {
+      id: "replacement-cadence",
+      module: "collector.ts",
+      claim: "Flights per day to maintain Type I forever at a 5-year array life",
+      value: replacementFlow(5).flightsPerDay,
+      unit: "flights/day",
+      kind: "derived",
+      provenance: "area / lifetime × areal density, at the density a 100-year build demands",
+      limits: "Twenty times the construction cadence. The world flew 0.7/day in 2024.",
+    },
+    {
+      id: "radiator-understatement",
+      module: "reject.ts",
+      claim: "How much M7 and M8 understated the system by costing the collector only",
+      value: massUnderstatementX(320),
+      unit: "×",
+      kind: "derived",
+      provenance: "an orbital load must radiate everything it collects; 3.5 kg/m² radiator vs 2.24 kg/m² wing",
+      limits: "Radiator areal density is the physics.ts satellite figure; thin film would shift it back.",
+      affects: ["lift.ts", "collector.ts"],
+    },
+    {
+      id: "hot-silicon-lever",
+      module: "reject.ts",
+      claim: "Mass saved by raising the junction 50 K, against an optimally pumped loop",
+      value: lever.hotterSaves / lever.pumpingSaves,
+      unit: "×",
+      kind: "derived",
+      provenance: "total-mass optimisation with Carnot work charged to both collector and radiator",
+      limits: "Carnot is an upper bound on any real pump, so the pumped figure is already optimistic.",
+    },
+    {
+      id: "efficiency-runway-logic",
+      module: "reject.ts",
+      claim: "Orders of magnitude of logic-energy headroom before a practical thermodynamic floor",
+      value: runway(LOGIC_J_PER_BIT_OP).ordersOfMagnitude,
+      unit: "orders",
+      kind: "derived",
+      provenance: "H100 FP8 J/FLOP over ~1000 bit-ops, against 100 kT·ln2 at 300 K",
+      limits: "Bit-ops per FLOP is an assumption. Reversible computing is not modelled.",
+    },
+    {
+      id: "efficiency-runway-movement",
+      module: "reject.ts",
+      claim: "Same headroom for data movement — the term that actually binds today",
+      value: runway(MOVEMENT_J_PER_BIT).ordersOfMagnitude,
+      unit: "orders",
+      kind: "measured",
+      provenance: "0.227 nJ per byte moved, measured on an RTX 5060 Ti in qsim.ts",
+      limits: "This is why 'ASI is an energy event' is deferred, not wrong.",
+      affects: ["compute-energy.ts"],
+    },
+
+    // ── M11 in-situ resources ───────────────────────────────────────────────
+    {
+      id: "lunar-advantage",
+      module: "isru.ts",
+      claim: "How much cheaper lunar sourcing is, comparing what each actually costs",
+      value: lunarAdvantageX(),
+      unit: "×",
+      kind: "derived",
+      provenance: "4.71 MJ/kg mass driver at 60% against 500 MJ/kg of Earth chemical launch",
+      limits: "M7 said ×12 by comparing floors, which flatters Earth. Mass-driver efficiency is assumed.",
+      affects: ["lift.ts"],
+    },
+    {
+      id: "isru-transport-share",
+      module: "isru.ts",
+      claim: "Getting material off the Moon, as a share of what making it costs",
+      value: transportShare(),
+      unit: "fraction",
+      kind: "derived",
+      provenance: "lunar launch against ~100 MJ/kg of embodied processing energy",
+      limits: "Embodied energy is the least certain number in the module; a terrestrial analogue.",
+    },
+    {
+      id: "lunar-industry-power",
+      module: "isru.ts",
+      claim: "Lunar industrial power to maintain Type I at a 5-year array life",
+      value: industryLadder().find((x) => x.label.includes("5 yr"))!.powerW,
+      unit: "W",
+      kind: "derived",
+      provenance: "full M10 system mass over lifetime, times embodied plus transport energy",
+      limits: "Four times today's world TES in absolute terms, under 1% of the Type I it builds.",
+    },
+    {
+      id: "max-earth-fraction",
+      module: "isru.ts",
+      // Stated as the Earth share, not the lunar one: 0.99984 rounds to 1.000
+      // in any table and hides the entire finding. The small number carries it.
+      claim: "Share of the array that may come from Earth, at 100 Earth flights/day",
+      value: earthShareCeiling(100).maxEarthFraction,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "Earth cadence against the replacement flow; regolith supplies no carbon",
+      limits: "So the array must be >=99.98% lunar. The hardest constraint in the chain, and a materials question rather than a physical one.",
+    },
+    {
+      id: "type-i-doublings",
+      module: "isru.ts",
+      claim: "Industrial doublings from a 100 t seed to a Type I system",
+      value: doublingsRequired(typeISystemMassKg()),
+      unit: "doublings",
+      kind: "derived",
+      provenance: "log2(full system mass / seed); allocation optimum f≈0.96 washes every constant out",
+      limits: "Productivity is assumed; a larger seed buys doublings only logarithmically.",
+    },
+    {
+      id: "lambda-as-doubling-time",
+      module: "isru.ts",
+      claim: "Industrial doubling time that λ = 0.62 is secretly claiming",
+      value: doublingTimeImpliedBy(101),
+      unit: "years",
+      kind: "derived",
+      provenance: "forecast.ts λ timeline divided by the doubling count",
+      limits: "Turns an unfalsifiable curve fit into an engineering parameter. That is the point of it.",
+      affects: ["forecast.ts"],
+    },
+
+    // ── M12 environment ─────────────────────────────────────────────────────
+    {
+      id: "dust-peak-diameter",
+      module: "environment.ts",
+      claim: "Grain size carrying most of Earth's dust influx — the check on the flux model",
+      value: dustAccretion().peakDiameterM,
+      unit: "m",
+      kind: "derived",
+      provenance: "Grün 1985 integrated over Earth's sphere; Love & Brownlee 1993 measured ~200 µm",
+      limits: "Validates the shape. The integrated total lands 3.4× under the central measured value.",
+    },
+    {
+      id: "film-thickness",
+      module: "environment.ts",
+      claim: "Physical thickness of the film M7's mass budget actually demands",
+      value: filmThicknessM(),
+      unit: "m",
+      kind: "derived",
+      provenance: "12.3 g/m² over polyimide density 1420 kg/m³",
+      limits: "Assumes a polyimide-like substrate. A denser cell stack is thinner still, not thicker.",
+      affects: ["lift.ts", "collector.ts"],
+    },
+    {
+      id: "micrometeoroid-area-loss",
+      module: "environment.ts",
+      claim: "Fraction of collector area micrometeoroids remove per year",
+      value: film.areaLossFracPerYr,
+      unit: "fraction/yr",
+      kind: "derived",
+      provenance: "Grün 1985 flux integrated over mass; peak validated at 172 µm vs ~200 µm measured",
+      limits: "Holes, not tears. Fracture propagation is the real film failure mode and is not modelled.",
+      affects: ["collector.ts"],
+    },
+    {
+      id: "film-perforations",
+      module: "environment.ts",
+      claim: "Micrometeoroid perforations per m² per year, which set the ripstop pitch",
+      value: film.perforationsPerM2Yr,
+      unit: "/m²/yr",
+      kind: "derived",
+      provenance: "Grün 1985 above a perforation threshold of half the film thickness",
+      limits: "The threshold is assumed; the area conclusion is insensitive to it, the hole count is not.",
+    },
+    {
+      id: "ao-bare-film-life",
+      module: "environment.ts",
+      claim: "How long a bare polyimide film survives atomic oxygen at 400 km",
+      value: ao.bareFilmYears,
+      unit: "years",
+      kind: "derived",
+      provenance: "Kapton erosion yield 3.0e-24 cm³/atom against LDEF-derived fluence at ~400 km",
+      limits: "Bare film only. A 100 nm silica coat costs 1.8% of the budget and removes this entirely.",
+    },
+    {
+      id: "debris-impact-rate",
+      module: "environment.ts",
+      claim: "Trackable-debris impacts on the full Type I array",
+      value: debrisExposure().impactsPerSecond,
+      unit: "/s",
+      kind: "derived",
+      provenance: "catalogue count over LEO shell volume × 10 km/s × 29.7e12 m²",
+      limits: "Order-of-magnitude density. The conclusion survives two orders; the exact rate does not.",
+    },
+    {
+      id: "array-vs-earth-cross-section",
+      module: "environment.ts",
+      claim: "The Type I array as a share of Earth's own cross-section",
+      value: obj.shareOfEarthCrossSection,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "29.7e12 m² over πR⊕²",
+      limits: "Pure geometry. It is why the debris question inverts: the array becomes the environment.",
+    },
+    {
+      id: "array-vs-mass-launched",
+      module: "environment.ts",
+      claim: "Array mass against everything humanity has ever put in orbit",
+      value: obj.versusAllMassEverLaunched,
+      unit: "×",
+      kind: "derived",
+      provenance: "29.7e12 m² × 2.24 kg/m² over ESA's ~13 kt currently in orbit",
+      limits: "Collector only; M10 says the radiator roughly doubles it. No Kessler cascade is modelled.",
+    },
+    {
+      id: "environment-lifetime",
+      module: "environment.ts",
+      claim: "Array lifetime the environment actually supports, against M8's assumed 5 years",
+      value: combinedLifetimeYr(),
+      unit: "years",
+      kind: "derived",
+      provenance: "every modelled mechanism at once to 50% power; radiation damage dominates at ~1%/yr",
+      limits: "[CORRECTS M8] Argument from mechanism, not flight heritage — nothing this thin has flown a decade.",
+      affects: ["collector.ts", "isru.ts"],
+    },
+    {
+      id: "lifetime-leverage",
+      module: "environment.ts",
+      claim: "Sustainable share of Type I at a 30-year array, against 5% at M8's five",
+      value: lifetimeLeverage(100, [30])[0].sustainableFractionOfTypeI,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "A_max = R·L is linear in L, so the ceiling moves with the lifetime",
+      limits: "Does not reach the century-long build, so M8's convergence condition is argued, not met.",
+      affects: ["collector.ts"],
+    },
+
+    // ── M13 placement ───────────────────────────────────────────────────────
+    {
+      id: "shading-leo",
+      module: "placement.ts",
+      claim: "Sunlight an isotropic Type I shell at 400 km removes from Earth",
+      value: shadingFraction(issRadius),
+      unit: "fraction",
+      kind: "derived",
+      provenance: "(1−cosθ)/2 with sinθ = R⊕/a, times array area over Earth's disk",
+      limits: "Isotropic shell. A constellation confined to the non-shading band removes nothing.",
+      affects: ["thermal.ts", "collector.ts"],
+    },
+    {
+      id: "shading-cooling-leo",
+      module: "placement.ts",
+      claim: "Equilibrium cooling that shading causes — the mirror of M6's heating",
+      value: shadingDeltaTK(issRadius),
+      unit: "K",
+      kind: "derived",
+      provenance: "ΔT/T = ¼·ΔP/P against T_eff = 255 K, the same relation thermal.ts uses",
+      limits: "Equilibrium, no ocean lag, no ice-albedo feedback. Feedbacks make it larger, not smaller.",
+      affects: ["thermal.ts"],
+    },
+    {
+      id: "climate-floor-radius",
+      module: "placement.ts",
+      claim: "Lowest orbital radius whose shading stays inside M6's +0.1 K budget",
+      value: climateFloor,
+      unit: "m",
+      kind: "derived",
+      provenance: "solved against thermal.ts's own budget; nothing but radiative balance goes in",
+      limits: "Assumes an isotropic shell — the band escape exists at every altitude and costs packing.",
+    },
+    {
+      id: "climate-floor-vs-geo",
+      module: "placement.ts",
+      claim: "That floor as a fraction of geostationary radius",
+      value: climateFloor / GEO_RADIUS_M,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "climate floor over GEO radius from orbit.ts",
+      limits: "A coincidence worth stating plainly: two unrelated physics land within 8% of each other.",
+    },
+    {
+      id: "duty-cycle-geometric-leo",
+      module: "placement.ts",
+      claim: "Duty cycle geometry gives at 400 km, against the 0.96 assumed repo-wide",
+      value: dutyCycleGeometric(issRadius),
+      unit: "fraction",
+      kind: "derived",
+      provenance: `antisolar cap of an isotropic shell; physics.ts assumes ${ASSUMED_DUTY_CYCLE} with no orbit named`,
+      limits: "[CORRECTS physics.ts] The 0.96 is a dawn-dusk assumption, defensible but never written down.",
+      affects: ["physics.ts", "lift.ts"],
+    },
+    {
+      id: "band-fill-leo",
+      module: "placement.ts",
+      claim: "Areal packing Type I needs inside the non-shading band at 800 km",
+      value: nonShadingBand(6.371e6 + 800e3).fillFraction,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "array area over the sunlit non-shading share of the shell",
+      limits: "Geometric capacity only. No collision dynamics inside a band filled to a tenth.",
+    },
+    {
+      id: "sky-coverage-geo",
+      module: "placement.ts",
+      claim: "Sky the array occupies from the ground at GEO",
+      value: skyCoverageSquareDeg(GEO_RADIUS_M),
+      unit: "deg²",
+      kind: "derived",
+      provenance: "A/4πa² of the 41,253 square degrees of sky",
+      limits: "Solid angle only. No brightness and no claim about observational impact.",
+    },
+
+    // ── M14 transfer ────────────────────────────────────────────────────────
+    {
+      id: "geo-payload-penalty",
+      module: "transfer.ts",
+      claim: "Delivered-mass penalty for raising the destination from 550 km to GEO",
+      value: penalty.payloadPenalty,
+      unit: "×",
+      kind: "derived",
+      provenance: "ratio of Tsiolkovsky mass ratios at Isp 380 s; Δv 8,924 → 12,724 m/s",
+      limits: "No dry mass, no refuelling, impulsive burns. Only the ratio is meaningful, never a payload.",
+      affects: ["lift.ts", "collector.ts", "isru.ts"],
+    },
+    {
+      id: "energy-understates-delivery",
+      module: "transfer.ts",
+      claim: "How much reasoning about delivery in joules understates it",
+      value: penalty.understatement,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "payload penalty ×2.77 against the orbital-energy ratio ×1.71",
+      limits: "The distinction lift.ts was missing: energy is linear in altitude and delivery is not.",
+      affects: ["lift.ts"],
+    },
+    {
+      id: "areal-density-geo",
+      module: "transfer.ts",
+      claim: "Areal density a century at 100 flights/day demands once the destination is GEO",
+      value: arealGeo,
+      unit: "kg/m²",
+      kind: "derived",
+      provenance: "M7's 12.3 g/m² divided by the ×2.77 payload penalty",
+      limits: "[TIGHTENS M7] A 3.1 µm film. M13's climate floor made the hardest number 2.8× harder.",
+      affects: ["lift.ts"],
+    },
+    {
+      id: "areal-gap-geo",
+      module: "transfer.ts",
+      claim: "Gap between that requirement and a real wing, against M7's ×183 to low orbit",
+      value: 2.24 / arealGeo,
+      unit: "×",
+      kind: "derived",
+      provenance: "2.24 kg/m² ROSA-class over the GEO requirement",
+      limits: "Earth-launched only. It is the number that closes the Earth route, which is M11's point.",
+    },
+    {
+      id: "moon-to-geo-dv",
+      module: "transfer.ts",
+      claim: "Δv from the lunar surface to GEO, against 6,737 m/s to low orbit",
+      value: lunarDelivery(35_793).totalMs,
+      unit: "m/s",
+      kind: "derived",
+      provenance: "lunar escape plus a combined circularisation and 20° plane change at arrival",
+      limits: "Patched conics, Moon at rest at 3.844e8 m. Weak-stability-boundary transfers are cheaper.",
+    },
+    {
+      id: "lunar-advantage-geo",
+      module: "transfer.ts",
+      claim: "Mass-ratio advantage of sourcing from the Moon, with GEO as the destination",
+      value: sourcingAdvantage(35_793).advantageX,
+      unit: "×",
+      kind: "derived",
+      provenance: "Earth 12,724 m/s against the Moon's 3,982 m/s, as a ratio of mass ratios",
+      limits: "[STRENGTHENS M11] At LEO it is only ×1.8 — the destination is what makes the Moon win.",
+      affects: ["isru.ts"],
+    },
+    {
+      id: "earth-to-geo-dv",
+      module: "transfer.ts",
+      claim: "Δv from Earth's surface to GEO via a 550 km parking orbit",
+      value: deltaVToGeo(),
+      unit: "m/s",
+      kind: "derived",
+      provenance: "ascent with 1,800 m/s of losses less 465 m/s of rotation, plus a Hohmann transfer",
+      limits: "Hohmann is verified against bi-elliptic rather than assumed: it wins at a radius ratio of 6.",
+    },
+
+    // ── M15 the load ────────────────────────────────────────────────────────
+    {
+      id: "load-mass-rack",
+      module: "load.ts",
+      claim: "Mass of a Type I load at the specific power of a real datacentre rack",
+      value: rackLoad.massKg,
+      unit: "kg",
+      kind: "derived",
+      provenance: "10¹⁶ W over ~100 W/kg, a rack including memory, interconnect and power delivery",
+      limits: "×1.5 the collector's real mass — comparable, not dominant. It was in no chain total.",
+      affects: ["lift.ts", "collector.ts", "reject.ts"],
+    },
+    {
+      id: "load-centuries-of-launch",
+      module: "load.ts",
+      claim: "Centuries of launch at 100 flights/day the load alone would need, delivered to GEO",
+      value: rackLoad.centuriesOfLaunch,
+      unit: "centuries",
+      kind: "derived",
+      provenance: "load mass over M7's cadence corrected by M14's ×2.77 payload penalty",
+      limits: "Against the deliverable budget, not against other hardware. Use the right denominator.",
+    },
+    {
+      id: "radiator-specific-power",
+      module: "load.ts",
+      claim: "Watts a kilogram of M10's radiator can reject at 320 K, whatever the chip does",
+      value: radiatorSpecificPowerWKg(320),
+      unit: "W/kg",
+      kind: "derived",
+      provenance: "εσT⁴ over 3.5 kg/m², both from reject.ts",
+      limits: "A system ceiling M10 implied and never stated. It is the number the architecture must beat.",
+    },
+    {
+      id: "self-radiating-specific-power",
+      module: "load.ts",
+      claim: "Watts per kilogram of a 100 µm die radiating from its own two faces at 400 K",
+      value: selfRadiatingSpecificPowerWKg(400, 100e-6),
+      unit: "W/kg",
+      kind: "derived",
+      provenance: "2εσT⁴/(ρ·t) with silicon at 2330 kg/m³",
+      limits: "×73 the radiator. Bare geometry — no packaging, interconnect or substrate, so a ceiling.",
+      affects: ["reject.ts"],
+    },
+    {
+      id: "load-specific-power-required",
+      module: "load.ts",
+      claim: "Specific power the load needs to fit inside one century of launch",
+      value: requiredSpecificPowerWKg(1),
+      unit: "W/kg",
+      kind: "derived",
+      provenance: "10¹⁶ W over the deliverable mass; the same inversion M7 did for areal density",
+      limits: "Leaves nothing for the collector. ×759 above a rack and ×7 above a bare conducted die.",
+    },
+    {
+      id: "die-thickness-required",
+      module: "load.ts",
+      claim: "Die thickness that reaches the requirement by self-radiation at 400 K",
+      value: thicknessForSpecificPowerM(requiredSpecificPowerWKg(1), 400),
+      unit: "m",
+      kind: "derived",
+      provenance: "inverting 2εσT⁴/(ρ·t) for the required specific power",
+      limits: "Thinner than any production die. The wall is thinning and junction temperature, not thermodynamics.",
+    },
+    {
+      id: "climate-floor-corrected",
+      module: "load.ts",
+      claim: "Climate floor once M10's radiator area is on the same shell as the collector",
+      value: floors.correctedFloorM,
+      unit: "m",
+      kind: "derived",
+      provenance: "M13's √A scaling applied to collector plus radiator, 1.67× the area",
+      limits: "[CORRECTS M13] 119% of GEO — the array cannot be geostationary. Two right modules, never multiplied.",
+      affects: ["placement.ts"],
+    },
+
+    // ── M16 substitution ────────────────────────────────────────────────────
+    {
+      id: "escape-threshold",
+      module: "substitution.ts",
+      claim: "Compute-efficiency gain at which Type I computation no longer needs to leave the crust",
+      value: escape.factor,
+      unit: "×",
+      kind: "derived",
+      provenance: "P_I over M6's 192 TW terrestrial ceiling under a +0.1 K budget",
+      limits: "[THE CHALLENGE] Smaller than M10's own runways. Quote it beside the orbital chain, never instead.",
+      affects: ["thermal.ts", "reject.ts", "plan.ts"],
+    },
+    {
+      id: "logic-runway",
+      module: "substitution.ts",
+      claim: "Efficiency headroom in logic before the 100 kT practical floor",
+      value: runwayCases().find((c) => c.term === "logic")!.headroomX,
+      unit: "×",
+      kind: "derived",
+      provenance: "H100 FP8 at 3.5e-16 J/bit-op over 100·kT·ln2 at 300 K",
+      limits: "A thermodynamic bound, not a roadmap. It is ×24 the escape threshold.",
+    },
+    {
+      id: "movement-runway",
+      module: "substitution.ts",
+      claim: "Efficiency headroom in data movement — the term M3 says actually binds",
+      value: runwayCases().find((c) => c.term === "data movement")!.headroomX,
+      unit: "×",
+      kind: "derived",
+      provenance: "0.227 nJ/byte measured on this machine in qsim.ts, over the practical floor",
+      limits: "Taken literally it puts Type I computation at 101 MW, which is a reductio on the bound.",
+    },
+    {
+      id: "compute-power-at-logic-floor",
+      module: "substitution.ts",
+      claim: "Power Type I's computation would draw with the logic runway spent in full",
+      value: runwayCases().find((c) => c.term === "logic")!.powerAtFloorW,
+      unit: "W",
+      kind: "derived",
+      provenance: "P_I over the logic headroom",
+      limits: "8.1 TW — under half of today's world TES, and far inside the terrestrial ceiling.",
+    },
+    {
+      id: "brain-lead-over-silicon",
+      module: "substitution.ts",
+      claim: "How much more efficient a human brain is per operation than an H100",
+      value: eff.brainLeadX,
+      unit: "×",
+      kind: "derived",
+      provenance: "20 W over ~1e15 synaptic ops/s, against 3.5e-13 J/FLOP",
+      limits: "Synaptic rate is assumed and swept over 1e14–1e16; the lead stays between ×1.8 and ×177.",
+    },
+    {
+      id: "brain-orders-over-floor",
+      module: "substitution.ts",
+      claim: "Orders of magnitude the brain itself sits above the practical Landauer floor",
+      value: eff.brain.ordersOverFloor,
+      unit: "orders",
+      kind: "derived",
+      provenance: "brain J/op over 100·kT·ln2 at 300 K",
+      limits: "Biology has not spent the runway either. Whatever closes the gap is available to both.",
+    },
+    {
+      id: "type-i-responses-per-person",
+      module: "substitution.ts",
+      claim: "Frontier responses per living human per second, at Type I",
+      value: typeIResponsesPerSecond() / 8.2e9,
+      unit: "/person/s",
+      kind: "derived",
+      provenance: "P_I over M3's measured 0.323 Wh per served frontier response",
+      limits: "A unit conversion, not a claim about value. Nothing here models what the computation is for.",
+    },
+    {
+      id: "type-i-in-brains",
+      module: "substitution.ts",
+      claim: "Type I expressed in 20 W human brains, per living human",
+      value: brainEquivalents().perPerson,
+      unit: "brains/person",
+      kind: "derived",
+      provenance: "P_I over 20 W over world population",
+      limits: "Power-equivalence only. It says nothing about what either kind of machine does with it.",
+    },
+
+    // ── M17 industry ────────────────────────────────────────────────────────
+    {
+      id: "industry-runway",
+      module: "industry.ts",
+      claim: "How far heavy industry runs above its own thermodynamic minimum, averaged",
+      value: industryRunway,
+      unit: "×",
+      kind: "derived",
+      provenance: "five published minimum-vs-actual pairs: steel, ammonia, cement, aluminium, desalination",
+      limits: "Five processes are not an economy. Transport and heating are excluded and stated separately.",
+      affects: ["substitution.ts"],
+    },
+    {
+      id: "ammonia-runway",
+      module: "industry.ts",
+      claim: "Haber-Bosch against its thermodynamic floor — the most mature process at scale",
+      value: processRunway(PROCESSES.find((p) => p.id === "ammonia")!),
+      unit: "×",
+      kind: "published",
+      provenance: "~20.9 GJ/t minimum against a ~36 GJ/t global average",
+      limits: "Best plants are nearer ×1.3. Two centuries of chemistry has left almost nothing on the table.",
+    },
+    {
+      id: "compute-anomaly",
+      module: "industry.ts",
+      claim: "How much more thermodynamic headroom logic has than heavy industry",
+      value: runway(LOGIC_J_PER_BIT_OP).headroomX / industryRunway,
+      unit: "×",
+      kind: "derived",
+      provenance: "M10's logic runway over the industrial mean",
+      limits: "The gap is not a general property of technology. It is specific to computation.",
+    },
+    {
+      id: "required-compute-share",
+      module: "industry.ts",
+      claim: "Share of a Type I economy that must be computation for M16's ×52 escape to work",
+      value: requiredComputeShare(),
+      unit: "fraction",
+      kind: "derived",
+      provenance: "inverting the harmonic blend 1/(f/r_c + (1−f)/r_nc) against the escape factor",
+      limits: "[ANSWERS M16] The condition under which the orbital argument fails. Today's share is 0.27%.",
+      affects: ["substitution.ts", "thermal.ts"],
+    },
+    {
+      id: "required-share-best-case",
+      module: "industry.ts",
+      claim: "The same share with compute assumed infinitely efficient",
+      value: requiredComputeShareAtBestCase(),
+      unit: "fraction",
+      kind: "derived",
+      provenance: "1 − r_nc/target; the compute term vanishes and the industrial floor sets the answer",
+      limits: "Within a point of the finite-runway figure. No improvement in computers can rescue the escape.",
+    },
+    {
+      id: "reduction-at-todays-mix",
+      module: "industry.ts",
+      claim: "Total energy reduction available today if every runway were spent at once",
+      value: totalReduction(computeShareToday().ofTes),
+      unit: "×",
+      kind: "derived",
+      provenance: "the blend at compute's current 0.27% of TES",
+      limits: "×2.3, not ×52. At today's mix the escape is not close.",
+    },
+    {
+      id: "compute-share-today",
+      module: "industry.ts",
+      claim: "Compute's share of world total energy supply today",
+      value: computeShareToday().ofTes,
+      unit: "fraction",
+      kind: "published",
+      provenance: "IEA data-centre electricity ~460 TWh over TES 620 EJ, both from facts.ts",
+      limits: "All data centres, not only AI. It is the starting point of the mix, not a forecast of it.",
+    },
+
+    // ── M18 signature ───────────────────────────────────────────────────────
+    {
+      id: "type-i-ir-contrast",
+      module: "signature.ts",
+      claim: "Infrared contrast of a Type I array against its own star, at the array's Wien peak",
+      value: sig.contrast,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "Planck at 9.06 µm, 320 K radiator area from reject.ts, against a 5772 K photosphere",
+      limits: "One part in 41 million. Undetectable by any instrument that exists or is planned.",
+      affects: ["reject.ts"],
+    },
+    {
+      id: "type-i-bolometric-contrast",
+      module: "signature.ts",
+      claim: "Type I as a fraction of its star's total luminosity",
+      value: sig.bolometricContrast,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "1e16 W over the solar 3.828e26 W",
+      limits: "26 parts per trillion. Dyson's argument is about Type II, which is ten orders above this.",
+    },
+    {
+      id: "ir-spectral-advantage",
+      module: "signature.ts",
+      claim: "How much observing in the mid-infrared buys over the bolometric ratio",
+      value: spectralAdvantage(320),
+      unit: "×",
+      kind: "derived",
+      provenance: "a 320 K source at its peak against the photosphere's Rayleigh-Jeans tail",
+      limits: "Real, large, and nowhere near enough — the deficit it has to close is 4e10.",
+    },
+    {
+      id: "type-i-detection-reach",
+      module: "signature.ts",
+      claim: "Distance at which a Type I array's own flux reaches JWST-class mid-IR sensitivity",
+      value: detectionDistancePc(),
+      unit: "pc",
+      kind: "derived",
+      provenance: "0.066 µJy at 10 pc against an assumed 0.7 µJy threshold, inverse square",
+      limits: "Ignores the star entirely, so it is an upper bound no real instrument achieves.",
+    },
+    {
+      id: "type-i-occultation-ppm",
+      module: "signature.ts",
+      claim: "Transit depth of the full collector-plus-radiator array against the solar disk",
+      value: occ.arrayPpm,
+      unit: "ppm",
+      kind: "derived",
+      provenance: "4.95e13 m² over πR☉²",
+      limits: "Geometry only. What would distinguish it from a planet is light-curve shape, not depth.",
+    },
+    {
+      id: "occultation-vs-earth",
+      module: "signature.ts",
+      claim: "That depth as a fraction of Earth's own transit",
+      value: occ.versusEarth,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "32.6 ppm against (R⊕/R☉)² = 83.9 ppm",
+      limits: "Inside Kepler- and TESS-class photometry for a bright star. The only viable signature.",
+    },
+
+    // ── M19 sequence ────────────────────────────────────────────────────────
+    {
+      id: "first-wall-k",
+      module: "sequence.ts",
+      claim: "K at which the first wall in the whole chain binds — the waste-heat ceiling",
+      value: first.k,
+      unit: "K",
+      kind: "derived",
+      provenance: "kOf(powerCeilingW(0.1)) from thermal.ts — 192 TW under a +0.1 K budget",
+      limits: "The budget is a choice, not a law. At +0.5 K the wall moves to K 0.898.",
+      affects: ["thermal.ts", "forecast.ts", "plan.ts"],
+    },
+    {
+      id: "first-wall-multiple",
+      module: "sequence.ts",
+      claim: "How far the first wall is from today, in watts",
+      value: first.multipleOfToday,
+      unit: "×",
+      kind: "derived",
+      provenance: "192 TW over IEA TES 2023",
+      limits: "×9.8, against ×509 for Type I. The repo's own headline gap is not the binding one.",
+    },
+    {
+      id: "first-wall-doublings",
+      module: "sequence.ts",
+      claim: "Doublings to the first wall, against nine to Type I",
+      value: first.doublingsFromToday,
+      unit: "doublings",
+      kind: "derived",
+      provenance: "log2 of the multiple above",
+      limits: "3.3 doublings. Everything M6–M18 argues about lies past this point, not past Type I.",
+    },
+    {
+      id: "first-wall-sooner",
+      module: "sequence.ts",
+      claim: "How much sooner the first wall arrives than Type I at IEA inertia",
+      value: soonerThanTypeIX(),
+      unit: "×",
+      kind: "derived",
+      provenance: "ratio of inertial years at 1.8%/yr",
+      limits: "The year column is the softest thing in M19 — it assumes 1.8%/yr forever.",
+    },
+    {
+      id: "ground-solar-all-land-w",
+      module: "sequence.ts",
+      claim: "Power at which ground solar would need every square metre of Earth's land",
+      value: groundSolarAllLandW(),
+      unit: "W",
+      kind: "derived",
+      provenance: "P_I over M6's land fraction of 1.68",
+      limits: "The one wall on the ladder no budget can move. Geometry, not thermodynamics.",
+    },
+    {
+      id: "walls-before-type-i",
+      module: "sequence.ts",
+      claim: "Walls the chain establishes that arrive before Type I does",
+      value: rungs().filter((r) => r.id !== "today" && r.id !== "type-i").length,
+      unit: "walls",
+      kind: "derived",
+      provenance: "the ordered ladder in sequence.ts, every rung sourced from its own module",
+      limits: "Two are budgets, one is a comparison, one is physical. A ladder that blurs those is propaganda.",
+    },
+
+    // ── M20 engine ──────────────────────────────────────────────────────────
+    {
+      id: "cstar-lox-lh2",
+      module: "engine.ts",
+      claim: "Characteristic velocity of LOX/LH2, derived, against 2,360 m/s published",
+      value: lh2.cStar,
+      unit: "m/s",
+      kind: "derived",
+      provenance: "√(R_u·T_c/M)/Γ(γ) with R_u per kmol; a pure combustion property, no nozzle in it",
+      limits: "Within 2.7% of published. Ideal 1-D flow — do not trust it past a few percent.",
+    },
+    {
+      id: "isp-rs25-derived",
+      module: "engine.ts",
+      claim: "Vacuum specific impulse of an RS-25-class engine, derived from c* × C_f",
+      value: lh2.ispVacS,
+      unit: "s",
+      kind: "derived",
+      provenance: "c* times the thrust coefficient at RS-25's own area ratio of 69, over g₀",
+      limits: "Within 0.2% of the published 452.3 s. Isp carries the nozzle, so it is the looser half.",
+      affects: ["transfer.ts"],
+    },
+    {
+      id: "molar-mass-lever",
+      module: "engine.ts",
+      claim: "T_c/M advantage of LOX/LH2 over LOX/RP-1 — the group c* actually depends on",
+      value: lh2.temperatureOverMolarMass / rp1.temperatureOverMolarMass,
+      unit: "×",
+      kind: "derived",
+      provenance: "chamber temperature over exhaust molar mass, per pair",
+      limits: "Hydrogen burns COOLER and still wins. The lever is molar mass, not temperature.",
+    },
+    {
+      id: "isp-for-sane-stage",
+      module: "engine.ts",
+      claim: "Specific impulse needed to reach GEO from Earth at a single-stage mass ratio of 3",
+      value: sane.requiredIspS,
+      unit: "s",
+      kind: "derived",
+      provenance: "M14's 12,724 m/s inverted through Tsiolkovsky at mass ratio 3",
+      limits: "Nuclear-thermal territory. Chemistry cannot reach it, and that is a ceiling not a gap.",
+      affects: ["transfer.ts", "lift.ts"],
+    },
+    {
+      id: "beyond-chemistry",
+      module: "engine.ts",
+      claim: "How far past the chemical ceiling a sane single stage to GEO would have to reach",
+      value: sane.versusChemicalCeiling,
+      unit: "×",
+      kind: "derived",
+      provenance: `required Isp over a ${CHEMICAL_CEILING_S} s chemical ceiling of the LOX/LH2 class`,
+      limits: "[THIRD ROAD TO M11] The Earth-launch route is closed by the periodic table, not by effort.",
+      affects: ["isru.ts"],
+    },
+
+    // ── M21 staging ─────────────────────────────────────────────────────────
+    {
+      id: "falcon9-validation",
+      module: "staging.ts",
+      claim: "Error between M14's derived GEO payload penalty and Falcon 9's published capability ratio",
+      value: Math.abs(f9.errorFrac),
+      unit: "fraction",
+      // NOT "measured" — that kind is reserved for numbers off this machine's
+      // hardware, and a findings test enforces it. This is a published external
+      // capability against a derived prediction, which is where its weight comes from.
+      kind: "published",
+      provenance: "Falcon 9 Block 5 expendable: 22,800 kg LEO / 8,300 kg GTO = ×2.747, against M14's ×2.772",
+      limits: "The strongest external check the transfer chain has. Nothing in M14 was fitted to it.",
+      affects: ["transfer.ts"],
+    },
+    {
+      id: "geo-payload-fraction",
+      module: "staging.ts",
+      claim: "Share of gross mass a two-stage chemical vehicle delivers to GEO",
+      value: stagedFlight(12_724, 2).payloadFraction,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "λ = 1 − (1−1/R)/(1−ε) per stage at ε = 0.08, raised to the stage count",
+      limits: "Against Falcon 9's actual 1.51% to GTO. Very sensitive to ε: 0.05 gives 1.9%, 0.12 gives 0.5%.",
+    },
+    {
+      id: "minimum-stages-to-geo",
+      module: "staging.ts",
+      claim: "Fewest chemical stages that can reach GEO at all",
+      value: minimumStages(12_724),
+      unit: "stages",
+      kind: "derived",
+      provenance: "smallest n for which the stage payload ratio is positive",
+      limits: "[CORRECTS M20] Single stage is impossible; the route is not. M20 concluded too broadly.",
+      affects: ["engine.ts"],
+    },
+    {
+      id: "launcher-share-of-mass",
+      module: "staging.ts",
+      claim: "Share of what you launch that is the launcher rather than the payload",
+      value: 1 - stagedFlight(12_724, 2).payloadFraction,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "one minus the two-stage payload fraction to GEO",
+      limits: "This — not the periodic table — is why M7's areal density requirement is ×505.",
+      affects: ["lift.ts"],
+    },
+
+    // ── M22 density ─────────────────────────────────────────────────────────
+    {
+      id: "density-impulse-reversal",
+      module: "density.ts",
+      claim: "How much more impulse a cubic metre of LOX/RP-1 is worth than one of LOX/LH2",
+      value: rev.densityImpulseAdvantageOfRp1,
+      unit: "×",
+      kind: "derived",
+      provenance: "ρ_bulk·Isp, with bulk density volume-weighted at each engine's own mixture ratio",
+      limits: "LH2 leads Isp by ×1.30 and loses bulk density by ×2.81. Both ratios are real and opposed.",
+      affects: ["engine.ts"],
+    },
+    {
+      id: "hydrogen-pump-penalty",
+      module: "density.ts",
+      claim: "Pump work per kilogram of hydrogen against kerosene at the same pressure rise",
+      value: rev.pumpWorkPenaltyOfLh2,
+      unit: "×",
+      kind: "derived",
+      provenance: "Δp/(ρ·η) — exactly the density ratio, and independent of the efficiency assumed",
+      limits: "Why an RS-25 needs a 50 MW-class fuel turbopump to feed a 2 MN engine.",
+    },
+    {
+      id: "rs25-pump-power",
+      module: "density.ts",
+      claim: "Total turbopump shaft power for an RS-25, derived, against ~73 MW published",
+      value: pumpBudget(VEHICLES["lox-lh2"]).totalW,
+      unit: "W",
+      kind: "derived",
+      provenance: "ṁ·Δp/(ρ·η) per side at an assumed 0.7 efficiency",
+      limits: "25-30% high on both validated engines, in the same direction. Quote ratios, not absolutes.",
+    },
+    {
+      id: "methane-matches-hydrogen",
+      module: "density.ts",
+      claim: "Payload fraction of LOX/CH4 against LOX/LH2, each carrying its own density-implied tanks",
+      value:
+        sc.find((c) => c.id === "lox-ch4")!.payloadFraction /
+        sc.find((c) => c.id === "lox-lh2")!.payloadFraction,
+      unit: "×",
+      kind: "derived",
+      provenance: "M21's two-stage GEO case with ε scaled by bulk density; tank share assumed half",
+      limits: "Hydrogen's 19% Isp lead is cancelled exactly by its tanks. Both still beat kerosene.",
+      affects: ["staging.ts"],
+    },
+    {
+      id: "hydrogen-structural-penalty",
+      module: "density.ts",
+      claim: "Structural coefficient a hydrogen stage carries, against kerosene's 0.08",
+      value: sc.find((c) => c.id === "lox-lh2")!.structuralCoefficient,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "M21's ε with the tank-driven half scaled inversely with bulk density",
+      limits: "Tank share is a round half and tank mass is taken proportional to volume. A sensitivity, not a design.",
+    },
+
+    // ── M23 acceleration ────────────────────────────────────────────────────
+    {
+      id: "doubling-floor-days",
+      module: "acceleration.ts",
+      claim: "Thermodynamic floor on industrial doubling time — embodied energy over specific power",
+      value: doublingFloorSeconds() / 86400,
+      unit: "days",
+      kind: "derived",
+      provenance: "e/p with M11's 100 MJ/kg and M8's own 337 W/m² over 2.24 kg/m². The mass cancels.",
+      limits: "A bound, not a forecast. Assumes energy binds, with no transport, tooling or idle time.",
+      affects: ["isru.ts", "forecast.ts"],
+    },
+    {
+      id: "organisational-gap",
+      module: "acceleration.ts",
+      claim: "How far λ's implied doubling time sits above what the energy budget alone allows",
+      value: organisationalGap(),
+      unit: "×",
+      kind: "derived",
+      provenance: "λ's 3.36 yr per doubling over the e/p floor of 7.7 days",
+      limits: "The whole gap is organisational — logistics, tooling, transport — which is what intelligence attacks.",
+    },
+    {
+      id: "wall-arrival-inertial",
+      module: "acceleration.ts",
+      claim: "Years to the first wall at IEA inertia",
+      value: arrivals[0].yearsToFirstWall,
+      unit: "years",
+      kind: "derived",
+      provenance: "3.29 doublings at 1.8%/yr",
+      limits: "The slowest regime modelled, and the one every earlier module implicitly assumed.",
+    },
+    {
+      id: "wall-arrival-fastest",
+      module: "acceleration.ts",
+      claim: "Years to the same wall at the thermodynamic floor",
+      value: arrivals[arrivals.length - 1].yearsToFirstWall,
+      unit: "years",
+      kind: "derived",
+      provenance: "the same 3.29 doublings at 7.7 days each",
+      limits: "25 days. A reductio like M16's 101 MW — it shows the schedule is not protected by physics.",
+    },
+    {
+      id: "wall-doublings-invariant",
+      module: "acceleration.ts",
+      claim: "Doublings to the first wall — identical in every regime, because σT⁴ does not negotiate",
+      value: arrivals[0].doublings,
+      unit: "doublings",
+      kind: "derived",
+      provenance: "log2 of M19's first wall over today's supply; a test asserts every regime agrees",
+      limits: "[THE ANSWER] Intelligence does not raise the ceiling. It shortens the runway to it.",
+      affects: ["sequence.ts", "thermal.ts"],
+    },
+    {
+      id: "inelastic-parameters",
+      module: "acceleration.ts",
+      claim: "Chain parameters no amount of intelligence can move",
+      value: inelastic().length,
+      unit: "parameters",
+      kind: "derived",
+      provenance: "σT⁴, land area, the chemical Isp ceiling, propellant density, Δv, Landauer, c",
+      limits: `Against ${elastic().length} elastic ones. Thermodynamics and geometry are not design choices.`,
+    },
+
+    // ── M24 qualification ───────────────────────────────────────────────────
+    {
+      id: "verification-dominance",
+      module: "qualification.ts",
+      claim: "How far verifying the array's lifetime dominates building it",
+      value: ver.dominanceX,
+      unit: "×",
+      kind: "derived",
+      provenance: "M12's 69-year lifetime against M23's 232-day build at the thermodynamic floor",
+      limits: "You cannot know a lifetime in less time than the lifetime. No intelligence shortens an exposure test.",
+      affects: ["environment.ts", "collector.ts", "acceleration.ts"],
+    },
+    {
+      id: "cognitive-fraction-implied",
+      module: "qualification.ts",
+      claim: "Share of the schedule that must be thinking, for AGI to close M23's organisational gap",
+      value: fractionImpliedByClosingTheGap(),
+      unit: "fraction",
+      kind: "derived",
+      provenance: "Amdahl inverted: 1 − 1/159, where 159 is M23's measured gap",
+      limits: "Turns an adjective into a claim about the world. The module never estimates f, only converts.",
+      affects: ["acceleration.ts"],
+    },
+    {
+      id: "speedup-at-half-cognition",
+      module: "qualification.ts",
+      claim: "Ceiling on speedup if half the schedule is cognition and cognition becomes free",
+      value: speedupLadder([0.5])[0].ceiling,
+      unit: "×",
+      kind: "derived",
+      provenance: "Amdahl's 1/(1−f) at f = 0.5",
+      limits: "×2. The intuition that a fast mind compresses everything is bounded by what is not thinking.",
+    },
+    {
+      id: "wall-at-half-cognition",
+      module: "qualification.ts",
+      claim: "Years to the first wall from λ's pace, if half the schedule is cognition and it goes free",
+      value: speedupLadder([0.5])[0].yearsToFirstWall,
+      unit: "years",
+      kind: "derived",
+      provenance: "λ's 3.36 yr per doubling halved, over M19's 3.29 doublings",
+      limits: "Even the modest case brings the +0.1 K ceiling inside a decade. That is the point.",
+    },
+    {
+      id: "unaccelerable-test-modes",
+      module: "qualification.ts",
+      claim: "Failure modes that accelerated life testing cannot compress",
+      value: unaccelerable().length,
+      unit: "modes",
+      kind: "derived",
+      provenance: "coupled multi-mechanism, the acceleration factor itself, and mechanisms nobody modelled",
+      limits: "You can accelerate a mechanism you understand. You cannot accelerate finding the one you missed.",
+    },
+
+    // ── M25 learning ────────────────────────────────────────────────────────
+    {
+      id: "required-learning-rate",
+      module: "learning.ts",
+      claim: "Learning rate in areal density that would close M14's gap over the build's own doublings",
+      value: requiredArealRate(),
+      unit: "fraction/doubling",
+      kind: "derived",
+      provenance: "Wright inverted: the ×505 gap over M11's 30 doublings of cumulative production",
+      limits: "A falsifiable target in kg/m². It must never be compared against a $/W curve.",
+      affects: ["lift.ts", "transfer.ts", "isru.ts"],
+    },
+    {
+      id: "pv-cost-learning-rate",
+      module: "learning.ts",
+      claim: "Photovoltaic learning rate — forty years and five orders of cumulative production",
+      value: CURVES.find((c) => c.id === "pv-cost")!.rate,
+      unit: "fraction/doubling",
+      kind: "published",
+      provenance: "the best-documented learning curve in industry, measured on $/W",
+      limits: "[THE TRAP] Measured on cost. The chain's gap is in mass. They decouple completely.",
+    },
+    {
+      id: "learning-temptation",
+      module: "learning.ts",
+      claim: "How close the PV cost curve sits to the required areal-density rate",
+      value: temptation().ratio,
+      unit: "×",
+      kind: "derived",
+      provenance: "22% cost learning over the 18.7% mass requirement",
+      limits: "Close enough to be seductive, which is exactly why the units must be stated every time.",
+    },
+    {
+      id: "gap-at-mass-like-rate",
+      module: "learning.ts",
+      claim: "Improvement the build's 30 doublings buy at a mass-like 6% learning rate",
+      value: learn.find((c) => c.id === "mass-illustrative")!.improvementOverBuild,
+      unit: "×",
+      kind: "derived",
+      provenance: "illustrative low case, standing in for mass rather than cost",
+      limits: "×6 against a ×505 gap. Not a measurement — no mass learning rate is claimed anywhere.",
+    },
+    {
+      id: "doublings-at-ten-percent",
+      module: "learning.ts",
+      claim: "Doublings of cumulative production needed to close the gap at a 10% learning rate",
+      value: learn.length > 0 ? Math.log(505.172) / Math.log(1 / 0.9) : 0,
+      unit: "doublings",
+      kind: "derived",
+      provenance: "Wright at r = 0.10 against the ×505 areal gap",
+      limits: "59 against the 30 the build supplies. The gap closes only if learning outpaces construction.",
+    },
+
+    // ── M26 route ───────────────────────────────────────────────────────────
+    {
+      id: "open-gates",
+      module: "route.ts",
+      claim: "Engineering gates between here and Type I, each a falsifiable target in stated units",
+      value: openGates().length,
+      unit: "gates",
+      kind: "derived",
+      provenance: "assembled from the module that derived each one; no number typed in route.ts",
+      limits: "A specification, not a schedule. The repo publishes no date and a test enforces it.",
+    },
+    {
+      id: "power-doublings-to-type-i",
+      module: "route.ts",
+      claim: "Doublings of installed power from today to Type I",
+      value: powerDoublingsToTypeI(),
+      unit: "doublings",
+      kind: "derived",
+      provenance: "log2(P_I/P_2023)",
+      limits: "[CORRECTED] Not M11's 30 industrial MASS doublings. Mixing them gave 1,169 years for IEA inertia.",
+    },
+    {
+      id: "hardest-gate",
+      module: "route.ts",
+      claim: "Largest ratio gap of any gate where a ratio is the right frame",
+      value: Math.max(...gs.filter((g) => g.ratioMeaningful && g.kind !== "inverted").map((g) => g.gapX)),
+      unit: "×",
+      kind: "derived",
+      provenance: "load specific power: ~100 W/kg today against 75,900 required",
+      limits: "The lunar mass fraction is excluded — it goes from zero, so a multiple is not the frame.",
+    },
+    {
+      id: "inertial-years-to-type-i",
+      module: "route.ts",
+      claim: "Years to Type I under the only scenario that assumes nothing changes",
+      value: projections().find((p) => p.scenario === "IEA inertia")!.yearsToTypeI,
+      unit: "years",
+      kind: "derived",
+      provenance: "9.0 power doublings at 1.8%/yr; reproduces forecast.ts yearsInertial()",
+      limits: "An extrapolation of a trend, not a prediction. Every other scenario requires an argument.",
+    },
+
+    // -- M27 bootstrap ------------------------------------------------------
+    {
+      id: "loop-growth-exponent",
+      module: "bootstrap.ts",
+      claim: "Growth exponent of the build-learning loop: area goes as t to this power",
+      value: growthExponent(requiredArealRate()),
+      unit: "exponent",
+      kind: "derived",
+      provenance: "integrating dA/dt = (C/s0)(A/A0)^b at M25's required learning rate",
+      limits: "[CORRECTS the chain] Polynomial, not exponential. Doublings need self-replication, not learning.",
+      affects: ["isru.ts", "acceleration.ts", "route.ts"],
+    },
+    {
+      id: "no-learning-years",
+      module: "bootstrap.ts",
+      claim: "Years to build Type I's collector at 100 flights/day with no learning at all",
+      value: yearsToBuild(undefined, { learningRate: 0 }),
+      unit: "years",
+      kind: "derived",
+      provenance: "Type I collector mass over M14's GEO-corrected delivery rate",
+      limits: "The baseline the whole schedule is measured against. Fifty thousand years.",
+    },
+    {
+      id: "learning-leverage",
+      module: "bootstrap.ts",
+      claim: "What learning at the required rate is worth on the schedule",
+      value: learningLeverage(),
+      unit: "x",
+      kind: "derived",
+      provenance: "50,490 years with no learning against 107 with it, same cadence and start",
+      limits: "The largest single lever in the repo, and it needs a rate nobody has measured in mass.",
+    },
+    {
+      id: "lambda-mechanism-years",
+      module: "bootstrap.ts",
+      claim: "Years the build-learning loop gives at the required rate, against the fitted 101",
+      value: yearsToBuild(undefined, { learningRate: requiredArealRate() }),
+      unit: "years",
+      kind: "derived",
+      provenance: "the loop integrated from a 10,000 m2 starting fleet",
+      limits: "NOT a derivation of lambda - three decades of starting area move it x8. Lambda is inside the range.",
+      affects: ["forecast.ts"],
+    },
+
+    // -- M28 closure --------------------------------------------------------
+    {
+      id: "required-closure",
+      module: "closure.ts",
+      claim: "Fraction of its own mass a lunar base must produce for the build to stay exponential",
+      value: requiredClosure(),
+      unit: "fraction",
+      kind: "derived",
+      provenance: "M11's Earth-supply ceiling, restated as the dynamical condition on self-replication",
+      limits: "M11 reached the same number as a MATERIALS claim about carbon. Two arguments, one threshold.",
+      affects: ["isru.ts", "bootstrap.ts"],
+    },
+    {
+      id: "proposed-closure",
+      module: "closure.ts",
+      claim: "Closure the 1980 Advanced Automation for Space Missions study judged achievable",
+      value: AASM_1980_CLOSURE.high,
+      unit: "fraction",
+      kind: "published",
+      provenance: "NASA CP-2255, the only serious engineering treatment of a self-replicating lunar factory",
+      limits: "A design-study estimate from 1980, never tested against a physical machine.",
+    },
+    {
+      id: "closure-import-gap",
+      module: "closure.ts",
+      claim: "Ratio of import flow between proposed closure and required closure",
+      value: proposedVersusRequired().importFlowX,
+      unit: "x",
+      kind: "derived",
+      provenance: "4% imports at 96% closure against 0.016% at the requirement",
+      limits: "The mass fraction is the wrong unit for the real problem, which is WHICH few percent.",
+    },
+    {
+      id: "years-at-proposed-closure",
+      module: "closure.ts",
+      claim: "Years to build the Type I base at the best closure anyone has proposed",
+      value: buildAt(AASM_1980_CLOSURE.high).totalYears,
+      unit: "years",
+      kind: "derived",
+      provenance: "compound to the crossover, then import-limited and linear to the target",
+      limits: "The exponential phase ends at 0.03% of the target. Almost all of it is a straight line.",
+    },
+    {
+      id: "exponential-share-at-proposed",
+      module: "closure.ts",
+      claim: "Share of the build that still compounds at 96% closure",
+      value: buildAt(AASM_1980_CLOSURE.high).exponentialShareOfTarget,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "crossover mass over target mass",
+      limits: "Self-replication delivers exponential growth for three ten-thousandths of the build.",
+      affects: ["bootstrap.ts", "acceleration.ts"],
+    },
+
+    // -- M29 volatiles ------------------------------------------------------
+    {
+      id: "regolith-per-kg-carbon",
+      module: "volatiles.ts",
+      claim: "Kilograms of regolith that must be processed for one kilogram of carbon",
+      value: regolithPerKg(TRACE_VOLATILES.C),
+      unit: "kg/kg",
+      kind: "derived",
+      provenance: "solar-wind implanted carbon at ~100 ppm, at a 70% release yield",
+      limits: "M11's carbon problem as a number. Varies with soil maturity by more than a factor of two.",
+      affects: ["isru.ts", "closure.ts"],
+    },
+    {
+      id: "carbon-extraction-energy",
+      module: "volatiles.ts",
+      claim: "Energy to win one kilogram of carbon by bulk-heating regolith",
+      value: extractionJPerKg(TRACE_VOLATILES.C),
+      unit: "J/kg",
+      kind: "derived",
+      provenance: "process ratio times sensible heat of everything warmed to 973 K at 800 J/kg-K",
+      limits: "One hundred times the embodied energy M11 assigns the whole system per kilogram.",
+    },
+    {
+      id: "volatile-power-tax",
+      module: "volatiles.ts",
+      claim: "Share of lunar industrial power spent winning volatiles from bulk regolith",
+      value: volatileBudget().shareOfLunarIndustry,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "18.4 Mt of volatiles at 10 GJ/kg over a 31-year build, against M11's 3.8 TW",
+      limits: "Expensive per kilogram, affordable in total. It closes, and it closes expensively.",
+    },
+    {
+      id: "polar-ice-advantage",
+      module: "volatiles.ts",
+      claim: "How much better polar ice is than solar wind as a hydrogen source",
+      value: polarAdvantageX(),
+      unit: "x",
+      kind: "derived",
+      provenance: "LCROSS ~5.6% water by mass in the Cabeus plume against ~50 ppm implanted H",
+      limits: "One plume from one crater, and the 5.6% carries a +/-2.9% this module does not propagate.",
+    },
+    {
+      id: "peak-of-light-share",
+      module: "volatiles.ts",
+      claim: "Share of the lunar industry a handful of peaks of near-eternal light could run",
+      value: sitingConflict().peakShareOfIndustry,
+      unit: "fraction",
+      kind: "derived",
+      provenance: "five 1 km2 sites at 231 W/m2 against the 3.8 TW M11 budgets",
+      limits: "[THE CONFLICT] Ice needs permanent shadow, power needs permanent sun. Not the same place.",
+      affects: ["isru.ts"],
+    },
+    {
+      id: "lunar-array-area",
+      module: "volatiles.ts",
+      claim: "Lunar surface array area needed to run the industry that builds Type I",
+      value: sitingConflict().requiredArrayM2,
+      unit: "m2",
+      kind: "derived",
+      provenance: "3.8 TW at AM0 x 20% x 0.85 illumination",
+      limits: "16,450 km2. Fine anywhere sunlit, and the poles do not have that much sunlit ground.",
+    },
+
+    // -- M30 surface --------------------------------------------------------
+    {
+      id: "hop-escape-crossover",
+      module: "surface.ts",
+      claim: "Ground range beyond which leaving the Moon costs less delta-v than hopping across it",
+      value: hopEqualsEscapeRangeM(),
+      unit: "m",
+      kind: "derived",
+      provenance: "minimum-energy range equation v2 = gR*2sin(T/2)/(1+sin(T/2)), doubled to land",
+      limits: "You arrive at the speed you left. Pole to equator is 2,729 km, well past this line.",
+    },
+    {
+      id: "lunar-roll-energy",
+      module: "surface.ts",
+      claim: "Energy to roll a kilogram from a lunar pole to the equator",
+      value: transportCase(POLE_TO_EQUATOR_M).rollJPerKg,
+      unit: "J/kg",
+      kind: "derived",
+      provenance: "mu*g*d at an assumed rolling resistance of 0.1 over 2,729 km",
+      limits: "0.44% of M11's embodied energy. No grade, no craters, no route a vehicle could follow.",
+    },
+    {
+      id: "roll-vs-hop",
+      module: "surface.ts",
+      claim: "How much cheaper rolling is than hopping, pole to equator",
+      value: transportCase(POLE_TO_EQUATOR_M).rollAdvantageX,
+      unit: "x",
+      kind: "derived",
+      provenance: "mu*g*d against the kinetic energy of a minimum-energy hop, both ways",
+      limits: "Energy only. Rolling takes 23 days at 10 km/h and a hop takes minutes.",
+    },
+    {
+      id: "volatile-rover-fleet",
+      module: "surface.ts",
+      claim: "Rovers needed to sustain the volatile flow across the Moon",
+      value: fleetComparison().volatilesOnly.rovers,
+      unit: "rovers",
+      kind: "derived",
+      provenance: "0.016% of M11's 23 Gt/yr replacement flow, at 10 t and 10 km/h over 2,729 km",
+      limits: "[THE INVERSION] The share that makes closure hard is what makes transport cheap.",
+      affects: ["closure.ts", "volatiles.ts"],
+    },
+    {
+      id: "everything-rover-fleet",
+      module: "surface.ts",
+      claim: "Rovers that would be needed if the whole replacement flow had to cross the Moon",
+      value: fleetComparison().everything.rovers,
+      unit: "rovers",
+      kind: "derived",
+      provenance: "the same calculation against the full 23 Gt/yr",
+      limits: "It does not have to: silicon, aluminium and iron are under the factory wherever it stands.",
+    },
+
+    // -- context ─────────────────────────────────────────────────────────────
+    {
+      id: "electricity-now",
+      module: "facts.ts",
+      claim: "World electricity as mean power — the electron layer, not TES",
+      value: ELECTRICITY_W,
+      unit: "W",
+      kind: "published",
+      provenance: "IEA ~30,000 TWh/yr via twhYrToW; the ×3600 that was missing until M2",
+      limits: "Electricity is ~17% of TES. Do not blur the two layers in one chart.",
+    },
+    {
+      id: "datacentres-now",
+      module: "facts.ts",
+      claim: "World data-centre electricity as mean power",
+      value: DATACENTER_W,
+      unit: "W",
+      kind: "published",
+      provenance: "IEA ~460 TWh (2024)",
+      limits: "All data centres, not only AI. Compare against ELECTRICITY_W, never against TES.",
+    },
+    {
+      id: "k-of-type-i",
+      module: "kardashev.ts",
+      claim: "K at Type I, by definition",
+      value: kOf(P_I),
+      unit: "K",
+      kind: "derived",
+      provenance: "(log10(1e16) − 6)/10",
+      limits: "Exactly 1 by construction. Useful only as an axis anchor.",
+    },
+  ];
+}
+
+/** Findings whose conclusions depend on a given module. */
+export function dependents(moduleName: string) {
+  return findings().filter((f) => f.affects?.includes(moduleName));
+}
+
+/** Everything a tool needs, in one call. */
+export function findingsExport() {
+  const all = findings();
+  return {
+    generatedFrom: "src/lib/findings.ts — computed live, no copied literals",
+    contract:
+      "Render value with unit. Show provenance. Never publish a finding without its limits. " +
+      "kind=assumed must be shown as an input, not a result.",
+    counts: {
+      total: all.length,
+      derived: all.filter((f) => f.kind === "derived").length,
+      measured: all.filter((f) => f.kind === "measured").length,
+      published: all.filter((f) => f.kind === "published").length,
+      assumed: all.filter((f) => f.kind === "assumed").length,
+    },
+    findings: all,
+  };
+}

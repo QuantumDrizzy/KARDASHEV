@@ -1,0 +1,17 @@
+# dependencies and build output
+node_modules/
+.vercel/
+.tanstack/
+dist/
+# private (global rule: CLAUDE.md never versioned with the product)
+CLAUDE.md
+# large media: kept in the working tree, not in history
+public/media/*.mp4
+# native build products
+*.exe
+*.exp
+*.lib
+*.obj
+*.pdb
+# stray empty file from a sandbox export
+/{}
