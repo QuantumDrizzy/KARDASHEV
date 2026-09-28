@@ -1,7 +1,7 @@
 {
   "head": {
-    "seq": 2,
-    "hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33"
+    "seq": 3,
+    "hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58"
   },
   "entries": {
     "ignios/nozzle/a_vacuum_bell_is_worse_at_sea_level/specific_impulse_s": {
@@ -259,6 +259,2254 @@
       "block": 2,
       "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
       "earlier_versions": 1
+    },
+    "qublar/check_ahead/cavity_blocked": {
+      "id": "qublar/check_ahead/cavity_blocked",
+      "value": 64.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_ahead: a cavity 5 m ahead of the face, traversable policy (ADR-019)",
+      "test": "src/check_ahead.cu",
+      "inputs": {
+        "cavity_ahead_m": 5,
+        "exposure_log2": 26
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ahead/centroid_m": {
+      "id": "qublar/check_ahead/centroid_m",
+      "value": 0.7905694150420949,
+      "unit": "m",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_ahead: a cavity 5 m ahead of the face, traversable policy (ADR-019)",
+      "test": "src/check_ahead.cu",
+      "inputs": {
+        "cavity_ahead_m": 5,
+        "exposure_log2": 26
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ahead/confident": {
+      "id": "qublar/check_ahead/confident",
+      "value": 4.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_ahead: a cavity 5 m ahead of the face, traversable policy (ADR-019)",
+      "test": "src/check_ahead.cu",
+      "inputs": {
+        "cavity_ahead_m": 5,
+        "exposure_log2": 26
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ahead/control_false": {
+      "id": "qublar/check_ahead/control_false",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_ahead: a cavity 5 m ahead of the face, traversable policy (ADR-019)",
+      "test": "src/check_ahead.cu",
+      "inputs": {
+        "cavity_ahead_m": 5,
+        "exposure_log2": 26
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ahead/correct": {
+      "id": "qublar/check_ahead/correct",
+      "value": 4.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_ahead: a cavity 5 m ahead of the face, traversable policy (ADR-019)",
+      "test": "src/check_ahead.cu",
+      "inputs": {
+        "cavity_ahead_m": 5,
+        "exposure_log2": 26
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ahead/data_nats": {
+      "id": "qublar/check_ahead/data_nats",
+      "value": 24546.885352207344,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "PAY",
+      "source": "check_ahead: a cavity 5 m ahead of the face, traversable policy (ADR-019)",
+      "test": "src/check_ahead.cu",
+      "inputs": {
+        "cavity_ahead_m": 5,
+        "exposure_log2": 26
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ahead/off_truth": {
+      "id": "qublar/check_ahead/off_truth",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "ADR-019 U1: no confident void off the truth",
+      "test": "src/check_ahead.cu",
+      "inputs": {
+        "cavity_ahead_m": 5,
+        "exposure_log2": 26
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ahead/prior_nats": {
+      "id": "qublar/check_ahead/prior_nats",
+      "value": 634.0323058335075,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "PAY",
+      "source": "check_ahead: a cavity 5 m ahead of the face, traversable policy (ADR-019)",
+      "test": "src/check_ahead.cu",
+      "inputs": {
+        "cavity_ahead_m": 5,
+        "exposure_log2": 26
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ahead/truth_bits": {
+      "id": "qublar/check_ahead/truth_bits",
+      "value": 64.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_ahead: a cavity 5 m ahead of the face, traversable policy (ADR-019)",
+      "test": "src/check_ahead.cu",
+      "inputs": {
+        "cavity_ahead_m": 5,
+        "exposure_log2": 26
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/fused/claimed_depth_m": {
+      "id": "qublar/check_fusion/fused/claimed_depth_m",
+      "value": 18.176470588235293,
+      "unit": "m",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/fused/confident": {
+      "id": "qublar/check_fusion/fused/confident",
+      "value": 20.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/fused/control_false": {
+      "id": "qublar/check_fusion/fused/control_false",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/fused/data_nats": {
+      "id": "qublar/check_fusion/fused/data_nats",
+      "value": 785.1611307813546,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "PAY",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/fused/horizontal_m": {
+      "id": "qublar/check_fusion/fused/horizontal_m",
+      "value": 0.9433981132056605,
+      "unit": "m",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/fused/off_truth": {
+      "id": "qublar/check_fusion/fused/off_truth",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "ADR-019 U1: no confident bit off the truth",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/fused/on_ore": {
+      "id": "qublar/check_fusion/fused/on_ore",
+      "value": 20.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/fused/u2_misses": {
+      "id": "qublar/check_fusion/fused/u2_misses",
+      "value": 17.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "ADR-019 U2 (reported)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/fused/undecided": {
+      "id": "qublar/check_fusion/fused/undecided",
+      "value": 28.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/gravity/confident": {
+      "id": "qublar/check_fusion/gravity/confident",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/gravity/control_false": {
+      "id": "qublar/check_fusion/gravity/control_false",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/gravity/data_nats": {
+      "id": "qublar/check_fusion/gravity/data_nats",
+      "value": 531.1785529357915,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "DECLINE",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/gravity/off_truth": {
+      "id": "qublar/check_fusion/gravity/off_truth",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "ADR-019 U1: no confident bit off the truth",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/gravity/on_ore": {
+      "id": "qublar/check_fusion/gravity/on_ore",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/gravity/u2_misses": {
+      "id": "qublar/check_fusion/gravity/u2_misses",
+      "value": 64.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "ADR-019 U2 (reported)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/gravity/undecided": {
+      "id": "qublar/check_fusion/gravity/undecided",
+      "value": 48.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/muons/claimed_depth_m": {
+      "id": "qublar/check_fusion/muons/claimed_depth_m",
+      "value": 31.666666666666668,
+      "unit": "m",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/muons/confident": {
+      "id": "qublar/check_fusion/muons/confident",
+      "value": 3.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/muons/control_false": {
+      "id": "qublar/check_fusion/muons/control_false",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/muons/data_nats": {
+      "id": "qublar/check_fusion/muons/data_nats",
+      "value": 253.98257784559246,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "DECLINE",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/muons/horizontal_m": {
+      "id": "qublar/check_fusion/muons/horizontal_m",
+      "value": 0.4714045207910317,
+      "unit": "m",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/muons/off_truth": {
+      "id": "qublar/check_fusion/muons/off_truth",
+      "value": 3.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "FAIL",
+      "source": "ADR-019 U1: no confident bit off the truth [REGISTERED FAIL: ADR-019 section 4, prereg SHA-256 d55ce27b0cf98ddbf12cb8b236e0de07bb57e32835409c3ddb7b61370f106b04: muons alone mark 3 confident bits off the ore]",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/muons/on_ore": {
+      "id": "qublar/check_fusion/muons/on_ore",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/muons/u2_misses": {
+      "id": "qublar/check_fusion/muons/u2_misses",
+      "value": 64.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "ADR-019 U2 (reported)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/muons/undecided": {
+      "id": "qublar/check_fusion/muons/undecided",
+      "value": 3.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/prior_nats": {
+      "id": "qublar/check_fusion/prior_nats",
+      "value": 634.0323058335075,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_fusion: muons + gravity on one field (ADR-018, ADR-019)",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/r1_evidence_adds": {
+      "id": "qublar/check_fusion/r1_evidence_adds",
+      "value": true,
+      "unit": "1",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "ADR-018 R1",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/r2_controls_clean": {
+      "id": "qublar/check_fusion/r2_controls_clean",
+      "value": true,
+      "unit": "1",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "ADR-018 R2",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/r3_decidable": {
+      "id": "qublar/check_fusion/r3_decidable",
+      "value": false,
+      "unit": "1",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "ADR-018 R3",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_fusion/r4_fused_localised": {
+      "id": "qublar/check_fusion/r4_fused_localised",
+      "value": true,
+      "unit": "1",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "ADR-018 R4",
+      "test": "src/check_fusion.cu",
+      "inputs": {
+        "muon_candidates_log2": 23,
+        "ore_depth_m": 20,
+        "ore_half_m": 4,
+        "sigma_ugal": 1
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma1/confident": {
+      "id": "qublar/check_gravity/sigma1/confident",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "XFAIL",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 1,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma1/control_false": {
+      "id": "qublar/check_gravity/sigma1/control_false",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 1,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma1/correct": {
+      "id": "qublar/check_gravity/sigma1/correct",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "XFAIL",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 1,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma1/data_nats": {
+      "id": "qublar/check_gravity/sigma1/data_nats",
+      "value": 1588.5732331037677,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "PAY",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 1,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma1/energy_best_branch": {
+      "id": "qublar/check_gravity/sigma1/energy_best_branch",
+      "value": 641.7575143503029,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "model vs sampler diagnostic",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 1,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma1/energy_truth": {
+      "id": "qublar/check_gravity/sigma1/energy_truth",
+      "value": 757.9844872736119,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "model vs sampler diagnostic",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 1,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma1/off_truth": {
+      "id": "qublar/check_gravity/sigma1/off_truth",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "ADR-019 U1: no confident bit off the truth",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 1,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma1/prior_nats": {
+      "id": "qublar/check_gravity/sigma1/prior_nats",
+      "value": 634.0323058335075,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "PAY",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 1,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma1/u2_misses": {
+      "id": "qublar/check_gravity/sigma1/u2_misses",
+      "value": 48.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "ADR-019 U2 (reported)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 1,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma1/undecided": {
+      "id": "qublar/check_gravity/sigma1/undecided",
+      "value": 85.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 1,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma2/confident": {
+      "id": "qublar/check_gravity/sigma2/confident",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 2,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma2/control_false": {
+      "id": "qublar/check_gravity/sigma2/control_false",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 2,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma2/correct": {
+      "id": "qublar/check_gravity/sigma2/correct",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 2,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma2/data_nats": {
+      "id": "qublar/check_gravity/sigma2/data_nats",
+      "value": 382.6820431393623,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "DECLINE",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 2,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma2/energy_best_branch": {
+      "id": "qublar/check_gravity/sigma2/energy_best_branch",
+      "value": 407.13529620597353,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "model vs sampler diagnostic",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 2,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma2/energy_truth": {
+      "id": "qublar/check_gravity/sigma2/energy_truth",
+      "value": 752.5630495858975,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "model vs sampler diagnostic",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 2,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma2/off_truth": {
+      "id": "qublar/check_gravity/sigma2/off_truth",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "ADR-019 U1: no confident bit off the truth",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 2,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma2/prior_nats": {
+      "id": "qublar/check_gravity/sigma2/prior_nats",
+      "value": 634.0323058335075,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "DECLINE",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 2,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma2/u2_misses": {
+      "id": "qublar/check_gravity/sigma2/u2_misses",
+      "value": 64.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "ADR-019 U2 (reported)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 2,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma2/undecided": {
+      "id": "qublar/check_gravity/sigma2/undecided",
+      "value": 31.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 2,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma5/confident": {
+      "id": "qublar/check_gravity/sigma5/confident",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 5,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma5/control_false": {
+      "id": "qublar/check_gravity/sigma5/control_false",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 5,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma5/correct": {
+      "id": "qublar/check_gravity/sigma5/correct",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 5,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma5/data_nats": {
+      "id": "qublar/check_gravity/sigma5/data_nats",
+      "value": 50.71930263671794,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "DECLINE",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 5,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma5/energy_best_branch": {
+      "id": "qublar/check_gravity/sigma5/energy_best_branch",
+      "value": 194.69847841698203,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "model vs sampler diagnostic",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 5,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma5/energy_truth": {
+      "id": "qublar/check_gravity/sigma5/energy_truth",
+      "value": 778.0114816137716,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "model vs sampler diagnostic",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 5,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma5/off_truth": {
+      "id": "qublar/check_gravity/sigma5/off_truth",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "ADR-019 U1: no confident bit off the truth",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 5,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma5/prior_nats": {
+      "id": "qublar/check_gravity/sigma5/prior_nats",
+      "value": 634.0323058335075,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "DECLINE",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 5,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma5/u2_misses": {
+      "id": "qublar/check_gravity/sigma5/u2_misses",
+      "value": 64.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "ADR-019 U2 (reported)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 5,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_gravity/sigma5/undecided": {
+      "id": "qublar/check_gravity/sigma5/undecided",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_gravity: gravity only, an 8 m cube 12 m down (ADR-017 L1, ADR-019)",
+      "test": "src/check_gravity.cu",
+      "inputs": {
+        "bits": 16384,
+        "sigma_ugal": 5,
+        "stations": 256
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ising/cloud/pyramid_meta": {
+      "id": "qublar/check_ising/cloud/pyramid_meta",
+      "value": 32.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_ising posterior p_void over the pyramid (ADR-021 cloud)",
+      "test": "src/check_ising.cu",
+      "inputs": {
+        "nx": 128
+      },
+      "artifact": {
+        "path": "qublar/cloud_pyramid.json",
+        "sha256": "28c12c1174d45c65d681251cfa797265024410f19c723856b790a415cb9b7f3b",
+        "bytes": 404
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ising/cloud/pyramid_u8": {
+      "id": "qublar/check_ising/cloud/pyramid_u8",
+      "value": 306328.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_ising posterior p_void over the pyramid (ADR-021 cloud)",
+      "test": "src/check_ising.cu",
+      "inputs": {
+        "nx": 128
+      },
+      "artifact": {
+        "path": "qublar/cloud_pyramid.u8",
+        "sha256": "f86a406a6510f952ee655717cbd96217d937c145ac6f17773612fa8d7deafd6a",
+        "bytes": 2097152
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ising/control/false_voids": {
+      "id": "qublar/check_ising/control/false_voids",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_ising section C: the empty pyramid, same seeds, same priors",
+      "test": "src/check_ising.cu",
+      "inputs": {
+        "exposure_log2": 27
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ising/void/centroid_m": {
+      "id": "qublar/check_ising/void/centroid_m",
+      "value": 0.09090909090909091,
+      "unit": "m",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_ising section B: pyramid void, muon tomography (ADR-007, ADR-019)",
+      "test": "src/check_ising.cu",
+      "inputs": {
+        "bits": 306328,
+        "branches": 16,
+        "exposure_log2": 27
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ising/void/confident": {
+      "id": "qublar/check_ising/void/confident",
+      "value": 11.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_ising section B: pyramid void, muon tomography (ADR-007, ADR-019)",
+      "test": "src/check_ising.cu",
+      "inputs": {
+        "bits": 306328,
+        "branches": 16,
+        "exposure_log2": 27
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ising/void/correct": {
+      "id": "qublar/check_ising/void/correct",
+      "value": 11.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_ising section B: pyramid void, muon tomography (ADR-007, ADR-019)",
+      "test": "src/check_ising.cu",
+      "inputs": {
+        "bits": 306328,
+        "branches": 16,
+        "exposure_log2": 27
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ising/void/data_nats": {
+      "id": "qublar/check_ising/void/data_nats",
+      "value": 772.9180210337363,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_ising section B: pyramid void, muon tomography (ADR-007, ADR-019)",
+      "test": "src/check_ising.cu",
+      "inputs": {
+        "bits": 306328,
+        "branches": 16,
+        "exposure_log2": 27
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ising/void/iou": {
+      "id": "qublar/check_ising/void/iou",
+      "value": 0.34375,
+      "unit": "1",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_ising section B: pyramid void, muon tomography (ADR-007, ADR-019)",
+      "test": "src/check_ising.cu",
+      "inputs": {
+        "bits": 306328,
+        "branches": 16,
+        "exposure_log2": 27
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ising/void/off_truth": {
+      "id": "qublar/check_ising/void/off_truth",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "ADR-019 U1: no confident void off the truth",
+      "test": "src/check_ising.cu",
+      "inputs": {
+        "bits": 306328,
+        "branches": 16,
+        "exposure_log2": 27
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ising/void/prior_nats": {
+      "id": "qublar/check_ising/void/prior_nats",
+      "value": 421.0161529167539,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_ising section B: pyramid void, muon tomography (ADR-007, ADR-019)",
+      "test": "src/check_ising.cu",
+      "inputs": {
+        "bits": 306328,
+        "branches": 16,
+        "exposure_log2": 27
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ising/void/truth_bits": {
+      "id": "qublar/check_ising/void/truth_bits",
+      "value": 32.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_ising section B: pyramid void, muon tomography (ADR-007, ADR-019)",
+      "test": "src/check_ising.cu",
+      "inputs": {
+        "bits": 306328,
+        "branches": 16,
+        "exposure_log2": 27
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ising/void/u2_misses": {
+      "id": "qublar/check_ising/void/u2_misses",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "ADR-019 U2 (reported)",
+      "test": "src/check_ising.cu",
+      "inputs": {
+        "bits": 306328,
+        "branches": 16,
+        "exposure_log2": 27
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_ising/void/undecided": {
+      "id": "qublar/check_ising/void/undecided",
+      "value": 37.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "check_ising section B: pyramid void, muon tomography (ADR-007, ADR-019)",
+      "test": "src/check_ising.cu",
+      "inputs": {
+        "bits": 306328,
+        "branches": 16,
+        "exposure_log2": 27
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp25/confident": {
+      "id": "qublar/check_mine/half2_exp25/confident",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp25/control_false": {
+      "id": "qublar/check_mine/half2_exp25/control_false",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp25/correct": {
+      "id": "qublar/check_mine/half2_exp25/correct",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp25/data_nats": {
+      "id": "qublar/check_mine/half2_exp25/data_nats",
+      "value": 74.26643259836783,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "DECLINE",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp25/off_truth": {
+      "id": "qublar/check_mine/half2_exp25/off_truth",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "ADR-019 U1: no confident ore off the truth",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp25/prior_nats": {
+      "id": "qublar/check_mine/half2_exp25/prior_nats",
+      "value": 103.25403822918841,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "DECLINE",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp25/truth_bits": {
+      "id": "qublar/check_mine/half2_exp25/truth_bits",
+      "value": 8.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp25/u2_misses": {
+      "id": "qublar/check_mine/half2_exp25/u2_misses",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "ADR-019 U2 (reported)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp27/centroid_m": {
+      "id": "qublar/check_mine/half2_exp27/centroid_m",
+      "value": 0.0,
+      "unit": "m",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp27/confident": {
+      "id": "qublar/check_mine/half2_exp27/confident",
+      "value": 8.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp27/control_false": {
+      "id": "qublar/check_mine/half2_exp27/control_false",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp27/correct": {
+      "id": "qublar/check_mine/half2_exp27/correct",
+      "value": 8.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp27/data_nats": {
+      "id": "qublar/check_mine/half2_exp27/data_nats",
+      "value": 414.58903802669374,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "PAY",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp27/off_truth": {
+      "id": "qublar/check_mine/half2_exp27/off_truth",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "ADR-019 U1: no confident ore off the truth",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp27/prior_nats": {
+      "id": "qublar/check_mine/half2_exp27/prior_nats",
+      "value": 103.25403822918841,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "PAY",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp27/truth_bits": {
+      "id": "qublar/check_mine/half2_exp27/truth_bits",
+      "value": 8.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half2_exp27/u2_misses": {
+      "id": "qublar/check_mine/half2_exp27/u2_misses",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "ADR-019 U2 (reported)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 2,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp25/centroid_m": {
+      "id": "qublar/check_mine/half4_exp25/centroid_m",
+      "value": 0.9616927131905982,
+      "unit": "m",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp25/confident": {
+      "id": "qublar/check_mine/half4_exp25/confident",
+      "value": 47.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp25/control_false": {
+      "id": "qublar/check_mine/half4_exp25/control_false",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp25/correct": {
+      "id": "qublar/check_mine/half4_exp25/correct",
+      "value": 47.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp25/data_nats": {
+      "id": "qublar/check_mine/half4_exp25/data_nats",
+      "value": 1603.554922934145,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "PAY",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp25/off_truth": {
+      "id": "qublar/check_mine/half4_exp25/off_truth",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "ADR-019 U1: no confident ore off the truth",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp25/prior_nats": {
+      "id": "qublar/check_mine/half4_exp25/prior_nats",
+      "value": 634.0323058335075,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "PAY",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp25/truth_bits": {
+      "id": "qublar/check_mine/half4_exp25/truth_bits",
+      "value": 64.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp25/u2_misses": {
+      "id": "qublar/check_mine/half4_exp25/u2_misses",
+      "value": 16.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "ADR-019 U2 (reported)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 25,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp27/centroid_m": {
+      "id": "qublar/check_mine/half4_exp27/centroid_m",
+      "value": 0.06918887211969312,
+      "unit": "m",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp27/confident": {
+      "id": "qublar/check_mine/half4_exp27/confident",
+      "value": 63.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp27/control_false": {
+      "id": "qublar/check_mine/half4_exp27/control_false",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp27/correct": {
+      "id": "qublar/check_mine/half4_exp27/correct",
+      "value": 63.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp27/data_nats": {
+      "id": "qublar/check_mine/half4_exp27/data_nats",
+      "value": 7010.719837011304,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "PAY",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp27/off_truth": {
+      "id": "qublar/check_mine/half4_exp27/off_truth",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "ADR-019 U1: no confident ore off the truth",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp27/prior_nats": {
+      "id": "qublar/check_mine/half4_exp27/prior_nats",
+      "value": 634.0323058335075,
+      "unit": "nats",
+      "class": "MEASURED",
+      "verdict": "PAY",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp27/truth_bits": {
+      "id": "qublar/check_mine/half4_exp27/truth_bits",
+      "value": 64.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "PASS",
+      "source": "check_mine: denser ore under a mountain, three muon chambers (ADR-019)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
+    },
+    "qublar/check_mine/half4_exp27/u2_misses": {
+      "id": "qublar/check_mine/half4_exp27/u2_misses",
+      "value": 0.0,
+      "unit": "bits",
+      "class": "MEASURED",
+      "verdict": "REPORTED",
+      "source": "ADR-019 U2 (reported)",
+      "test": "src/check_mine.cu",
+      "inputs": {
+        "exposure_log2": 27,
+        "ore_half_m": 4,
+        "rho_ratio": 1.25
+      },
+      "repo": "qublar",
+      "commit": "d96b893c00eb",
+      "block": 3,
+      "block_hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58",
+      "earlier_versions": 0
     }
   }
 }
