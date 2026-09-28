@@ -1,7 +1,7 @@
 {
   "head": {
-    "seq": 3,
-    "hash": "c45868c32081b7a4c54b41d7bba51734697ceb4251dedc2692e4680d3a415a58"
+    "seq": 5,
+    "hash": "dce1f912ea8c3594f60c78100d064501a124085f9598e476e4688a4e5c3139ec"
   },
   "entries": {
     "ignios/nozzle/a_vacuum_bell_is_worse_at_sea_level/specific_impulse_s": {
@@ -24,10 +24,89 @@
         "ignios/thermochem/lox_rp1_products/gamma"
       ],
       "repo": "ignios",
-      "commit": "e67985dbe7fa",
-      "block": 2,
-      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
-      "earlier_versions": 1
+      "commit": "72fe3ea3a4f7",
+      "block": 4,
+      "block_hash": "afcb2d693d8b030eaaf6ee960ffdd6661121b0d45f08ddb4eb0dc5bbee4a1241",
+      "earlier_versions": 2
+    },
+    "ignios/nozzle/lox_ch4_cstar_published/characteristic_velocity_m_s": {
+      "id": "ignios/nozzle/lox_ch4_cstar_published/characteristic_velocity_m_s",
+      "value": 1828.9144617817708,
+      "unit": "m/s",
+      "class": "DERIVED",
+      "verdict": "PASS",
+      "expect": 1830.0,
+      "rel_err": 0.000593190283185357,
+      "source": "LOX/CH4 characteristic velocity about 1830 m/s (Raptor class), recited by KARDASHEV M20 [TO CITE]",
+      "test": "crates/ignis-nozzle/cases/performance.toml#lox_ch4_cstar_published",
+      "inputs": {
+        "ambient_pressure_pa": 0.0,
+        "area_ratio": 80.0,
+        "chamber_pressure_pa": 30000000.0,
+        "propellant": "lox_ch4"
+      },
+      "cites": [
+        "ignios/thermochem/lox_ch4_products/chamber_temperature_k",
+        "ignios/thermochem/lox_ch4_products/gamma",
+        "ignios/thermochem/lox_ch4_products/molar_mass_kg_mol"
+      ],
+      "repo": "ignios",
+      "commit": "72fe3ea3a4f7",
+      "block": 4,
+      "block_hash": "afcb2d693d8b030eaaf6ee960ffdd6661121b0d45f08ddb4eb0dc5bbee4a1241",
+      "earlier_versions": 0
+    },
+    "ignios/nozzle/lox_lh2_cstar_published/characteristic_velocity_m_s": {
+      "id": "ignios/nozzle/lox_lh2_cstar_published/characteristic_velocity_m_s",
+      "value": 2299.0728713218878,
+      "unit": "m/s",
+      "class": "DERIVED",
+      "verdict": "PASS",
+      "expect": 2360.0,
+      "rel_err": 0.025816579948352646,
+      "source": "LOX/LH2 characteristic velocity about 2360 m/s (RS-25 class), recited by KARDASHEV M20 [TO CITE]",
+      "test": "crates/ignis-nozzle/cases/performance.toml#lox_lh2_cstar_published",
+      "inputs": {
+        "ambient_pressure_pa": 0.0,
+        "area_ratio": 69.0,
+        "chamber_pressure_pa": 20600000.0,
+        "propellant": "lox_lh2"
+      },
+      "cites": [
+        "ignios/thermochem/lox_lh2_products/chamber_temperature_k",
+        "ignios/thermochem/lox_lh2_products/gamma",
+        "ignios/thermochem/lox_lh2_products/molar_mass_kg_mol"
+      ],
+      "repo": "ignios",
+      "commit": "72fe3ea3a4f7",
+      "block": 4,
+      "block_hash": "afcb2d693d8b030eaaf6ee960ffdd6661121b0d45f08ddb4eb0dc5bbee4a1241",
+      "earlier_versions": 0
+    },
+    "ignios/nozzle/lox_rp1_cstar_published/characteristic_velocity_m_s": {
+      "id": "ignios/nozzle/lox_rp1_cstar_published/characteristic_velocity_m_s",
+      "value": 1797.6111517984843,
+      "unit": "m/s",
+      "class": "DERIVED",
+      "verdict": "PASS",
+      "expect": 1820.0,
+      "rel_err": 0.012301564945887723,
+      "source": "LOX/RP-1 characteristic velocity about 1820 m/s (Merlin class), recited by KARDASHEV M20 [TO CITE]",
+      "test": "crates/ignis-nozzle/cases/performance.toml#lox_rp1_cstar_published",
+      "inputs": {
+        "ambient_pressure_pa": 0.0,
+        "area_ratio": 165.0,
+        "chamber_pressure_pa": 9700000.0,
+        "propellant": "lox_rp1"
+      },
+      "cites": [
+        "ignios/thermochem/lox_rp1_products/gamma"
+      ],
+      "repo": "ignios",
+      "commit": "72fe3ea3a4f7",
+      "block": 4,
+      "block_hash": "afcb2d693d8b030eaaf6ee960ffdd6661121b0d45f08ddb4eb0dc5bbee4a1241",
+      "earlier_versions": 0
     },
     "ignios/nozzle/merlin_vacuum_isp/specific_impulse_s": {
       "id": "ignios/nozzle/merlin_vacuum_isp/specific_impulse_s",
@@ -49,10 +128,10 @@
         "ignios/thermochem/lox_rp1_products/gamma"
       ],
       "repo": "ignios",
-      "commit": "e67985dbe7fa",
-      "block": 2,
-      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
-      "earlier_versions": 1
+      "commit": "72fe3ea3a4f7",
+      "block": 4,
+      "block_hash": "afcb2d693d8b030eaaf6ee960ffdd6661121b0d45f08ddb4eb0dc5bbee4a1241",
+      "earlier_versions": 2
     },
     "ignios/nozzle/raptor_sea_level_isp/specific_impulse_s": {
       "id": "ignios/nozzle/raptor_sea_level_isp/specific_impulse_s",
@@ -76,10 +155,10 @@
         "ignios/thermochem/lox_ch4_products/molar_mass_kg_mol"
       ],
       "repo": "ignios",
-      "commit": "e67985dbe7fa",
-      "block": 2,
-      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
-      "earlier_versions": 1
+      "commit": "72fe3ea3a4f7",
+      "block": 4,
+      "block_hash": "afcb2d693d8b030eaaf6ee960ffdd6661121b0d45f08ddb4eb0dc5bbee4a1241",
+      "earlier_versions": 2
     },
     "ignios/nozzle/rs25_vacuum_isp/specific_impulse_s": {
       "id": "ignios/nozzle/rs25_vacuum_isp/specific_impulse_s",
@@ -103,10 +182,10 @@
         "ignios/thermochem/lox_lh2_products/molar_mass_kg_mol"
       ],
       "repo": "ignios",
-      "commit": "e67985dbe7fa",
-      "block": 2,
-      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
-      "earlier_versions": 1
+      "commit": "72fe3ea3a4f7",
+      "block": 4,
+      "block_hash": "afcb2d693d8b030eaaf6ee960ffdd6661121b0d45f08ddb4eb0dc5bbee4a1241",
+      "earlier_versions": 2
     },
     "ignios/thermochem/hydrogen_wins_on_molar_mass/characteristic_speed_scale_m_s": {
       "id": "ignios/thermochem/hydrogen_wins_on_molar_mass/characteristic_speed_scale_m_s",
@@ -122,10 +201,10 @@
         "propellant": "lox_lh2"
       },
       "repo": "ignios",
-      "commit": "e67985dbe7fa",
-      "block": 2,
-      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
-      "earlier_versions": 1
+      "commit": "72fe3ea3a4f7",
+      "block": 4,
+      "block_hash": "afcb2d693d8b030eaaf6ee960ffdd6661121b0d45f08ddb4eb0dc5bbee4a1241",
+      "earlier_versions": 2
     },
     "ignios/thermochem/lox_ch4_products/chamber_temperature_k": {
       "id": "ignios/thermochem/lox_ch4_products/chamber_temperature_k",
@@ -141,10 +220,10 @@
         "propellant": "lox_ch4"
       },
       "repo": "ignios",
-      "commit": "e67985dbe7fa",
-      "block": 2,
-      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
-      "earlier_versions": 1
+      "commit": "72fe3ea3a4f7",
+      "block": 4,
+      "block_hash": "afcb2d693d8b030eaaf6ee960ffdd6661121b0d45f08ddb4eb0dc5bbee4a1241",
+      "earlier_versions": 2
     },
     "ignios/thermochem/lox_ch4_products/gamma": {
       "id": "ignios/thermochem/lox_ch4_products/gamma",
@@ -160,10 +239,10 @@
         "propellant": "lox_ch4"
       },
       "repo": "ignios",
-      "commit": "e67985dbe7fa",
-      "block": 2,
-      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
-      "earlier_versions": 1
+      "commit": "72fe3ea3a4f7",
+      "block": 4,
+      "block_hash": "afcb2d693d8b030eaaf6ee960ffdd6661121b0d45f08ddb4eb0dc5bbee4a1241",
+      "earlier_versions": 2
     },
     "ignios/thermochem/lox_ch4_products/molar_mass_kg_mol": {
       "id": "ignios/thermochem/lox_ch4_products/molar_mass_kg_mol",
@@ -179,10 +258,10 @@
         "propellant": "lox_ch4"
       },
       "repo": "ignios",
-      "commit": "e67985dbe7fa",
-      "block": 2,
-      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
-      "earlier_versions": 1
+      "commit": "72fe3ea3a4f7",
+      "block": 4,
+      "block_hash": "afcb2d693d8b030eaaf6ee960ffdd6661121b0d45f08ddb4eb0dc5bbee4a1241",
+      "earlier_versions": 2
     },
     "ignios/thermochem/lox_lh2_products/chamber_temperature_k": {
       "id": "ignios/thermochem/lox_lh2_products/chamber_temperature_k",
@@ -198,10 +277,10 @@
         "propellant": "lox_lh2"
       },
       "repo": "ignios",
-      "commit": "e67985dbe7fa",
-      "block": 2,
-      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
-      "earlier_versions": 1
+      "commit": "72fe3ea3a4f7",
+      "block": 4,
+      "block_hash": "afcb2d693d8b030eaaf6ee960ffdd6661121b0d45f08ddb4eb0dc5bbee4a1241",
+      "earlier_versions": 2
     },
     "ignios/thermochem/lox_lh2_products/gamma": {
       "id": "ignios/thermochem/lox_lh2_products/gamma",
@@ -217,10 +296,10 @@
         "propellant": "lox_lh2"
       },
       "repo": "ignios",
-      "commit": "e67985dbe7fa",
-      "block": 2,
-      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
-      "earlier_versions": 1
+      "commit": "72fe3ea3a4f7",
+      "block": 4,
+      "block_hash": "afcb2d693d8b030eaaf6ee960ffdd6661121b0d45f08ddb4eb0dc5bbee4a1241",
+      "earlier_versions": 2
     },
     "ignios/thermochem/lox_lh2_products/molar_mass_kg_mol": {
       "id": "ignios/thermochem/lox_lh2_products/molar_mass_kg_mol",
@@ -236,10 +315,10 @@
         "propellant": "lox_lh2"
       },
       "repo": "ignios",
-      "commit": "e67985dbe7fa",
-      "block": 2,
-      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
-      "earlier_versions": 1
+      "commit": "72fe3ea3a4f7",
+      "block": 4,
+      "block_hash": "afcb2d693d8b030eaaf6ee960ffdd6661121b0d45f08ddb4eb0dc5bbee4a1241",
+      "earlier_versions": 2
     },
     "ignios/thermochem/lox_rp1_products/gamma": {
       "id": "ignios/thermochem/lox_rp1_products/gamma",
@@ -255,10 +334,249 @@
         "propellant": "lox_rp1"
       },
       "repo": "ignios",
-      "commit": "e67985dbe7fa",
-      "block": 2,
-      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
-      "earlier_versions": 1
+      "commit": "72fe3ea3a4f7",
+      "block": 4,
+      "block_hash": "afcb2d693d8b030eaaf6ee960ffdd6661121b0d45f08ddb4eb0dc5bbee4a1241",
+      "earlier_versions": 2
+    },
+    "kardashev/inputs/growth_per_year": {
+      "id": "kardashev/inputs/growth_per_year",
+      "value": 0.018,
+      "unit": "1",
+      "class": "CITED",
+      "verdict": "PASS",
+      "source": "IEA TES growth 2013-2023, about 1.8 %/yr; not a forecast",
+      "test": "core/tests/golden.rs",
+      "inputs": {
+        "growth_per_year": 0.018
+      },
+      "repo": "kardashev",
+      "commit": "985110389603",
+      "block": 5,
+      "block_hash": "dce1f912ea8c3594f60c78100d064501a124085f9598e476e4688a4e5c3139ec",
+      "earlier_versions": 0
+    },
+    "kardashev/inputs/sun_luminosity_w": {
+      "id": "kardashev/inputs/sun_luminosity_w",
+      "value": 3.826e+26,
+      "unit": "W",
+      "class": "CITED",
+      "verdict": "PASS",
+      "source": "Solar luminosity 3.826e26 W as used by M1 [TO VERIFY against IAU 2015 nominal 3.828e26 W]",
+      "test": "core/tests/golden.rs",
+      "inputs": {
+        "growth_per_year": 0.018
+      },
+      "repo": "kardashev",
+      "commit": "985110389603",
+      "block": 5,
+      "block_hash": "dce1f912ea8c3594f60c78100d064501a124085f9598e476e4688a4e5c3139ec",
+      "earlier_versions": 0
+    },
+    "kardashev/inputs/tes_2023_ej": {
+      "id": "kardashev/inputs/tes_2023_ej",
+      "value": 620.0,
+      "unit": "EJ/yr",
+      "class": "CITED",
+      "verdict": "PASS",
+      "source": "IEA World Energy Balances 2023: total energy supply 620 EJ/yr",
+      "test": "core/tests/golden.rs",
+      "inputs": {
+        "growth_per_year": 0.018
+      },
+      "repo": "kardashev",
+      "commit": "985110389603",
+      "block": 5,
+      "block_hash": "dce1f912ea8c3594f60c78100d064501a124085f9598e476e4688a4e5c3139ec",
+      "earlier_versions": 0
+    },
+    "kardashev/inputs/type_i_w": {
+      "id": "kardashev/inputs/type_i_w",
+      "value": 1e+16,
+      "unit": "W",
+      "class": "CITED",
+      "verdict": "PASS",
+      "source": "Sagan 1973, The Cosmic Connection: K = (log10 P - 6) / 10",
+      "test": "core/tests/golden.rs",
+      "inputs": {
+        "growth_per_year": 0.018
+      },
+      "repo": "kardashev",
+      "commit": "985110389603",
+      "block": 5,
+      "block_hash": "dce1f912ea8c3594f60c78100d064501a124085f9598e476e4688a4e5c3139ec",
+      "earlier_versions": 0
+    },
+    "kardashev/inputs/type_iii_w": {
+      "id": "kardashev/inputs/type_iii_w",
+      "value": 1e+36,
+      "unit": "W",
+      "class": "CITED",
+      "verdict": "PASS",
+      "source": "Sagan 1973, The Cosmic Connection: K = (log10 P - 6) / 10",
+      "test": "core/tests/golden.rs",
+      "inputs": {
+        "growth_per_year": 0.018
+      },
+      "repo": "kardashev",
+      "commit": "985110389603",
+      "block": 5,
+      "block_hash": "dce1f912ea8c3594f60c78100d064501a124085f9598e476e4688a4e5c3139ec",
+      "earlier_versions": 0
+    },
+    "kardashev/m1/gap_sun_over_type_i": {
+      "id": "kardashev/m1/gap_sun_over_type_i",
+      "value": 38260000000.0,
+      "unit": "1",
+      "class": "DERIVED",
+      "verdict": "PASS",
+      "source": "core/src/lib.rs (kardashev-core), locked by tests/golden.rs against src/lib/kardashev.ts",
+      "test": "core/tests/golden.rs",
+      "inputs": {
+        "growth_per_year": 0.018
+      },
+      "cites": [
+        "kardashev/inputs/tes_2023_ej",
+        "kardashev/inputs/growth_per_year",
+        "kardashev/inputs/type_i_w"
+      ],
+      "repo": "kardashev",
+      "commit": "985110389603",
+      "block": 5,
+      "block_hash": "dce1f912ea8c3594f60c78100d064501a124085f9598e476e4688a4e5c3139ec",
+      "earlier_versions": 0
+    },
+    "kardashev/m1/gap_type_i": {
+      "id": "kardashev/m1/gap_type_i",
+      "value": 508.9935483870968,
+      "unit": "1",
+      "class": "DERIVED",
+      "verdict": "PASS",
+      "source": "core/src/lib.rs (kardashev-core), locked by tests/golden.rs against src/lib/kardashev.ts",
+      "test": "core/tests/golden.rs",
+      "inputs": {
+        "growth_per_year": 0.018
+      },
+      "cites": [
+        "kardashev/inputs/tes_2023_ej",
+        "kardashev/inputs/growth_per_year",
+        "kardashev/inputs/type_i_w"
+      ],
+      "repo": "kardashev",
+      "commit": "985110389603",
+      "block": 5,
+      "block_hash": "dce1f912ea8c3594f60c78100d064501a124085f9598e476e4688a4e5c3139ec",
+      "earlier_versions": 0
+    },
+    "kardashev/m1/k_now": {
+      "id": "kardashev/m1/k_now",
+      "value": 0.7293287722413027,
+      "unit": "1",
+      "class": "DERIVED",
+      "verdict": "PASS",
+      "source": "core/src/lib.rs (kardashev-core), locked by tests/golden.rs against src/lib/kardashev.ts",
+      "test": "core/tests/golden.rs",
+      "inputs": {
+        "growth_per_year": 0.018
+      },
+      "cites": [
+        "kardashev/inputs/tes_2023_ej",
+        "kardashev/inputs/growth_per_year",
+        "kardashev/inputs/type_i_w"
+      ],
+      "repo": "kardashev",
+      "commit": "985110389603",
+      "block": 5,
+      "block_hash": "dce1f912ea8c3594f60c78100d064501a124085f9598e476e4688a4e5c3139ec",
+      "earlier_versions": 0
+    },
+    "kardashev/m1/power_2023_w": {
+      "id": "kardashev/m1/power_2023_w",
+      "value": 19646614444697.95,
+      "unit": "W",
+      "class": "DERIVED",
+      "verdict": "PASS",
+      "source": "core/src/lib.rs (kardashev-core), locked by tests/golden.rs against src/lib/kardashev.ts",
+      "test": "core/tests/golden.rs",
+      "inputs": {
+        "growth_per_year": 0.018
+      },
+      "cites": [
+        "kardashev/inputs/tes_2023_ej",
+        "kardashev/inputs/growth_per_year",
+        "kardashev/inputs/type_i_w"
+      ],
+      "repo": "kardashev",
+      "commit": "985110389603",
+      "block": 5,
+      "block_hash": "dce1f912ea8c3594f60c78100d064501a124085f9598e476e4688a4e5c3139ec",
+      "earlier_versions": 0
+    },
+    "kardashev/m1/years_to_sun": {
+      "id": "kardashev/m1/years_to_sun",
+      "value": 1715.2604581609137,
+      "unit": "yr",
+      "class": "DERIVED",
+      "verdict": "PASS",
+      "source": "core/src/lib.rs (kardashev-core), locked by tests/golden.rs against src/lib/kardashev.ts",
+      "test": "core/tests/golden.rs",
+      "inputs": {
+        "growth_per_year": 0.018
+      },
+      "cites": [
+        "kardashev/inputs/tes_2023_ej",
+        "kardashev/inputs/growth_per_year",
+        "kardashev/inputs/type_i_w"
+      ],
+      "repo": "kardashev",
+      "commit": "985110389603",
+      "block": 5,
+      "block_hash": "dce1f912ea8c3594f60c78100d064501a124085f9598e476e4688a4e5c3139ec",
+      "earlier_versions": 0
+    },
+    "kardashev/m1/years_to_type_i": {
+      "id": "kardashev/m1/years_to_type_i",
+      "value": 349.3533600638106,
+      "unit": "yr",
+      "class": "DERIVED",
+      "verdict": "PASS",
+      "source": "core/src/lib.rs (kardashev-core), locked by tests/golden.rs against src/lib/kardashev.ts",
+      "test": "core/tests/golden.rs",
+      "inputs": {
+        "growth_per_year": 0.018
+      },
+      "cites": [
+        "kardashev/inputs/tes_2023_ej",
+        "kardashev/inputs/growth_per_year",
+        "kardashev/inputs/type_i_w"
+      ],
+      "repo": "kardashev",
+      "commit": "985110389603",
+      "block": 5,
+      "block_hash": "dce1f912ea8c3594f60c78100d064501a124085f9598e476e4688a4e5c3139ec",
+      "earlier_versions": 0
+    },
+    "kardashev/m1/years_to_type_iii": {
+      "id": "kardashev/m1/years_to_type_iii",
+      "value": 2930.738629245492,
+      "unit": "yr",
+      "class": "DERIVED",
+      "verdict": "PASS",
+      "source": "core/src/lib.rs (kardashev-core), locked by tests/golden.rs against src/lib/kardashev.ts",
+      "test": "core/tests/golden.rs",
+      "inputs": {
+        "growth_per_year": 0.018
+      },
+      "cites": [
+        "kardashev/inputs/tes_2023_ej",
+        "kardashev/inputs/growth_per_year",
+        "kardashev/inputs/type_i_w"
+      ],
+      "repo": "kardashev",
+      "commit": "985110389603",
+      "block": 5,
+      "block_hash": "dce1f912ea8c3594f60c78100d064501a124085f9598e476e4688a4e5c3139ec",
+      "earlier_versions": 0
     },
     "qublar/check_ahead/cavity_blocked": {
       "id": "qublar/check_ahead/cavity_blocked",
