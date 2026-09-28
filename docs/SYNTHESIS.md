@@ -572,9 +572,13 @@ pair while C_f depends on an area ratio that differs between every engine ever f
 
 | pair | c* derived | c* published | error | engine | Isp derived | published |
 |---|---|---|---|---|---|---|
-| LOX/LH2 | 2,296 m/s | 2,360 | **−2.7%** | RS-25 | 451 s | 452.3 |
-| LOX/CH4 | 1,833 m/s | 1,830 | **+0.2%** | Raptor Vac | 371 s | 380 |
-| LOX/RP-1 | 1,804 m/s | 1,820 | **−0.9%** | Merlin 1D Vac | 367 s | 348 |
+| LOX/LH2 | 2,299 m/s | 2,360 | **−2.6%** | RS-25 | 454.6 s | 452.3 |
+| LOX/CH4 | 1,829 m/s | 1,830 | **−0.06%** | Raptor Vac | 371.5 s | 380 |
+| LOX/RP-1 | 1,798 m/s | 1,820 | **−1.2%** | Merlin 1D Vac | 382.0 s | 348 |
+
+*(IGNIOS core and R1 table since Unibit-Web ADR-0003: the ecosystem has one engine. M20's own
+table gave 2,296 / 1,833 / 1,804 m/s. Its prose said Merlin 367 s while its code gave 379.9 s,
+drift the ledger now refuses. The +9.8% on Merlin is in C_f (γ), since c* is inside 1.2%.)*
 
 *(The first run of this was out by exactly √1000 — dividing by molar mass in kg/mol against a
 gas constant per kmol. Invisible in any self-consistency check, obvious in one line against a
@@ -582,7 +586,7 @@ published number.)*
 
 **[RESULT] The lever is molar mass, not chamber temperature.** Since `c* ∝ √(T_c/M)`, and
 hydrogen burns **cooler** than kerosene, the reason LOX/LH2 wins is entirely that its exhaust
-is light — 13.5 g/mol fuel-rich against 23, a **×1.67** advantage in the group that matters.
+is light — 13.5 g/mol fuel-rich against 23.3, a **×1.69** advantage in the group that matters.
 Chasing chamber temperature is chasing a square root of the wrong variable, and it is why
 every serious high-Isp engine runs fuel-rich even though that wastes fuel.
 
@@ -1341,9 +1345,9 @@ Generated from `src/lib/findings.ts`. `synthesis.test.ts` fails if these drift f
 | `first-wall-sooner` | 2.734 | × | derived | `sequence.ts` |
 | `ground-solar-all-land-w` | 5.960e+15 | W | derived | `sequence.ts` |
 | `walls-before-type-i` | 4.000 | walls | derived | `sequence.ts` |
-| `cstar-lox-lh2` | 2296 | m/s | derived | `engine.ts` |
-| `isp-rs25-derived` | 451 | s | derived | `engine.ts` |
-| `molar-mass-lever` | 1.671 | × | derived | `engine.ts` |
+| `cstar-lox-lh2` | 2299 | m/s | derived | `engine.ts` |
+| `isp-rs25-derived` | 455 | s | derived | `engine.ts` |
+| `molar-mass-lever` | 1.687 | × | derived | `engine.ts` |
 | `isp-for-sane-stage` | 1181 | s | derived | `engine.ts` |
 | `beyond-chemistry` | 2.624 | × | derived | `engine.ts` |
 | `falcon9-validation` | 0.009 | fraction | published | `staging.ts` |

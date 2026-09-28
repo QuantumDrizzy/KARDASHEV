@@ -1568,19 +1568,30 @@ propellant pair, while C_f depends on an area ratio that differs between every e
 
 ### [VALIDATION] c* within 3% for all three pairs
 
+**[CORRECTED by Unibit-Web ADR-0003, 2026-09-29]** M20 no longer has its own engine.
+- **Source.** Tc, M and γ are the IGNIOS core's R1 table, and the equations are its crates,
+  through wasm: one engine for the ecosystem.
+- **Chain.** The c* anchors below are IGNIOS harness cases, signed in the Unibit chain as
+  `ignios/nozzle/lox_*_cstar_published/characteristic_velocity_m_s` (block 4).
+- **Old table.** 3600 / 13.5 / 1.20, 3550 / 21.4 / 1.16 and 3670 / 23.0 / 1.15 gave 2,296 /
+  1,833 / 1,804 m/s.
+- **A stale row.** The old Isp table said Merlin 1D Vacuum 367 s (+5.5%), but M20's own code
+  gave 379.9 s (+9.2%). The row had drifted from its code, the kind of drift the ledger now
+  refuses.
+
 | pair | Tc (K) | M (g/mol) | g | c* derived | c* published | error |
 |---|---|---|---|---|---|---|
-| LOX/LH2 | 3600 | 13.5 | 1.20 | **2,296 m/s** | 2,360 | **-2.7%** |
-| LOX/CH4 | 3550 | 21.4 | 1.16 | **1,833 m/s** | 1,830 | **+0.2%** |
-| LOX/RP-1 | 3670 | 23.0 | 1.15 | **1,804 m/s** | 1,820 | **-0.9%** |
+| LOX/LH2 | 3588 | 13.5 | 1.19 | **2,299 m/s** | 2,360 | **-2.6%** |
+| LOX/CH4 | 3550 | 21.5 | 1.16 | **1,829 m/s** | 1,830 | **-0.06%** |
+| LOX/RP-1 | 3670 | 23.3 | 1.14 | **1,798 m/s** | 1,820 | **-1.2%** |
 
 And with each engine's own area ratio:
 
 | engine | AR | Isp derived | published | error |
 |---|---|---|---|---|
-| RS-25 | 69 | **451.1 s** | 452.3 | **-0.2%** |
-| Raptor Vacuum | 80 | 371 s | 380 | -2.5% |
-| Merlin 1D Vacuum | 165 | 367 s | 348 | +5.5% |
+| RS-25 | 69 | **454.6 s** | 452.3 | **+0.5%** |
+| Raptor Vacuum | 80 | 371.5 s | 380 | -2.2% |
+| Merlin 1D Vacuum | 165 | 382.0 s | 348 | +9.8% — c* is inside 1.2%, so the excess is in C_f (γ), `[KNOWN_LIMIT]` in IGNIOS |
 
 ### [CORRECTED] A units trap that cost the first run
 
@@ -1593,12 +1604,13 @@ is the entire argument for keeping external yardsticks.
 
 | pair | Tc | M | Tc/M |
 |---|---|---|---|
-| LOX/LH2 | 3600 K | 13.5 | **267** |
-| LOX/CH4 | 3550 K | 21.4 | 166 |
-| LOX/RP-1 | **3670 K** | 23.0 | 160 |
+| LOX/LH2 | 3588 K | 13.5 | **266** |
+| LOX/CH4 | 3550 K | 21.5 | 165 |
+| LOX/RP-1 | **3670 K** | 23.3 | 158 |
 
-**Hydrogen burns the coolest flame of the three and still wins by 27%** in c*, because
-`c* ~ sqrt(Tc/M)` and its exhaust is light — a **x1.67** advantage in the group that matters.
+**Hydrogen burns the coolest flame of the three and still wins by 28%** in c*, because
+`c* ~ sqrt(Tc/M)` and its exhaust is light — a **x1.69** advantage in the group that matters.
+(IGNIOS R1 table; with M20's old table it was 27% and x1.67.)
 Chasing chamber temperature is chasing a square root of the wrong variable, and it is why
 every serious high-Isp engine runs fuel-rich even though that wastes fuel.
 

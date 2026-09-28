@@ -33,7 +33,8 @@ test("[VALIDATION] c* lands within 3% of published for every pair", () => {
     assert.ok(Math.abs(r.cStarErrorFrac) < 0.03, `${r.label}: c* off by ${(r.cStarErrorFrac * 100).toFixed(1)}%`);
   }
   const lh2 = results().find((r) => r.id === "lox-lh2")!;
-  assert.ok(Math.abs(lh2.cStar - 2296) < 15, `${lh2.cStar}`);
+  // [CORRECTED by Unibit-Web ADR-0003] 2,299 m/s from the IGNIOS R1 table (was 2,296 with M20's own).
+  assert.ok(Math.abs(lh2.cStar - 2299) < 15, `${lh2.cStar}`);
 });
 
 test("[VALIDATION] vacuum Isp lands near each engine's published figure", () => {
@@ -135,6 +136,9 @@ test("[KNOWN_LIMIT] the ceiling is a round figure, and the gas constant is per k
   assert.ok(best < CHEMICAL_CEILING_S + 10, "no modelled pair may exceed the stated ceiling by much");
   // And the units trap that cost the first run: R_u here is J/(kmol·K), which is
   // what lets molar mass stay in g/mol. Off by 1000 and c* is off by √1000.
-  assert.ok(Math.abs(R_UNIVERSAL - 8314.462618) < 1e-6);
-  assert.ok(Math.abs(R_UNIVERSAL / 8.314462618 - 1000) < 1e-9);
+  // [CORRECTED by Unibit-Web ADR-0003] R_u now comes from the IGNIOS core, which
+  // holds the exact CODATA 2018 value 8.314462618153 J/(mol·K); the lock used the
+  // truncated 8314.462618. The units trap it guards is unchanged.
+  assert.ok(Math.abs(R_UNIVERSAL - 8314.462618153) < 1e-6);
+  assert.ok(Math.abs(R_UNIVERSAL / 8.314462618153 - 1000) < 1e-9);
 });

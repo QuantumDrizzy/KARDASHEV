@@ -21,12 +21,21 @@
  *
  * **[VALIDATION] c* lands within 3% for all three pairs.**
  *
- *     LOX/LH2    2,296 m/s  vs  2,360 published   −2.7%
- *     LOX/CH4    1,833 m/s  vs  1,830 published   +0.2%
- *     LOX/RP-1   1,804 m/s  vs  1,820 published   −0.9%
+ *     LOX/LH2    2,299 m/s  vs  2,360 published   −2.6%
+ *     LOX/CH4    1,829 m/s  vs  1,830 published   −0.06%
+ *     LOX/RP-1   1,798 m/s  vs  1,820 published   −1.2%
  *
  * And with each engine's own area ratio the vacuum Isp lands within a few
- * percent of RS-25, Raptor and Merlin Vacuum.
+ * percent of RS-25 (+0.5%) and Raptor (−2.2%); Merlin Vacuum runs +9.8% hot,
+ * and since its c* is inside 1.2%, the excess sits in C_f — in γ.
+ *
+ * **[CORRECTED by Unibit-Web ADR-0003]** This module used to carry its own
+ * propellant table and its own copy of the ideal-rocket equations, beside the
+ * IGNIOS crates: two engines for one ecosystem. The two agreed within 0.8%. The
+ * physics and the table now come from the IGNIOS core (`ignis-core.ts`, the same
+ * wasm the IGNIOS site runs). The c* anchors above moved into the IGNIOS harness
+ * and are in the Unibit chain as `ignios/nozzle/lox_*_cstar_published/...`. The
+ * old figures were 2,296 / 1,833 / 1,804 m/s (−2.7 / +0.2 / −0.9%).
  *
  * **[RESULT] The lever is molar mass, not temperature.** Since `c* ∝ √(T_c/M)`,
  * and hydrogen burns *cooler* than kerosene, the reason LOX/LH2 wins is entirely
@@ -65,18 +74,22 @@
  */
 
 import { G0 } from "./constants.ts";
+import * as Ignis from "./ignis-core.ts";
 
-/** Universal gas constant, J/(kmol·K) — so molar mass can stay in g/mol. */
-export const R_UNIVERSAL = 8314.462618;
+/**
+ * Universal gas constant, J/(kmol·K), so molar mass can stay in g/mol. From the
+ * IGNIOS core (CODATA), not typed here.
+ */
+export const R_UNIVERSAL = Ignis.R_UNIVERSAL_J_MOL_K * 1000;
 
 export type Propellant = {
   id: string;
   label: string;
-  /** [ASSUMED] Chamber temperature at the fuel-rich optimum, K. */
+  /** [RECITED] Chamber temperature, K. IGNIOS R1 table. */
   chamberK: number;
-  /** [ASSUMED] Exhaust molar mass, g/mol. The lever. */
+  /** [RECITED] Exhaust molar mass, g/mol. The lever. IGNIOS R1 table. */
   molarMass: number;
-  /** [ASSUMED] Ratio of specific heats of the exhaust. */
+  /** [RECITED] Ratio of specific heats of the exhaust. IGNIOS R1 table. */
   gamma: number;
   /** [PUBLISHED] Characteristic velocity, m/s. The validation anchor. */
   publishedCStar: number;
@@ -87,17 +100,22 @@ export type Propellant = {
   publishedIspVac: number;
 };
 
+/** The chamber conditions of a pair, from the IGNIOS core's R1 table. */
+function chamber(id: Ignis.IgnisPropellantId) {
+  const p = Ignis.products(id);
+  return { chamberK: p.chamberK, molarMass: p.molarMassKgMol * 1000, gamma: p.gamma };
+}
+
 /**
  * [PUBLISHED] Anchors. c* is the tight one; Isp depends on the area ratio, which
- * is why each engine's own ratio is carried rather than a single default.
+ * is why each engine's own ratio is carried rather than a single default. The
+ * chamber conditions are the IGNIOS core's, never typed here (ADR-0003).
  */
 export const PROPELLANTS: Propellant[] = [
   {
     id: "lox-lh2",
     label: "LOX / LH2",
-    chamberK: 3600,
-    molarMass: 13.5,
-    gamma: 1.2,
+    ...chamber("lox-lh2"),
     publishedCStar: 2360,
     engine: "RS-25",
     areaRatio: 69,
@@ -106,9 +124,7 @@ export const PROPELLANTS: Propellant[] = [
   {
     id: "lox-ch4",
     label: "LOX / CH4",
-    chamberK: 3550,
-    molarMass: 21.4,
-    gamma: 1.16,
+    ...chamber("lox-ch4"),
     publishedCStar: 1830,
     engine: "Raptor Vacuum",
     areaRatio: 80,
@@ -117,9 +133,7 @@ export const PROPELLANTS: Propellant[] = [
   {
     id: "lox-rp1",
     label: "LOX / RP-1",
-    chamberK: 3670,
-    molarMass: 23.0,
-    gamma: 1.15,
+    ...chamber("lox-rp1"),
     publishedCStar: 1820,
     engine: "Merlin 1D Vacuum",
     areaRatio: 165,
@@ -128,10 +142,11 @@ export const PROPELLANTS: Propellant[] = [
 ];
 
 // ─────────────────────────────────────────────────────── ideal rocket flow
+// Every function below is the IGNIOS core (crates/ignis-nozzle), through wasm.
 
 /** Vandenkerckhove function Γ(γ). Appears in every choked-flow relation here. */
 export function vandenkerckhove(gamma: number): number {
-  return Math.sqrt(gamma) * (2 / (gamma + 1)) ** ((gamma + 1) / (2 * (gamma - 1)));
+  return Ignis.vandenkerckhove(gamma);
 }
 
 /**
@@ -139,47 +154,29 @@ export function vandenkerckhove(gamma: number): number {
  *
  * A pure combustion property — no nozzle in it anywhere. This is the number that
  * validates to under 3% against all three published pairs, and the one to
- * distrust last.
+ * distrust last. `molarMass` in g/mol, as everywhere in this module.
  */
 export function characteristicVelocity(chamberK: number, molarMass: number, gamma: number): number {
-  return Math.sqrt((R_UNIVERSAL * chamberK) / molarMass) / vandenkerckhove(gamma);
+  return Ignis.characteristicVelocity(chamberK, molarMass / 1000, gamma);
 }
 
-/**
- * Exit-to-chamber pressure ratio for a given area ratio, by bisection.
- *
- * The area-ratio relation cannot be inverted in closed form, so it is solved.
- * Monotone in `pe/pc`, which makes bisection both safe and exact to machine
- * precision here.
- */
+/** Exit-to-chamber pressure ratio for a given area ratio, supersonic branch. */
 export function pressureRatioForAreaRatio(areaRatio: number, gamma: number): number {
-  const areaOf = (pr: number) =>
-    vandenkerckhove(gamma) /
-    Math.sqrt(((2 * gamma) / (gamma - 1)) * pr ** (2 / gamma) * (1 - pr ** ((gamma - 1) / gamma)));
-  let lo = 1e-12;
-  let hi = 0.999;
-  for (let i = 0; i < 200; i++) {
-    const mid = Math.sqrt(lo * hi);
-    if (areaOf(mid) > areaRatio) lo = mid;
-    else hi = mid;
-  }
-  return Math.sqrt(lo * hi);
+  return Ignis.pressureRatioFromAreaRatio(areaRatio, gamma);
 }
 
 /**
  * Thrust coefficient. The nozzle's contribution, including the pressure term
- * that makes a vacuum bell useless at sea level and vice versa.
+ * that makes a vacuum bell useless at sea level and vice versa. C_f depends on
+ * pa/pc only, so the core is called at a nominal 1 MPa chamber.
  */
 export function thrustCoefficient(
   gamma: number,
   areaRatio: number,
   o: { ambientOverChamber?: number } = {},
 ): number {
-  const pr = pressureRatioForAreaRatio(areaRatio, gamma);
-  const momentum = Math.sqrt(
-    ((2 * gamma ** 2) / (gamma - 1)) * (2 / (gamma + 1)) ** ((gamma + 1) / (gamma - 1)) * (1 - pr ** ((gamma - 1) / gamma)),
-  );
-  return momentum + (pr - (o.ambientOverChamber ?? 0)) * areaRatio;
+  const pc = 1e6;
+  return Ignis.thrustCoefficient(pc, (o.ambientOverChamber ?? 0) * pc, areaRatio, gamma);
 }
 
 /** `Isp = c*·C_f / g₀`. The decomposition, assembled. */
