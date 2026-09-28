@@ -54,7 +54,7 @@ function SectorPage() {
         </div>
         <p className="mt-10 max-w-xl text-sm text-muted">
           The materials lab lives on the Unibit site. This list is who has to deliver watts and kilograms. It is not
-          that lab. The vehicle lives on the IGNIS site.
+          that lab. The vehicle lives on the IGNIOS site.
         </p>
       </div>
       <SiteFooter />

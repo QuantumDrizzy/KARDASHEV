@@ -1,0 +1,264 @@
+{
+  "head": {
+    "seq": 2,
+    "hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33"
+  },
+  "entries": {
+    "ignios/nozzle/a_vacuum_bell_is_worse_at_sea_level/specific_impulse_s": {
+      "id": "ignios/nozzle/a_vacuum_bell_is_worse_at_sea_level/specific_impulse_s",
+      "value": 307.78290818925274,
+      "unit": "s",
+      "class": "DERIVED",
+      "verdict": "PASS",
+      "expect": 307.8,
+      "rel_err": 0.0000555289497962131,
+      "source": "Identity: the pressure term of Cf is (pe - pa)/pc * Ae/At, negative when over-expanded",
+      "test": "crates/ignis-nozzle/cases/performance.toml#a_vacuum_bell_is_worse_at_sea_level",
+      "inputs": {
+        "ambient_pressure_pa": 101325.0,
+        "area_ratio": 16.0,
+        "chamber_pressure_pa": 9700000.0,
+        "propellant": "lox_rp1"
+      },
+      "cites": [
+        "ignios/thermochem/lox_rp1_products/gamma"
+      ],
+      "repo": "ignios",
+      "commit": "e67985dbe7fa",
+      "block": 2,
+      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
+      "earlier_versions": 1
+    },
+    "ignios/nozzle/merlin_vacuum_isp/specific_impulse_s": {
+      "id": "ignios/nozzle/merlin_vacuum_isp/specific_impulse_s",
+      "value": 381.9533402043909,
+      "unit": "s",
+      "class": "DERIVED",
+      "verdict": "KNOWN_LIMIT",
+      "expect": 348.0,
+      "rel_err": 0.09756706955284737,
+      "source": "Merlin Vacuum specific impulse, about 348 s at pc 97 bar, area ratio 165 [TO CITE]",
+      "test": "crates/ignis-nozzle/cases/performance.toml#merlin_vacuum_isp",
+      "inputs": {
+        "ambient_pressure_pa": 0.0,
+        "area_ratio": 165.0,
+        "chamber_pressure_pa": 9700000.0,
+        "propellant": "lox_rp1"
+      },
+      "cites": [
+        "ignios/thermochem/lox_rp1_products/gamma"
+      ],
+      "repo": "ignios",
+      "commit": "e67985dbe7fa",
+      "block": 2,
+      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
+      "earlier_versions": 1
+    },
+    "ignios/nozzle/raptor_sea_level_isp/specific_impulse_s": {
+      "id": "ignios/nozzle/raptor_sea_level_isp/specific_impulse_s",
+      "value": 334.63599304974815,
+      "unit": "s",
+      "class": "DERIVED",
+      "verdict": "PASS",
+      "expect": 334.6,
+      "rel_err": 0.00010757038179357043,
+      "source": "Raptor sea-level specific impulse, about 327 s at pc 300 bar, area ratio 40 [TO CITE]",
+      "test": "crates/ignis-nozzle/cases/performance.toml#raptor_sea_level_isp",
+      "inputs": {
+        "ambient_pressure_pa": 101325.0,
+        "area_ratio": 40.0,
+        "chamber_pressure_pa": 30000000.0,
+        "propellant": "lox_ch4"
+      },
+      "cites": [
+        "ignios/thermochem/lox_ch4_products/chamber_temperature_k",
+        "ignios/thermochem/lox_ch4_products/gamma",
+        "ignios/thermochem/lox_ch4_products/molar_mass_kg_mol"
+      ],
+      "repo": "ignios",
+      "commit": "e67985dbe7fa",
+      "block": 2,
+      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
+      "earlier_versions": 1
+    },
+    "ignios/nozzle/rs25_vacuum_isp/specific_impulse_s": {
+      "id": "ignios/nozzle/rs25_vacuum_isp/specific_impulse_s",
+      "value": 454.638866254415,
+      "unit": "s",
+      "class": "DERIVED",
+      "verdict": "PASS",
+      "expect": 454.6,
+      "rel_err": 0.00008549550025293403,
+      "source": "RS-25 vacuum specific impulse, about 452.3 s at pc 206 bar, area ratio 69 [TO CITE]",
+      "test": "crates/ignis-nozzle/cases/performance.toml#rs25_vacuum_isp",
+      "inputs": {
+        "ambient_pressure_pa": 0.0,
+        "area_ratio": 69.0,
+        "chamber_pressure_pa": 20600000.0,
+        "propellant": "lox_lh2"
+      },
+      "cites": [
+        "ignios/thermochem/lox_lh2_products/chamber_temperature_k",
+        "ignios/thermochem/lox_lh2_products/gamma",
+        "ignios/thermochem/lox_lh2_products/molar_mass_kg_mol"
+      ],
+      "repo": "ignios",
+      "commit": "e67985dbe7fa",
+      "block": 2,
+      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
+      "earlier_versions": 1
+    },
+    "ignios/thermochem/hydrogen_wins_on_molar_mass/characteristic_speed_scale_m_s": {
+      "id": "ignios/thermochem/hydrogen_wins_on_molar_mass/characteristic_speed_scale_m_s",
+      "value": 1486.5394034700769,
+      "unit": "m/s",
+      "class": "DERIVED",
+      "verdict": "PASS",
+      "expect": 1486.0,
+      "rel_err": 0.00036299022212441255,
+      "source": "Identity: exhaust velocity scales as sqrt(R Tc) and R goes as 1/M",
+      "test": "crates/ignis-thermochem/cases/products.toml#hydrogen_wins_on_molar_mass",
+      "inputs": {
+        "propellant": "lox_lh2"
+      },
+      "repo": "ignios",
+      "commit": "e67985dbe7fa",
+      "block": 2,
+      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
+      "earlier_versions": 1
+    },
+    "ignios/thermochem/lox_ch4_products/chamber_temperature_k": {
+      "id": "ignios/thermochem/lox_ch4_products/chamber_temperature_k",
+      "value": 3550.0,
+      "unit": "K",
+      "class": "CITED",
+      "verdict": "PASS",
+      "expect": 3550.0,
+      "rel_err": 0.0,
+      "source": "Published chemical-equilibrium results for LOX/CH4 at MR 3.6, pc 300 bar [TO VERIFY with a CEA run]",
+      "test": "crates/ignis-thermochem/cases/products.toml#lox_ch4_products",
+      "inputs": {
+        "propellant": "lox_ch4"
+      },
+      "repo": "ignios",
+      "commit": "e67985dbe7fa",
+      "block": 2,
+      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
+      "earlier_versions": 1
+    },
+    "ignios/thermochem/lox_ch4_products/gamma": {
+      "id": "ignios/thermochem/lox_ch4_products/gamma",
+      "value": 1.16,
+      "unit": "1",
+      "class": "CITED",
+      "verdict": "PASS",
+      "expect": 1.16,
+      "rel_err": 0.0,
+      "source": "Published chemical-equilibrium results for LOX/CH4 at MR 3.6, pc 300 bar [TO VERIFY with a CEA run]",
+      "test": "crates/ignis-thermochem/cases/products.toml#lox_ch4_products",
+      "inputs": {
+        "propellant": "lox_ch4"
+      },
+      "repo": "ignios",
+      "commit": "e67985dbe7fa",
+      "block": 2,
+      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
+      "earlier_versions": 1
+    },
+    "ignios/thermochem/lox_ch4_products/molar_mass_kg_mol": {
+      "id": "ignios/thermochem/lox_ch4_products/molar_mass_kg_mol",
+      "value": 0.0215,
+      "unit": "kg/mol",
+      "class": "CITED",
+      "verdict": "PASS",
+      "expect": 0.0215,
+      "rel_err": 0.0,
+      "source": "Published chemical-equilibrium results for LOX/CH4 at MR 3.6, pc 300 bar [TO VERIFY with a CEA run]",
+      "test": "crates/ignis-thermochem/cases/products.toml#lox_ch4_products",
+      "inputs": {
+        "propellant": "lox_ch4"
+      },
+      "repo": "ignios",
+      "commit": "e67985dbe7fa",
+      "block": 2,
+      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
+      "earlier_versions": 1
+    },
+    "ignios/thermochem/lox_lh2_products/chamber_temperature_k": {
+      "id": "ignios/thermochem/lox_lh2_products/chamber_temperature_k",
+      "value": 3588.0,
+      "unit": "K",
+      "class": "CITED",
+      "verdict": "PASS",
+      "expect": 3588.0,
+      "rel_err": 0.0,
+      "source": "Published chemical-equilibrium results for LOX/LH2 at MR 6.0, pc 200 bar [TO VERIFY with a CEA run]",
+      "test": "crates/ignis-thermochem/cases/products.toml#lox_lh2_products",
+      "inputs": {
+        "propellant": "lox_lh2"
+      },
+      "repo": "ignios",
+      "commit": "e67985dbe7fa",
+      "block": 2,
+      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
+      "earlier_versions": 1
+    },
+    "ignios/thermochem/lox_lh2_products/gamma": {
+      "id": "ignios/thermochem/lox_lh2_products/gamma",
+      "value": 1.19,
+      "unit": "1",
+      "class": "CITED",
+      "verdict": "PASS",
+      "expect": 1.19,
+      "rel_err": 0.0,
+      "source": "Published chemical-equilibrium results for LOX/LH2 at MR 6.0, pc 200 bar [TO VERIFY with a CEA run]",
+      "test": "crates/ignis-thermochem/cases/products.toml#lox_lh2_products",
+      "inputs": {
+        "propellant": "lox_lh2"
+      },
+      "repo": "ignios",
+      "commit": "e67985dbe7fa",
+      "block": 2,
+      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
+      "earlier_versions": 1
+    },
+    "ignios/thermochem/lox_lh2_products/molar_mass_kg_mol": {
+      "id": "ignios/thermochem/lox_lh2_products/molar_mass_kg_mol",
+      "value": 0.0135,
+      "unit": "kg/mol",
+      "class": "CITED",
+      "verdict": "PASS",
+      "expect": 0.0135,
+      "rel_err": 0.0,
+      "source": "Published chemical-equilibrium results for LOX/LH2 at MR 6.0, pc 200 bar [TO VERIFY with a CEA run]",
+      "test": "crates/ignis-thermochem/cases/products.toml#lox_lh2_products",
+      "inputs": {
+        "propellant": "lox_lh2"
+      },
+      "repo": "ignios",
+      "commit": "e67985dbe7fa",
+      "block": 2,
+      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
+      "earlier_versions": 1
+    },
+    "ignios/thermochem/lox_rp1_products/gamma": {
+      "id": "ignios/thermochem/lox_rp1_products/gamma",
+      "value": 1.14,
+      "unit": "1",
+      "class": "CITED",
+      "verdict": "KNOWN_LIMIT",
+      "expect": 1.2,
+      "rel_err": 0.050000000000000044,
+      "source": "Published chemical-equilibrium results for LOX/RP-1 at MR 2.56, pc 100 bar [TO VERIFY with a CEA run]",
+      "test": "crates/ignis-thermochem/cases/products.toml#lox_rp1_products",
+      "inputs": {
+        "propellant": "lox_rp1"
+      },
+      "repo": "ignios",
+      "commit": "e67985dbe7fa",
+      "block": 2,
+      "block_hash": "e7bf16afe60ec49a7074b372532723de6d51a897db0daf44d56d6693b1b8ea33",
+      "earlier_versions": 1
+    }
+  }
+}

@@ -48,7 +48,7 @@ function PlanPage() {
         <h2 className="k-line">Starship</h2>
         <p className="mt-6 max-w-xl font-mono text-sm text-muted">
           Without kg/week to LEO the rest is a deck. Reusable is not industrial cadence yet. The rocket is the
-          bottleneck, not the model. The vehicle lives on the IGNIS site. Mass in{" "}
+          bottleneck, not the model. The vehicle lives on the IGNIOS site. Mass in{" "}
           <Link to="/space" className="text-fg underline-offset-4 hover:underline">
             Space
           </Link>

@@ -61,7 +61,7 @@ function SpacePage() {
         <p className="mt-6 max-w-xl font-mono text-sm text-muted">
           Surface escape {(V_ESCAPE / 1000).toFixed(2)} km/s. LEO costs ~9.4 km/s with gravity and drag. Starship
           claimed 100 t reusable — cadence is not a factory yet. Without kg/week the constellation is a filing. The
-          vehicle lives on the IGNIS site.
+          vehicle lives on the IGNIOS site.
         </p>
       </Stage>
 

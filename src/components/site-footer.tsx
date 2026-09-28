@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
+import { ChainHead } from "./chain-head";
 
 const INSTRUMENT = [
   { to: "/", label: "Scale" },
@@ -68,7 +69,9 @@ export function SiteFooter() {
             </a>
           </FooterCol>
         </div>
-        <p className="mt-10 font-mono text-[11px] tracking-wide text-subtle">local — Unibit / KARDASHEV / IGNIS</p>
+        <p className="mt-10 font-mono text-[11px] tracking-wide text-subtle">
+          local — Unibit / KARDASHEV / IGNIOS · <ChainHead />
+        </p>
       </div>
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-5 font-mono text-[11px] tracking-wide text-subtle sm:flex-row sm:items-center sm:justify-between sm:px-6">
