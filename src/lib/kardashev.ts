@@ -8,28 +8,43 @@
  *
  * Civilization power: IEA 2023 total energy supply ≈ 620 EJ/yr (± few %).
  * Growth: ~1.8%/yr TES 2013–2023. Not a forecast. Long-run 20th c. was ~2.3%.
+ *
+ * The numbers and the math live in kardashev-core (core/, Rust), the one core the
+ * site, the ledger and the game share (Unibit-Web ADR-0003). This file is its
+ * facade: same exports as before, bit-identical values (core/tests/golden.rs).
+ * Only the calendar (Date) and the display formatting stay in TypeScript.
  */
 
-import { SECONDS_PER_YEAR as SECONDS_PER_YEAR_SI } from "./constants.ts";
+import { KARDASHEV_CORE_WASM_BASE64 } from "./kardashev-core.gen.ts";
 
-export const SECONDS_PER_YEAR = SECONDS_PER_YEAR_SI;
-export const TES_2023_EJ = 620;
-export const P_2023 = (TES_2023_EJ * 1e18) / SECONDS_PER_YEAR;
+type Core = {
+  kardashev_k_of(p: number): number;
+  kardashev_power_after_years(years: number): number;
+  kardashev_years_to(target: number, p: number): number;
+  kardashev_constant(i: number): number;
+};
+
+const bytes = Uint8Array.from(atob(KARDASHEV_CORE_WASM_BASE64), (c) => c.charCodeAt(0));
+const core = (await WebAssembly.instantiate(bytes, {})).instance.exports as unknown as Core;
+
+export const SECONDS_PER_YEAR = core.kardashev_constant(5);
+export const TES_2023_EJ = core.kardashev_constant(6);
+export const P_2023 = core.kardashev_constant(0);
 export const EPOCH = Date.UTC(2024, 0, 1);
-export const GROWTH = 0.018;
+export const GROWTH = core.kardashev_constant(1);
 
-export const P_I = 1e16;
-export const P_II_SAGAN = 1e26;
-export const P_III_SAGAN = 1e36;
-export const L_SUN = 3.826e26;
-export const L_MW = 1e37;
+export const P_I = core.kardashev_constant(2);
+export const P_II_SAGAN = core.kardashev_constant(7);
+export const P_III_SAGAN = core.kardashev_constant(4);
+export const L_SUN = core.kardashev_constant(3);
+export const L_MW = core.kardashev_constant(8);
 
 export const P_NOW = P_2023;
 export const P_II = L_SUN;
 export const P_III = P_III_SAGAN;
 
 export function kOf(p: number) {
-  return (Math.log10(p) - 6) / 10;
+  return core.kardashev_k_of(p);
 }
 
 export const K_NOW = kOf(P_2023);
@@ -44,11 +59,11 @@ export const MARKS = [
 
 export function powerAt(ms = Date.now()) {
   const years = (ms - EPOCH) / (SECONDS_PER_YEAR * 1000);
-  return P_2023 * (1 + GROWTH) ** years;
+  return core.kardashev_power_after_years(years);
 }
 
 export function yearsTo(target: number, p: number) {
-  return Math.log(target / p) / Math.log(1 + GROWTH);
+  return core.kardashev_years_to(target, p);
 }
 
 export function tw(w: number) {

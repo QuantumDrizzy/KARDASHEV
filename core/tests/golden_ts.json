@@ -1,0 +1,82 @@
+[
+ {
+  "name": "SECONDS_PER_YEAR",
+  "value": "417e187e00000000"
+ },
+ {
+  "name": "P_2023",
+  "value": "42b1de55799a99f3"
+ },
+ {
+  "name": "K_NOW",
+  "value": "3fe756a94b19dd00"
+ },
+ {
+  "name": "GAP_I",
+  "value": "407fcfe592fe5930"
+ },
+ {
+  "name": "GAP_II",
+  "value": "4221d0f28a000000"
+ },
+ {
+  "name": "GROWTH",
+  "value": "3f926e978d4fdf3b"
+ },
+ {
+  "name": "kOf(1)",
+  "value": "bfe3333333333333"
+ },
+ {
+  "name": "kOf(1000000)",
+  "value": "0000000000000000"
+ },
+ {
+  "name": "kOf(4000000000000)",
+  "value": "3fe5206854dcbf66"
+ },
+ {
+  "name": "kOf(19646614444697.95)",
+  "value": "3fe756a94b19dd00"
+ },
+ {
+  "name": "kOf(10000000000000)",
+  "value": "3fe6666666666666"
+ },
+ {
+  "name": "kOf(10000000000000000)",
+  "value": "3ff0000000000000"
+ },
+ {
+  "name": "kOf(3.826e+26)",
+  "value": "400077589e87a463"
+ },
+ {
+  "name": "kOf(1e+26)",
+  "value": "4000000000000000"
+ },
+ {
+  "name": "kOf(1e+36)",
+  "value": "4008000000000000"
+ },
+ {
+  "name": "kOf(1e+37)",
+  "value": "4008cccccccccccd"
+ },
+ {
+  "name": "kOf(123456789.5)",
+  "value": "3fcac579edadf5a6"
+ },
+ {
+  "name": "yearsTo(10000000000000000,P_2023)",
+  "value": "4075d5a75ce1dc77"
+ },
+ {
+  "name": "yearsTo(3.826e+26,P_2023)",
+  "value": "409acd0ab58b4c67"
+ },
+ {
+  "name": "yearsTo(1e+36,P_2023)",
+  "value": "40a6e57a2d9cca84"
+ }
+]

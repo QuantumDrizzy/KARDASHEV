@@ -1,0 +1,26 @@
+[package]
+name = "kardashev-core"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license = "UNLICENSED"
+description = "KARDASHEV M1 (the K scale) as one core: native, wasm32 and the Unreal plugin (Unibit-Web ADR-0003)"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# Determinism: the same libm on every target, as in IGNIOS.
+libm = "0.2"
+
+[dev-dependencies]
+serde_json = "1"
+
+[[bin]]
+name = "ledger"
+path = "src/bin/ledger.rs"
+required-features = []
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
