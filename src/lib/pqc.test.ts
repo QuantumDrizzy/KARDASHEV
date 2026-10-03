@@ -11,6 +11,7 @@ import {
   linkBudget,
   rateForOverhead,
   sizePenalty,
+  channelPanel,
   suite,
 } from "./pqc.ts";
 
@@ -85,4 +86,28 @@ test("handshake energy is microjoules — too small to be an argument", () => {
   const b = linkBudget(PQC_HANDSHAKE);
   assert.ok(b.joules < 1e-3, `${b.joules} J`);
   assert.ok(b.joules > 1e-6);
+});
+
+test("[PANEL] states the channel against the measurement, and does not raise K", () => {
+  const sentences = channelPanel().sentences;
+  const text = sentences.join("\n");
+  assert.equal(sentences.length, 7);
+  assert.match(sentences[0], /ML-KEM and ML-DSA/);
+  assert.match(sentences[0], /not a QPU/);
+  assert.match(sentences[1], /12,794 B/);
+  assert.match(sentences[1], /\u00d750/);
+  assert.match(sentences[2], /0\.15%/);
+  assert.match(sentences[2], /59%/);
+  assert.match(sentences[3], /13\.5 Mbps/);
+  assert.match(sentences[4], /29-qubit wall on 16 GB/);
+  assert.match(sentences[4], /7\.26 nJ/);
+  assert.match(sentences[4], /80\.2 qubits/);
+  assert.match(sentences[5], /does not raise K/);
+  assert.equal(/12-qubit|12 qubit/i.test(text), false);
+  assert.equal(text.includes("Kyber"), false);
+  assert.equal(text.includes("Dilithium"), false);
+  const fast = linkBudget(PQC_HANDSHAKE, { distanceKm: 5000, rateBps: 1e9 });
+  const slow = linkBudget(PQC_HANDSHAKE, { distanceKm: 5000, rateBps: 1e6 });
+  assert.ok(sentences[2].includes(`${(fast.pqcOverheadFrac * 100).toFixed(2)}%`));
+  assert.ok(sentences[2].includes(`${Math.round(slow.pqcOverheadFrac * 100)}%`));
 });

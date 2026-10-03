@@ -78,7 +78,7 @@ sustained (85% of datasheet), 7.26 nJ per amplitude-update, and the crossing whe
 gate costs a second of Type I at ~80 qubits. The doctrine line now rests on a measurement:
 quantum advantage is an **avoided cost**, and avoided cost is not generated power.
 
-Still open here: the PQC panel (ML-KEM / ML-DSA as the ISL channel, not a QPU).
+**Status: panel done.** `/quantum` states `channelPanel()` from `pqc.ts`: ML-KEM and ML-DSA as the ISL / telemetry channel, labelled from the measured 29-qubit wall. Not a QPU. It does not raise K.
 
 
 `/quantum` already says it does not raise K.
@@ -86,7 +86,7 @@ Still open here: the PQC panel (ML-KEM / ML-DSA as the ISL channel, not a QPU).
 Add a small panel:
 
 - PQC suite names (ML-KEM, ML-DSA) as **channel** for ISL / telemetry — not a QPU
-- “12-qubit classical tensor sim on 16 GB VRAM” as the **bench**, not a satellite
+- the measured **29-qubit** wall on 16 GB (`qsim.ts`) as the **bench**, not a satellite and not an older 12-qubit line
 - Keep modalities table
 
 No Cirq in the browser unless WASM is already justified.

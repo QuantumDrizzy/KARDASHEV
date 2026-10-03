@@ -36,6 +36,7 @@
  */
 
 import { C } from "./constants.ts";
+import { JOULES_PER_AMPLITUDE_GATE, simulationWall } from "./qsim.ts";
 
 /** Vacuum, not fibre. An ISL has no glass in it — see grid.ts for the contrast. */
 export const C_VACUUM = C;
@@ -276,3 +277,31 @@ export const PQC_VERDICT = {
     "themselves rather than where they shine.",
   doNotImplementHere: true,
 } as const;
+
+/**
+ * Sentences the /quantum channel panel is allowed to state. Built from the
+ * FIPS catalogue and from the M4a measurement in qsim.ts. No new constants.
+ * The page renders these and nothing else, so the copy cannot drift.
+ */
+export function channelPanel(): { readonly sentences: readonly string[] } {
+  const fast = linkBudget(PQC_HANDSHAKE, { distanceKm: 5000, rateBps: 1e9 });
+  const slow = linkBudget(PQC_HANDSHAKE, { distanceKm: 5000, rateBps: 1e6 });
+  const penalty = sizePenalty();
+  const wall = simulationWall();
+  const nJ = JOULES_PER_AMPLITUDE_GATE * 1e9;
+  const pct = (frac: number) => {
+    const p = frac * 100;
+    return p >= 10 ? `${Math.round(p)}%` : `${p.toFixed(2)}%`;
+  };
+  return {
+    sentences: [
+      "ML-KEM and ML-DSA are the channel for the ISL and for telemetry. They are not a QPU.",
+      `A bare ML-KEM-768 + ML-DSA-65 handshake is ${PQC_HANDSHAKE.bytes.toLocaleString("en-US")} B against ${CLASSICAL_HANDSHAKE.bytes} B of X25519 + Ed25519, \u00d7${penalty.toFixed(0)}. Assumption: no certificate chain.`,
+      `On a 5,000 km optical ISL at 1 Gbps the extra bytes are ${pct(fast.pqcOverheadFrac)} of handshake wall time. At 1 Mbps they are ${pct(slow.pqcOverheadFrac)}.`,
+      `Above ${(PQC_VERDICT.freeAboveBps / 1e6).toFixed(1)} Mbps the extra bytes stay under 10% of the handshake. Below that they dominate, and small-satellite telemetry lives below that.`,
+      `The bench is the measurement already in the repo: a ${wall.measuredMaxQubits}-qubit wall on 16 GB, ${nJ.toFixed(2)} nJ per amplitude-update. One gate costs a second of a Type I budget at ${wall.typeIQubits.toFixed(1)} qubits.`,
+      "Quantum advantage is an avoided cost. Avoided cost is not generated power, so quantum does not raise K.",
+      "The reason to migrate is harvest-now-decrypt-later. Crypto is load, not generation.",
+    ],
+  };
+}

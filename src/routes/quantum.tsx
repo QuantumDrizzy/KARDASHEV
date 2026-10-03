@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { LayerResearch } from "@/components/layer-research";
 import { MediaTile } from "@/components/media-tile";
 import { Stage, DataStrip } from "@/components/stage";
+import { channelPanel } from "@/lib/pqc";
 import { ARCH, MODALITIES, ORBIT_LABEL } from "@/lib/quantum";
 import { cn } from "@/lib/utils";
 
@@ -59,7 +60,23 @@ function QuantumPage() {
       </Stage>
 
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <p className="max-w-xl text-sm text-muted">
+        <section className="border border-border p-6" aria-label="PQC channel">
+          <p className="font-mono text-xs tracking-[0.22em] text-subtle uppercase">Channel · ISL / telemetry</p>
+          <div className="mt-6 max-w-3xl">
+            {channelPanel().sentences.map((sentence) => (
+              <p
+                key={sentence}
+                className={cn(
+                  "mt-4 font-mono text-sm text-muted first:mt-0",
+                  sentence.includes("does not raise K") && "text-warn",
+                )}
+              >
+                {sentence}
+              </p>
+            ))}
+          </div>
+        </section>
+        <p className="mt-10 max-w-xl text-sm text-muted">
           This lab lives on the Unibit site. This page only records that it does not raise K.
         </p>
         <section className="mt-10 grid gap-3 md:grid-cols-3">
