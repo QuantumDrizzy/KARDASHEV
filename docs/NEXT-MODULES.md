@@ -99,7 +99,7 @@ result is that 1/Δf sets a ~1 s floor no electronics can move, so the operator 
 0.5 s arrest window exactly as a transcontinental cable does. Humans supervise; they do not
 stabilize.
 
-Still open: the SVG/CSS block diagram itself (UI lane).
+**Status: diagram done.** `/salud` draws `operatorDiagram()`: Muse 2 class, notch, FFT / bandpower, local ACI, neurorights. No hardware is connected. Nothing is uploaded.
 
 
 Do **not** connect a real Muse in the website.

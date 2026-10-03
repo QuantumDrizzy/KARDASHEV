@@ -230,3 +230,63 @@ export const OPERATOR_DOCTRINE = {
     "cannot: resolving a frequency to df requires observing for 1/df. A faster " +
     "ADC, a faster radio and a bigger model all leave it untouched.",
 } as const;
+
+/**
+ * Blocks and sentences the /salud operator diagram is allowed to state.
+ * Every millisecond comes from latencyBudget(). No hardware is connected.
+ */
+export function operatorDiagram(s: AcquisitionSpec = CONSUMER_HEADBAND) {
+  const b = latencyBudget(s);
+  const arrest = loopVerdicts(s).find((v) => v.loop === "RoCoF arrest")!;
+  const ms = (n: number) => `${Math.round(n).toLocaleString("en-US")} ms`;
+  const blocks = [
+    {
+      id: "muse",
+      title: "Muse 2",
+      detail: `${s.channels} ch, ${s.sampleRateHz} Hz, BT`,
+      msLabel: ms(b.radioMs),
+      irreducible: false,
+    },
+    {
+      id: "notch",
+      title: "Notch",
+      detail: `${s.mainsHz} Hz, ${s.notchTaps} taps`,
+      msLabel: ms(b.notchGroupDelayMs),
+      irreducible: false,
+    },
+    {
+      id: "fft",
+      title: "FFT / bandpower",
+      detail: `${s.resolutionHz} Hz resolution`,
+      msLabel: ms(b.windowMs),
+      irreducible: true,
+    },
+    {
+      id: "aci",
+      title: "Local ACI",
+      detail: "vectors, on device",
+      msLabel: ms(b.classifyMs),
+      irreducible: false,
+    },
+    {
+      id: "rights",
+      title: "Neurorights",
+      detail: "no upload, no raw store",
+      msLabel: "constraint",
+      irreducible: false,
+    },
+  ] as const;
+  return {
+    blocks,
+    totalMs: b.totalMs,
+    canCloseArrest: arrest.canClose,
+    sentences: [
+      "No Muse is connected. Nothing is uploaded. Raw samples are not stored.",
+      `Muse 2 class: ${s.channels} channels at ${s.sampleRateHz} Hz over Bluetooth. The radio waits ${ms(b.radioMs)}. Assumption: a consumer headband specification, not a measurement made here.`,
+      `A ${s.notchTaps}-tap notch at ${s.mainsHz} Hz adds ${ms(b.notchGroupDelayMs)} of group delay. That delay is a design choice.`,
+      `FFT / bandpower at ${s.resolutionHz} Hz needs a ${ms(b.windowMs)} window. That term is 1/df. A faster ADC, a faster radio and a bigger model leave it untouched.`,
+      `Bandpower vectors stay in local ACI state. Classification is ${ms(b.classifyMs)}, on device.`,
+      `The chain is ${ms(b.totalMs)}. It misses the ${arrest.windowS} s arrest window. Humans supervise; they do not stabilize.`,
+    ],
+  };
+}

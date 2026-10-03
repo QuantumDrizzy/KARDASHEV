@@ -18,6 +18,7 @@ import {
   METABOLIC_W,
   POPULATION,
 } from "@/lib/life";
+import { OperatorDiagram } from "@/components/operator-diagram";
 import { fmtTW } from "@/lib/kardashev";
 
 export const Route = createFileRoute("/salud")({ component: SaludPage });
@@ -100,6 +101,10 @@ function SaludPage() {
             teleop, not for a city in LEO.
           </p>
         </section>
+
+        <div className="mt-16">
+          <OperatorDiagram />
+        </div>
 
         <div className="mt-8 grid gap-3 md:grid-cols-2">
           <MediaTile className="h-56" src="/media/salud-orbit.jpg" label="Orbital medicine" />

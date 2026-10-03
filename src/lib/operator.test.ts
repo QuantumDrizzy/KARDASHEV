@@ -11,6 +11,7 @@ import {
   latencyBudget,
   loopVerdicts,
   rawBitrate,
+  operatorDiagram,
   resolutionForArrest,
 } from "./operator.ts";
 
@@ -89,4 +90,26 @@ test("[CAREFUL] joules per bit is a channel figure, not the cost of thought", ()
   assert.ok(Math.abs(SILICON_JOULES_PER_BIT - 2.267e-10 / 8) < 1e-20);
   // The header must keep the caveat that this is bandwidth, not cognition.
   assert.ok(OPERATOR_DOCTRINE.note.includes("window"));
+});
+
+test("[DIAGRAM] the chain is the budget, and no device is connected", () => {
+  const d = operatorDiagram();
+  const text = d.sentences.join("\n");
+  assert.equal(d.blocks.length, 5);
+  assert.equal(d.canCloseArrest, false);
+  assert.equal(d.totalMs, latencyBudget().totalMs);
+  assert.equal(d.blocks.map((b) => b.id).join(","), "muse,notch,fft,aci,rights");
+  assert.equal(d.blocks.find((b) => b.id === "fft")!.irreducible, true);
+  assert.equal(d.blocks.find((b) => b.id === "rights")!.msLabel, "constraint");
+  assert.match(text, /No Muse is connected/);
+  assert.match(text, /Nothing is uploaded/);
+  assert.match(text, /Raw samples are not stored/);
+  assert.match(text, /4 channels at 256 Hz/);
+  assert.match(text, /60 ms/);
+  assert.match(text, /250 ms/);
+  assert.match(text, /1,000 ms/);
+  assert.match(text, /1,315 ms/);
+  assert.match(text, /0\.5 s arrest window/);
+  assert.match(text, /do not stabilize/);
+  assert.equal(/upload the|store the raw|connected Muse/i.test(text), false);
 });
