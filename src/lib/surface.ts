@@ -61,8 +61,9 @@
  * this module models no grade, no craters and no route that a vehicle could
  * actually follow. Rover mass and speed are assumed. Nothing models the thermal
  * cycle of a vehicle crossing repeatedly between 40 K shadow and 400 K sunlight,
- * or lunar dust, which destroyed mechanisms on every Apollo surface mission and
- * is the single most likely thing to make this harder than it looks.
+ * or lunar dust. An accretion upper limit is cited below and is not applied.
+ * There is still no wear rate, which is the most likely thing to make this harder
+ * than it looks.
  */
 
 import { MU_MOON, R_MOON_M } from "./constants.ts";
@@ -77,6 +78,38 @@ export const V_ESCAPE = Math.sqrt(2 * G_MOON * R_MOON_M);
 
 /** [ASSUMED] Rolling resistance coefficient on regolith. Swept, not defended. */
 export const ROLLING_RESISTANCE = 0.1;
+
+
+/**
+ * Net accretion on the Apollo Dust Detector Experiments, about 100 cm above
+ * the surface at the Apollo 12, 14 and 15 sites. Not a wear rate, and not an
+ * input to E/m = mu*g*d.
+ *
+ * Hollick, M., and B. J. O'Brien (2013), Lunar weather measurements at three
+ * Apollo sites 1969-1976, Space Weather, 11, 651-660.
+ * doi:10.1002/2013SW000978
+ *
+ * Opened: the authors' repository record, which reprints the paper abstract.
+ * The journal PDF returned 403.
+ * https://research-repository.uwa.edu.au/en/publications/lunar-weather-measurements-at-three-apollo-sites-1969-1976/
+ *
+ * Printed there: "an upper limit of order 100 μg cm-2 yr-1".
+ * Conditional ("If the long-term effects were totally caused by dust"),
+ * calibrated on MLS-1 particles 20 to 38 μm, and "it may be significantly
+ * less." Gruen (1985) is a different object and is not used.
+ */
+export const LUNAR_DUST_ACCRETION = {
+  /** Upper limit of order, as printed. Not a point measurement. */
+  upperLimitOfOrder: 100,
+  /** Units as printed on the opened page. Greek mu, U+03BC. */
+  unit: "μg cm-2 yr-1",
+  /** The sentence the page actually prints, so the number cannot be promoted. */
+  printed: "an upper limit of order 100 μg cm-2 yr-1",
+  isWearRate: false,
+  doi: "10.1002/2013SW000978",
+  opened:
+    "https://research-repository.uwa.edu.au/en/publications/lunar-weather-measurements-at-three-apollo-sites-1969-1976/",
+} as const;
 
 /** [ASSUMED] A logistics rover: ten tonnes of payload at ten kilometres an hour. */
 export const ROVER = { payloadKg: 1e4, speedKmH: 10 } as const;
@@ -231,8 +264,9 @@ export const SURFACE_VERDICT = {
    *  - Rover mass and speed are assumed, and the fleet scales linearly in both.
    *  - Nothing models the thermal cycle of crossing repeatedly between 40 K
    *    shadow and 400 K sunlight.
-   *  - Nothing models dust, which destroyed mechanisms on every Apollo surface
-   *    mission and is the most likely thing to make this harder than it looks.
+   *  - Dust accretion has a cited upper limit and no wear rate. The limit is not
+   *    applied to the wheel. Apollo dust still destroyed mechanisms, and that
+   *    damage is not in this energy.
    */
-  limits: "assumed rolling resistance, no terrain, no thermal cycling, and no dust",
+  limits: "assumed rolling resistance, no terrain, no thermal cycling, and no dust wear",
 } as const;

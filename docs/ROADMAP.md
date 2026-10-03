@@ -89,7 +89,7 @@ Three other absences stay open, and stay unmeasured. They are not this step and 
 1. A number in `surface.ts` whose input is a **cited** lunar abrasion rate or a **cited** lunar dust flux, locked by a test. The Grün (1985) flux in `environment.ts` is the interplanetary meteoroid flux at 1 AU, partially checked against Love & Brownlee. It is the wrong object. It is not a surface wear rate and it is not to be reused as one.
 2. An explicit refusal, of the kind `surface.test.ts` already locks: `dustWear` is absent. If no citable abrasion or dust flux can be named, the module does not grow a wear field.
 
-This repository contains no citable lunar dust flux and no citable abrasion rate. The step is **cite, then measure**. No wear rate is stated here.
+Cited, and not worn. Hollick and O'Brien (2013), *Space Weather* 11, 651-660, doi:10.1002/2013SW000978, opened at the authors' repository record of the paper. The abstract prints an upper limit of order **100 μg cm-2 yr-1** of net accretion, conditional on the cell damage being entirely dust and calibrated on MLS-1. That figure is in `surface.ts`. It is not a wear rate. `dustWear` stays absent. Rolling resistance 0.1 stays assumed. The journal PDF itself returned 403.
 
 ---
 

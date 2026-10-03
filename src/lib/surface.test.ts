@@ -7,6 +7,7 @@ import {
   VOLATILE_SHARE,
   V_ESCAPE,
   V_ORBITAL,
+  LUNAR_DUST_ACCRETION,
   fleetComparison,
   fleetFor,
   hopDeltaV,
@@ -117,4 +118,18 @@ test("[KNOWN_LIMIT] no terrain, no thermal cycle, no dust", () => {
   for (const k of ["gradeRad", "routeM", "dustWear", "thermalCycles"]) {
     assert.ok(!(k in c), `${k} is not modelled and must not appear`);
   }
+});
+
+test("[CITED] Apollo dust accretion is an upper limit of order, not wear", () => {
+  assert.equal(LUNAR_DUST_ACCRETION.upperLimitOfOrder, 100);
+  assert.equal(LUNAR_DUST_ACCRETION.unit, "μg cm-2 yr-1");
+  assert.equal(LUNAR_DUST_ACCRETION.printed, "an upper limit of order 100 μg cm-2 yr-1");
+  assert.equal(LUNAR_DUST_ACCRETION.isWearRate, false);
+  assert.equal(LUNAR_DUST_ACCRETION.doi, "10.1002/2013SW000978");
+  assert.equal(ROLLING_RESISTANCE, 0.1);
+  const c = transportCase(POLE_TO_EQUATOR_M);
+  assert.ok(!("dustWear" in c));
+  assert.ok(!("dustWear" in LUNAR_DUST_ACCRETION));
+  // The wheel energy is still only mu*g*d. The flux is not in it.
+  assert.ok(Math.abs(c.rollJPerKg - ROLLING_RESISTANCE * G_MOON * POLE_TO_EQUATOR_M) < 1e-6);
 });
