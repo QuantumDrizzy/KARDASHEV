@@ -665,8 +665,8 @@ Type I needs **29.7 million km²** of collector: the area of Africa, in orbit. A
 | 100 flights/day | 9,800 |
 | 1,000 flights/day | 980 |
 
-The world flew ~250 orbital launches in **2024** — 0.7 per day, all payloads combined. So
-100/day is already **×150 the entire planet, every day, for a century.** Cadence is linear
+Jonathan McDowell, *Space Activities in 2024* (Rev 1.4, 2025 Jan 24), counts **258** launches that reached orbit or marginal orbit in **2024**, and **263** attempts. That is 0.71 per day. So
+100/day is already **×142 the entire planet, every day, for a century.** The requirement does not move. Cadence is linear
 and cannot close a five-order gap alone.
 
 ### The number that makes it an engineering target
@@ -680,7 +680,7 @@ Invert it. To finish in a century (the λ=0.62 timeline in `forecast.ts`) at 100
 | **Gap** | **×98** |
 
 So Earth-launched Type I needs a **hundredfold lighter collector**, held for a century at a
-cadence 150× the world's current total. Or the mass does not come up Earth's gravity well
+cadence about 142× the world's current total. Or the mass does not come up Earth's gravity well
 at all: **lunar escape is 2.8 MJ/kg against Earth's 33.8 — twelve times less**, with no
 atmosphere and no weather. In-situ material is not enthusiasm, it is what the arithmetic
 leaves standing.
@@ -855,9 +855,9 @@ scale, so polymers, volatiles and some dopants would still be launched.
 
 | Earth cadence | vs world 2024 | share of the flow it can supply |
 |---|---|---|
-| 100 flights/day | ×146 | **0.016%** |
-| 1,000 flights/day | ×1,462 | 0.16% |
-| 10,000 flights/day | ×14,620 | 1.6% |
+| 100 flights/day | ×142 | **0.016%** |
+| 1,000 flights/day | ×1,416 | 0.16% |
+| 10,000 flights/day | ×14,157 | 1.6% |
 
 **The array must be ≥99.98% lunar-sourced by mass.** No polymer substrate, no imported
 dopants at scale, no carbon. A materials-science constraint, and harder than anything in

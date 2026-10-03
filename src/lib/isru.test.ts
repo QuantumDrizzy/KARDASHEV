@@ -66,8 +66,8 @@ test("[THE HARD ONE] the array must be essentially all lunar", () => {
   assert.ok(REGOLITH.lacks.includes("carbon"));
   assert.ok(REGOLITH.supplies.includes("silicon"));
   const c = earthShareCeiling(100);
-  // 100 Earth flights/day is already 146x the entire world's 2024 rate...
-  assert.ok(c.versusWorldCadence > 140, `${c.versusWorldCadence}x the world`);
+  // 100/day against the 2024 reached-orbit count. 99.98% does not move with it.
+  assert.ok(c.versusWorldCadence > 141 && c.versusWorldCadence < 142, `${c.versusWorldCadence}x the world`);
   // ...and supplies under 0.02% of what the array consumes.
   assert.ok(c.maxEarthFraction < 2e-4, `${c.maxEarthFraction}`);
   assert.ok(c.minLunarFraction > 0.9998, `${c.minLunarFraction}`);

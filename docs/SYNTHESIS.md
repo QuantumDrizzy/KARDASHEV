@@ -122,8 +122,7 @@ that is a gap of **×183**.
 > cadence delivers 1/2.8 as much there, so the requirement becomes 4.4 g/m² and the gap
 > **×505**.
 
-For scale: the world flew ~250 orbital launches in 2024 — 0.7 per day, all payloads
-combined. "100 flights/day" is already ×150 the entire planet, every day, for a century.
+For scale: McDowell counts 258 launches that reached orbit or marginal orbit in 2024, and 263 attempts — 0.71 per day. "100 flights/day" is already ×142 the entire planet, every day, for a century. The requirement does not move.
 
 ### 2.5 And it is not a construction project
 
@@ -184,7 +183,7 @@ Two things do bind, and neither is thermodynamic.
 **First, the array must be essentially all lunar.** Regolith supplies silicon, aluminium,
 iron, titanium and oxygen. It does *not* supply carbon, hydrogen or nitrogen at scale, so
 polymers, volatiles and some dopants would still be launched. At 100 Earth flights/day —
-already 146× the entire world's 2024 rate — Earth can supply **0.016%** of the replacement
+already 142× the entire world's 2024 rate — Earth can supply **0.016%** of the replacement
 flow. **The array must be ≥99.98% lunar-sourced by mass.** No polymer substrate, no imported
 dopants at scale, no carbon. That is a materials-science constraint and it is harder than
 anything in 2.1–2.6.
@@ -856,7 +855,7 @@ produced instead is better and more useful than a date.
 |---|---|---|---|---|
 | Load specific power | ~100 W/kg | 75,900 W/kg | **×759** | design |
 | Areal density | 2.24 kg/m² | 4.43 g/m² | **×505** | design |
-| Launch cadence | 0.68 flights/day | 100 | ×146 | design |
+| Launch cadence | 0.71 flights/day | 100 | ×142 | design |
 | Array lifetime | ~5 yr | 69 yr | ×14 | design |
 | Lunar mass fraction | 0% | ≥99.98% | **from zero** | materials |
 | Thermal ceiling | 19.6 TW | 192 TW | ×9.8 | budget |

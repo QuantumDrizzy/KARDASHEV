@@ -31,8 +31,9 @@
  *     at 100 flights/day     9,800 years
  *     at 1000 flights/day      980 years
  *
- * The world flew ~250 orbital launches in 2024 — 0.7 per day, all payloads
- * combined. So the gap is not a factor, it is a category.
+ * Jonathan McDowell counts 258 launches that reached orbit or marginal orbit
+ * in 2024, and 263 attempts. That is 0.71 per day. One hundred flights a day
+ * is still ×141.6 that rate. The gap is not a factor, it is a category.
  *
  * ── The number that turns this into an engineering target ────────────────────
  *
@@ -41,7 +42,7 @@
  * Today's best flexible arrays are 1,200 g/m². **A factor of 98.**
  *
  * So Type I by Earth launch requires a hundredfold reduction in areal density,
- * held for a century at a cadence a hundred and fifty times today's global
+ * held for a century at a cadence about a hundred and forty times today's global
  * total. Either that, or the mass does not come from Earth: lunar escape costs
  * **2.8 MJ/kg against Earth's 33.8**, twelve times less, with no atmosphere and
  * no weather. In-situ material is not enthusiasm, it is what the arithmetic
@@ -159,8 +160,33 @@ export type BuildPlan = {
   versusWorldCadence: number;
 };
 
-/** Orbital launches worldwide in 2024, all payloads. ~0.7 per day. */
-export const WORLD_LAUNCHES_2024 = 250;
+/**
+ * Launches in calendar 2024. Opened: Jonathan McDowell, Space Activities
+ * in 2024, Rev 1.4, 2025 Jan 24.
+ * https://planet4589.org/space/papers/space24.pdf
+ *
+ * Printed: "During 2024 there were 263 orbital launch attempts from Earth,
+ * with 258 reaching orbit or marginal orbit."
+ * Table 1(a) total, 2024 = 263 attempts.
+ * Table 1(b) total, 2024 = 258 reaching orbit or marginal orbit.
+ * The 258 includes four near-orbital Starship flights (2024-U01, U03, U04,
+ * U06) and excludes the North Korean suborbital 2024-U05 and the
+ * lunar-surface launch 2024-U02.
+ *
+ * The count below is the 258. The old ~250 was not a count.
+ */
+export const LAUNCHES_2024 = {
+  attempts: 263,
+  reachedOrbitOrMarginal: 258,
+  unit: "launches",
+  printed:
+    "During 2024 there were 263 orbital launch attempts from Earth, with 258 reaching orbit or marginal orbit.",
+  source: "Jonathan McDowell, Space Activities in 2024, Rev 1.4, 2025 Jan 24",
+  url: "https://planet4589.org/space/papers/space24.pdf",
+} as const;
+
+/** Reached orbit or marginal orbit in 2024. Not the 263 attempts. */
+export const WORLD_LAUNCHES_2024 = LAUNCHES_2024.reachedOrbitOrMarginal;
 export const WORLD_CADENCE_PER_DAY = WORLD_LAUNCHES_2024 / 365.25;
 
 export function buildPlan(

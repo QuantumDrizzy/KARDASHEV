@@ -38,7 +38,7 @@
  * Regolith gives silicon, aluminium, iron, titanium and oxygen. It does **not**
  * give carbon, hydrogen or nitrogen in useful quantity — so polymers, volatiles
  * and some dopants would still be launched from Earth. That fraction has a
- * ceiling, and the ceiling is brutal: at 100 Earth flights/day, already 146× the
+ * ceiling, and the ceiling is brutal: at 100 Earth flights/day, already 142× the
  * entire world's 2024 launch rate, Earth can supply **0.016%** of the
  * replacement flow.
  *

@@ -15,7 +15,7 @@
  *     gate                              today        required        gap
  *     areal density                  2.24 kg/m²    4.43 g/m²        ×506
  *     load specific power             ~100 W/kg     75,900 W/kg     ×759
- *     launch cadence               0.68 flights/d   100 /d          ×147
+ *     launch cadence               0.71 flights/d   100 /d          ×142
  *     array lifetime                    ~5 yr        69 yr          ×14
  *     lunar mass fraction                 ~0%        ≥99.98%      materials
  *     compute efficiency          must NOT rise beyond ×52        inverted
@@ -37,7 +37,7 @@
  *   - **the learning rate in kg/m²** — M25 showed the areal gap closes at
  *     18.7% per doubling and that photovoltaics' famous 22% is measured in the
  *     wrong currency;
- *   - **launch cadence** — M7's 100 flights/day is ×147 the entire world's 2024
+ *   - **launch cadence** — M7's 100 flights/day is ×142 the entire world's 2024
  *     rate.
  *
  * So `yearsToTypeI` here takes a **required** scenario argument and has no
@@ -147,7 +147,7 @@ export function gates(): Gate[] {
       unit: "flights/day",
       owner: "lift.ts",
       kind: "design",
-      note: "Against the entire world's 2024 rate, all payloads combined, every day for a century.",
+      note: "McDowell 2024: 258 launches reached orbit or marginal orbit. The requirement is still 100/day.",
     },
     {
       id: "array-lifetime",

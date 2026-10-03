@@ -10,7 +10,9 @@ import {
   R_MOON_M,
   STARSHIP,
   WHY_NOT_ENERGY,
+  LAUNCHES_2024,
   WORLD_CADENCE_PER_DAY,
+  WORLD_LAUNCHES_2024,
   arealGapX,
   buildPlan,
   energyPayback,
@@ -85,10 +87,17 @@ test("[TARGET] a century at 100 flights/day demands 12 g/m²", () => {
   assert.ok(Math.abs(plan.areaM2 - P_I / PANEL_W_M2) < 1);
 });
 
-test("today's whole planet launches 0.7 times a day", () => {
-  assert.ok(Math.abs(WORLD_CADENCE_PER_DAY - 0.684) < 0.02);
-  // So "100 flights/day" is already ~150x the entire world, every day, for a century.
-  assert.ok(100 / WORLD_CADENCE_PER_DAY > 140);
+test("[CITED] 2024 launches that reached orbit, McDowell Table 1(b)", () => {
+  assert.equal(LAUNCHES_2024.attempts, 263);
+  assert.equal(LAUNCHES_2024.reachedOrbitOrMarginal, 258);
+  assert.equal(WORLD_LAUNCHES_2024, 258);
+  assert.ok(LAUNCHES_2024.printed.includes("263"));
+  assert.ok(LAUNCHES_2024.printed.includes("258 reaching orbit"));
+  assert.equal(WORLD_CADENCE_PER_DAY, 258 / 365.25);
+  // 100/day against that count is ×141.57. The requirement stays 100.
+  const gap = 100 / WORLD_CADENCE_PER_DAY;
+  assert.ok(Math.abs(gap - (100 * 365.25) / 258) < 1e-12, String(gap));
+  assert.ok(gap > 141 && gap < 142, String(gap));
   assert.equal(buildPlan(1.2, 100).payloadKg, STARSHIP_PAYLOAD_KG);
 });
 
