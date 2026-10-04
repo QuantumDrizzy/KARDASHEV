@@ -18,7 +18,13 @@ Tighten:
 
 ## M2 — GRID: federated bulkheads (priority)
 
-**Status: M2a done.** `src/lib/grid.ts` + `src/lib/grid.test.ts` (20 locks) ship.
+**Status: done.** M2a `src/lib/grid.ts` + `src/lib/grid.test.ts` (20 locks); M2b the bench
+(`src/components/grid-bench.tsx` -- kill containment with vacuous handling, federated vs pooled
+contingency, the three-legs copy) on `/grid`; M2c `src/lib/grid-qubo.ts` + tests -- the
+QUBO-class allocator behind the Allocator seam, with the exact optimum as ground truth, and
+`allocatorComparison()` as the verdict. The verdict it gives on this grid: greedy stands
+(the QUBO does not earn its place on unserved energy at 720 h). That is the measurement
+ADR-M2 demanded, and it went against the fancier solver.
 Read `docs/ADR-M2-GRID.md` before touching it — it records what the numbers said, and
 three places where the framing below did not survive contact with the physics:
 
