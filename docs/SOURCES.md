@@ -22,3 +22,8 @@ Cited in `/about#sources` and in lib comments. Order-of-magnitude is allowed if 
 | Starmind / AI1 / Suncatcher / Starcloud | `programs.ts` `roadmap.ts` | Public filings / reporting; **not** partnership; dates are targets not promises |
 
 If you change a constant: update the test, the comment, this table, and `/about#sources` in the same PR.
+
+## Lunar roving vehicle mobility (M31)
+
+- NASA NTRS 19730008090 — *Mobility performance of the lunar roving vehicle: Terrestrial studies*, MSFC, 1973 (87 pp. PDF hashed at `data/raw/lrv/lrv-mobility-terrestrial.pdf`, sha256 prefix `dd1d815e287b8509`). The Bekker/LLD soil-vehicle model vs the LRV's onboard ampere-hour integrators, Apollo 15: RMS deviation per km **11.4–16.0 %** across the LLL soil-value spectrum (Table 7); the WES variant overestimates, median ~30 %. Anchors `src/lib/lrv.ts`.
+- NASA NTRS 20250011301 — *Apollo Lunar Roving Vehicle as Traversed Performance Metrics* (2025). Not fetched; the modern re-analysis of the same traverses.

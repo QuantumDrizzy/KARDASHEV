@@ -56,7 +56,11 @@
  * closure requirement nearly impossible is what makes this transport problem
  * nearly free.** One number, two signs.
  *
- * [KNOWN_LIMIT] Rolling resistance on regolith is assumed at 0.1 and swept;
+ * [MEASURED_ANCHOR] The 0.1 is still assumed, but its consequence is now bounded:
+ * MSFC's Bekker/LLD model matched the LRV's own Apollo 15 ampere-hour integrators
+ * within 11.4-16.0 % RMS per km across the whole soil-value spectrum (NTRS
+ * 19730008090, hashed), and overestimates conservatively (median ~30 %). The band
+ * and the crossover margin are locked in lrv.ts / lrv.test.ts (ADR-LRV-ANCHOR).
  * Apollo experience with soft soil and slopes suggests it can be far worse, and
  * this module models no grade, no craters and no route that a vehicle could
  * actually follow. Rover mass and speed are assumed. Nothing models the thermal
