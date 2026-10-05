@@ -19,9 +19,11 @@ anuales. El programa empieza midiéndolos cada año (`data/kpi.csv`).
 - → K = 0,727 (el HUD y los tests usan este valor medido, no el 2×10¹³
   redondeado de la serie).
 - CAGR histórico reciente: ~1,5–2 %/año.
-- **A tendencia medida, K1 (×500) llega en ~310–350 años (~año 2350).**
-  Ese es el número brutal del que parte el programa: sin compresión, no
-  hay Type I hasta el siglo XXIV.
+- **A tendencia medida, K1 (×500) llega en ~348 años (~año 2374).**
+  t = ln(500)/ln(1.018). Ese es el número brutal del que parte el
+  programa: sin compresión, no hay Type I hasta el siglo XXIV.
+  La aceleración (demanda-IA + gates abiertos) mueve la banda a
+  2150–2240: ver [ACCELERATION.md](ACCELERATION.md) y su scoreboard 2040.
 
 ### Dial 2 — Coste por kg a LEO
 - Trayectoria medida: Shuttle ~$54.500/kg → Falcon 9 ~$2.600/kg público

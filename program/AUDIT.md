@@ -14,7 +14,7 @@ python -m kardashev              :: no aplica aún (prototype en game/crates/kar
 |---|---|---|
 | Escala K = (log₁₀P − 6)/10; K1=10¹⁶, K2=10²⁶, K3=10³⁶ W | **PINNED** (tests) | OIKOUMENE §2; Sol = K2.06 |
 | K0.727 = humanidad 2024 (592,2 EJ/año = 1,877×10¹³ W, +1,8 %/año) | **MEASURED + PINNED** (tests, 2026-10-06) | EI Statistical Review 2025; docs/PHASE0.md dial 1 |
-| **ETA honesto a K1: ~2350 a tendencia medida (1,8 %/año); ~2150–2200 con las puertas de PHASE0 abiertas** | **DERIVED** (ln(500)/ln(1.018) ≈ 348 a) | docs/PHASE0.md |
+| **ETA honesto a K1: 2374 a tendencia medida (1,8 %/año); banda acelerada 2153–2236 según crecimiento de demanda (2,5–4 %); scoreboard 2040 con 4 hitos falsables** | **DERIVED** (t = ln(500)/ln(1+r)) + scoreboard | docs/PHASE0.md + docs/ACCELERATION.md |
 | **Techo de la solar de superficie: ~K0,85–0,9** (10¹⁶ W piden 5×10¹⁴ m² a 20 W/m² > 3× la tierra emergida) | **DERIVED** — el último tramo del K1 es fusión u órbita | docs/PHASE0.md §1 |
 | Calor residual del K1 en superficie: 0,02 W/m² (~0,02 K) — sobrevivible | **DERIVED** (sensibilidad ×10: sigue sobreviviendo, clase 1–2) | docs/PHASE0.md §1 |
 | Dial lanzamiento: Shuttle 54.500 → F9 ~2.600 → Starship objetivo 100–200 $/kg (no logrado) | **MEASURED (parcial)** — objetivo anual [MEASURE] | data/kpi.csv |
