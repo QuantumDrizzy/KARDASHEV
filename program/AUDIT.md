@@ -40,7 +40,7 @@ python -m kardashev              :: no aplica aún (prototype en game/crates/kar
 | 2026-10-06 | Flujo D: suministro 1,0×10¹⁰ < demanda 1,17×10¹⁰ kg/año → hamuna silenciosa con ambas rutas a plena potencia | Suministro a 1,2×10¹⁰ + test de integridad del libro mayor (production ≥ consumption) |
 | 2026-10-06 | **Hallazgo A:** el árbol de Era I no contenía el P0 de TANTALUS (sonda ratio He-3/⁴He) — la ruta de hives se construía sobre un número supuesto | Añadida `assay-jupiter-he3` (~2040) como requisito duro de `jupiter-hive-1` |
 | 2026-10-06 | **Hallazgo B:** los 5,9×10¹⁴ W-equivalentes por hive son potencia entregada SOLO con reactores D-³He downstream listados como consumidores | Marcado en `programs.toml` y ERAS.md; re-cuadre pendiente de la fase de reactores |
-| 2026-10-06 | **Hallazgo C (física, clase 3):** la ruta B y la combustión final de la ruta A dependen de D-D/D-³He (física sin demostrar), no D-T | ERAS.md §0/§3: plan alternativo K1 = fisión + SSP + dial 2 hasta que D-D abra |
+| 2026-10-06 | **Hallazgo C (física, clase 3): D-D/D-³He** — dossier completo: D-T ignition demostrada (NIF 2024, ganancia diana 1,9×; Q_red ~0,8 %), Q_eléctrico > 1 jamás en ninguna máquina; D-D catalítico jamás quemado y sin patrocinador mundial (solo la aspiración Helion, a 150 M K de los ~600 M K que pide su D-³He); secuencia de gates G1–G5 documentada; K1 no depende de este gate (vía alternativa declarada) | docs/DD-GATE.md; watch markers anuales (SPARC 2027, Helion PPA 2028, cualquier campaña D-D) |
 
 ## Huecos declarados (no tapados)
 
