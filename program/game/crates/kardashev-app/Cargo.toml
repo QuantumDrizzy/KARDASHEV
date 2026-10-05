@@ -1,0 +1,11 @@
+[package]
+name = "kardashev-app"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+kardashev-core = { path = "../kardashev-core" }
+
+# Bevy front-end planned as a separate `kardashev-bevy` crate (era1-mechanics §7):
+# the sim core never imports renderer types; the terminal app below is the
+# playable prototype until Era I is fun.

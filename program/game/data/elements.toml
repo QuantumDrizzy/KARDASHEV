@@ -1,0 +1,13 @@
+# The closure ledger — stocks at game start (source cross-refs in comments).
+
+[[element]]
+id = "deuterium"
+stock_kg = 1.2e13        # Titan atmospheric CH4 D inventory — KRAKEN §3.2
+
+[[element]]
+id = "dopants"
+stock_kg = 5.0e9         # Earth reserves + existing supply chains at start
+
+[[element]]
+id = "he3"
+stock_kg = 0.0           # produced by hives; imported only via TANTALUS-era logistics
