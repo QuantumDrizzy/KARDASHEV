@@ -1,0 +1,7 @@
+dial,year,value,unit,source_class,source
+primary_power,2024,1.877e13,W,MEASURED,"Energy Institute Statistical Review 2025: 592.2 EJ/yr, +1.8% (IEEJ analysis)"
+primary_power,2023,1.844e13,W,MEASURED,"EI Statistical Review: 592.2 EJ 2024 = +11.9 EJ vs 2023 (581 EJ derived)"
+launch_cost_leo,1981,54500,USD_per_kg,MEASURED,"Space Shuttle program average (commonly cited ~$54,500/kg)"
+launch_cost_leo,2024,2600,USD_per_kg,MEASURED,"Falcon 9 public list pricing ~$2,600-2,700/kg (internal estimates $629-1,500)"
+launch_cost_leo,2030,150,USD_per_kg,TARGET,"Starship stated target $100-200/kg — NOT yet achieved; verify annually [MEASURE]"
+k1_target,-,1.0e16,W,CONVENTION,"K1 on the canonical scale (K = (log10 P - 6)/10); the real target is dispatchable watts, K is reporting"

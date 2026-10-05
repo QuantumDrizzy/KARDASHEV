@@ -13,10 +13,14 @@ python -m kardashev              :: no aplica aún (prototype en game/crates/kar
 | Número | Estado | Ancla |
 |---|---|---|
 | Escala K = (log₁₀P − 6)/10; K1=10¹⁶, K2=10²⁶, K3=10³⁶ W | **PINNED** (tests) | OIKOUMENE §2; Sol = K2.06 |
-| K0.73 = humanidad 2026 (2×10¹³ W) | **PINNED** (tests) | OIKOUMENE §2 |
-| Presupuestos Era I (assays, forja Mercurio, hive TANTALUS 5.9×10¹⁴ W, rutas D-D) | **TRACED** (campo `source` en cada fila) | Volúmenes 1–10 de la serie |
+| K0.727 = humanidad 2024 (592,2 EJ/año = 1,877×10¹³ W, +1,8 %/año) | **MEASURED + PINNED** (tests, 2026-10-06) | EI Statistical Review 2025; docs/PHASE0.md dial 1 |
+| **ETA honesto a K1: ~2350 a tendencia medida (1,8 %/año); ~2150–2200 con las puertas de PHASE0 abiertas** | **DERIVED** (ln(500)/ln(1.018) ≈ 348 a) | docs/PHASE0.md |
+| **Techo de la solar de superficie: ~K0,85–0,9** (10¹⁶ W piden 5×10¹⁴ m² a 20 W/m² > 3× la tierra emergida) | **DERIVED** — el último tramo del K1 es fusión u órbita | docs/PHASE0.md §1 |
+| Calor residual del K1 en superficie: 0,02 W/m² (~0,02 K) — sobrevivible | **DERIVED** (sensibilidad ×10: sigue sobreviviendo, clase 1–2) | docs/PHASE0.md §1 |
+| Dial lanzamiento: Shuttle 54.500 → F9 ~2.600 → Starship objetivo 100–200 $/kg (no logrado) | **MEASURED (parcial)** — objetivo anual [MEASURE] | data/kpi.csv |
+| Presupuestos Era I (assays, forja Mercurio, hive TANTALUS 5,9×10¹⁴ W, rutas D-D) | **TRACED** (campo `source` en cada fila) | Volúmenes 1–10 de la serie |
 | Flujo de deuterio: producción 1,2×10¹⁰ ≥ demanda 1,17×10¹⁰ kg/año | **PINNED** (test de integridad, 2026-10-06) | KRAKEN §3.2 / FM-07 |
-| Stock D = 1,2×10¹³ kg | **EST** — solo atmósfera; clatratos son al alza | KRAKEN §3.2 `[MEASURE]` |
+| Stock D = 1,2×10¹³ kg | **DERIVED + PINNED** (cadena STANDARD.md, test) | KRAKEN §3.2 `[MEASURE]` clatratos al alza |
 | Semilla 10⁵ kg → 10²¹ kg, τ=3 a, ~160 a hasta K2-local | **EST** — ley de doblamientos, sin ecosistema cerrado jamás construido | type3-ladder §3.1 `[HYPOTHESIS]` |
 | Frente de colonización v_eff ≈ 0,02c, galaxia en ~1–3 Myr | **EST** | type3-ladder §4.1 |
 | Índice de Fragilidad B | **DEFINICIÓN SOLA** — sin calibración contra casos reales | type3-ladder §5 `[HYPOTHESIS]` |

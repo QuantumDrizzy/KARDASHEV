@@ -178,7 +178,10 @@ impl GameState {
     ) -> Self {
         Self {
             year: 2026.0,
-            base_power_watts: 2.0e13,
+            // [MEASURED]: 592.2 EJ/yr primary energy 2024, +1.8% (Energy
+            // Institute Statistical Review 2025) = 1.877e13 W → K = 0.727.
+            // See docs/PHASE0.md dial 1 and data/kpi.csv.
+            base_power_watts: 1.877e13,
             tau_years: 4.0,
             industry_kg: 1.0e10,
             built: BTreeMap::new(),

@@ -2,9 +2,10 @@ use kardashev_core::k_level;
 
 #[test]
 fn earth_2026_is_k073() {
-    // OIKOUMENE §2: humanity ~2e13 W → (13.301 − 6)/10 = 0.730.
-    let k = k_level(2.0e13);
-    assert!((k - 0.730).abs() < 0.001, "got {k}");
+    // PHASE0 dial 1 [MEASURED]: 592.2 EJ/yr 2024 = 1.877e13 W
+    // → (13.273 − 6)/10 = 0.727.
+    let k = k_level(1.877e13);
+    assert!((k - 0.727).abs() < 0.001, "got {k}");
 }
 
 #[test]
