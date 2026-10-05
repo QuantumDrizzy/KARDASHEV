@@ -1,5 +1,49 @@
 use kardashev_core::k_level;
 
+// ── The KPI instrument (the program's first instrument, in code) ───────
+
+fn load_kpi() -> kardashev_core::Kpi {
+    let data = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../data");
+    kardashev_core::Kpi::load(&data.join("kpi.csv")).expect("kpi.csv")
+}
+
+#[test]
+fn kpi_dial_reads_measured_primary_power() {
+    let kpi = load_kpi();
+    let p = kpi.primary_power();
+    assert!((p - 1.877e13).abs() < 1.0e10, "primary power reads {p:.3e}");
+    assert!((k_level(p) - 0.727).abs() < 0.001, "K now reads {}", k_level(p));
+}
+
+#[test]
+fn kpi_eta_matches_the_scenarios() {
+    let kpi = load_kpi();
+    // ACCELERATION.md table: 1.8% -> ~2374; 3% -> ~2236; 5% -> ~2153.
+    let t18 = kpi.eta_k1_years(0.018);
+    let t30 = kpi.eta_k1_years(0.03);
+    let t50 = kpi.eta_k1_years(0.05);
+    assert!((t18 - 348.0).abs() < 8.0, "trend eta {t18:.0}");
+    assert!((t30 - 210.0).abs() < 5.0, "3% eta {t30:.0}");
+    assert!((t50 - 127.0).abs() < 5.0, "5% eta {t50:.0}");
+}
+
+#[test]
+fn scoreboard_2026_baseline_is_zero_of_four() {
+    let kpi = load_kpi();
+    let sb = kpi.scoreboard();
+    assert_eq!(sb.len(), 4);
+    let open = sb.iter().filter(|(_, ok, _)| *ok).count();
+    assert_eq!(open, 0, "2026 baseline: no scoreboard gate open yet");
+}
+
+#[test]
+fn brittleness_max_is_euv_at_one() {
+    let kpi = load_kpi();
+    let (name, b) = kpi.brittleness_max().expect("brittleness rows");
+    assert_eq!(name, "brittleness_euv");
+    assert!((b - 1.0).abs() < 1e-12, "max B reads {b}");
+}
+
 #[test]
 fn earth_2026_is_k073() {
     // PHASE0 dial 1 [MEASURED]: 592.2 EJ/yr 2024 = 1.877e13 W

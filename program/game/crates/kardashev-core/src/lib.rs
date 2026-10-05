@@ -151,6 +151,131 @@ pub fn load_elements(
         .collect())
 }
 
+// ───────────────────────────── KPI / Scoreboard ──────────────────────
+/// The program's first instrument, in code: `data/kpi.csv` parsed, the
+/// scoreboard status derived, and the K1 ETA re-published from data.
+
+/// Minimal RFC4180-subset CSV field split (quotes, doubled quotes; no
+/// embedded newlines — kpi.csv doesn't use them).
+pub fn parse_csv_line(line: &str) -> Vec<String> {
+    let mut out = Vec::new();
+    let mut cur = String::new();
+    let mut in_q = false;
+    let mut chars = line.chars().peekable();
+    while let Some(c) = chars.next() {
+        if in_q {
+            if c == '"' {
+                if chars.peek() == Some(&'"') {
+                    cur.push('"');
+                    chars.next();
+                } else {
+                    in_q = false;
+                }
+            } else {
+                cur.push(c);
+            }
+        } else {
+            match c {
+                '"' => in_q = true,
+                ',' => {
+                    out.push(std::mem::take(&mut cur));
+                }
+                _ => cur.push(c),
+            }
+        }
+    }
+    out.push(cur);
+    out
+}
+
+#[derive(Debug, Clone)]
+pub struct KpiEntry {
+    pub dial: String,
+    pub year: String,
+    pub value: f64,
+    pub unit: String,
+    pub class: String,
+    pub source: String,
+}
+
+#[derive(Debug, Default)]
+pub struct Kpi {
+    pub entries: Vec<KpiEntry>,
+}
+
+impl Kpi {
+    pub fn load(path: &std::path::Path) -> Result<Self, Box<dyn std::error::Error>> {
+        let raw = std::fs::read_to_string(path)?;
+        let mut entries = Vec::new();
+        for (i, line) in raw.lines().enumerate() {
+            if i == 0 || line.trim().is_empty() {
+                continue;
+            }
+            let f = parse_csv_line(line);
+            if f.len() < 5 {
+                continue;
+            }
+            entries.push(KpiEntry {
+                dial: f[0].trim().to_string(),
+                year: f[1].trim().to_string(),
+                value: f[2].trim().parse().unwrap_or(f64::NAN),
+                unit: f[3].trim().to_string(),
+                class: f[4].trim().to_string(),
+                source: f.get(5).cloned().unwrap_or_default(),
+            });
+        }
+        Ok(Self { entries })
+    }
+
+    /// Latest measured (non-target) entry for a dial.
+    pub fn latest(&self, dial: &str) -> Option<&KpiEntry> {
+        self.entries
+            .iter()
+            .filter(|e| e.dial == dial && e.year != "-")
+            .max_by(|a, b| {
+                let ya: f64 = a.year.parse().unwrap_or(0.0);
+                let yb: f64 = b.year.parse().unwrap_or(0.0);
+                ya.partial_cmp(&yb).unwrap_or(std::cmp::Ordering::Equal)
+            })
+    }
+
+    /// Scoreboard rows (scoreboard_S*): (name, achieved, source note).
+    /// Thresholds per ACCELERATION.md: S1 opens at sustained > 2.5 %/yr
+    /// growth; S2–S4 are boolean milestones.
+    pub fn scoreboard(&self) -> Vec<(String, bool, String)> {
+        let mut rows: Vec<(String, bool, String)> = Vec::new();
+        for e in &self.entries {
+            if let Some(name) = e.dial.strip_prefix("scoreboard_") {
+                let achieved = if name == "S1" { e.value >= 2.5 } else { e.value > 0.0 };
+                rows.push((name.to_string(), achieved, e.source.clone()));
+            }
+        }
+        rows.sort();
+        rows
+    }
+
+    /// Max brittleness registered (the index of the worst single point).
+    pub fn brittleness_max(&self) -> Option<(&String, f64)> {
+        self.entries
+            .iter()
+            .filter(|e| e.dial.starts_with("brittleness_"))
+            .max_by(|a, b| a.value.partial_cmp(&b.value).unwrap())
+            .map(|e| (&e.dial, e.value))
+    }
+
+    /// Years from current primary power to K1 at sustained growth rate r
+    /// (r as a fraction: 0.018 = 1.8 %/yr → t = ln(K1/P)/ln(1+r)).
+    pub fn eta_k1_years(&self, r: f64) -> f64 {
+        let p = self.latest("primary_power").map(|e| e.value).unwrap_or(2.0e13);
+        (1.0e16 / p).ln() / (1.0 + r).ln()
+    }
+
+    /// Primary power in watts (latest measured).
+    pub fn primary_power(&self) -> f64 {
+        self.latest("primary_power").map(|e| e.value).unwrap_or(2.0e13)
+    }
+}
+
 // ───────────────────────────── State ──────────────────────────────
 
 pub struct GameState {

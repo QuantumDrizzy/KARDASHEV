@@ -35,7 +35,7 @@ verificar al ingestar]`:
 | Masa lanzada a órbita | SpaceX (~80–90 % del upmass global 2023–24) | ~85 % | **0,85** |
 | Constelación de internet | Starlink (~2/3 de satélites activos) | ~65 % | **0,65** |
 | Tráfico intercontinental de datos | cables submarinos (~500, con estrangulaciones: Suez, Malacca, Dover) | — | **0,9** `[EST]` |
-| Clúster de cómputo/trafico | N. Virginia ("Data Center Alley", ~70 % del tráfico citado históricamente) | ~70 % | **0,7** |
+| Clúster de cómputo/trafico | Hiperscalers (trío ~66 % del mercado cloud); Loudoun es el mayor mercado DC único — **el "70 % del tráfico" es folclore sin fuente, retirado 2026-10-06 tras verificación** | ~66 % | **0,66** |
 
 La lectura que importa: **el propio plan es frágil en sus dos diales.** El
 dial 2 (lanzamiento) descansa en una empresa; la capa de cómputo que
