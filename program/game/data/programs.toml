@@ -93,7 +93,11 @@ class = "Extraction"
 power_watts = 5.0e9
 build_years = 8.0
 requires = ["titan-beachhead"]
-elements_drain = { deuterium = -1.0e10 }
+# Flow sized to cover BOTH K1 gates at full power (fleet 2.7e9 + reactor
+# 9.0e9 kg/yr = 1.17e10); stock covers >1000 yr at that flow.
+# [EST]: extraction flow is an engineering estimate; D stock = atmospheric
+# CH4 inventory only (KRAKEN §3.2) — clathrate reservoirs are upside [MEASURE].
+elements_drain = { deuterium = -1.2e10 }
 source = "KRAKEN §3.2 / FM-07"
 
 # ── Paths to K1 ────────────────────────────────────────────────────────
