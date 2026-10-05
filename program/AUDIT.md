@@ -21,7 +21,7 @@ python -m kardashev              :: no aplica aún (prototype en game/crates/kar
 | Presupuestos Era I (assays, forja Mercurio, hive TANTALUS 5,9×10¹⁴ W, rutas D-D) | **TRACED** (campo `source` en cada fila) | Volúmenes 1–10 de la serie |
 | Flujo de deuterio: producción 1,2×10¹⁰ ≥ demanda 1,17×10¹⁰ kg/año | **PINNED** (test de integridad, 2026-10-06) | KRAKEN §3.2 / FM-07 |
 | Stock D = 1,2×10¹³ kg | **DERIVED + PINNED** (cadena STANDARD.md, test) | KRAKEN §3.2 `[MEASURE]` clatratos al alza |
-| Semilla 10⁵ kg → 10²¹ kg, τ=3 a, ~160 a hasta K2-local | **EST** — ley de doblamientos, sin ecosistema cerrado jamás construido | type3-ladder §3.1 `[HYPOTHESIS]` |
+| τ = 3 años (ley de doblamientos) | **[HYPOTHESIS] → Dossier TAU-GATE (2026-10-06): dividida en τ_mech (1–3 yr, cierre casi demostrado: FANUC Oshino 30 días desde 2001; Metzger: doblamiento ~1 año lunar) y τ_electronics (abierto — el problema-vitamina; crossover 2075–2100)**; M1 del hito-ladder YA PASADO; sensibilidad τ=6: K2 110→300 yr (clase 2–3, no cierra rutas) | docs/TAU-GATE.md; INVICTUS §3.4; FRAGILITY (el mismo gate: B(chips) 0,9/EUV 1,0) |
 | Frente de colonización v_eff ≈ 0,02c, galaxia en ~1–3 Myr | **EST** | type3-ladder §4.1 |
 | Índice de Fragilidad B | **DEFINICIÓN + B por función crítica registradas 2026-10-06** (EUV 1,0; chips 0,9; lanzamiento 0,85 — el propio dial 2 es frágil) — calibración de factura por choque: pandemia medida (−4,4 % en 2020), resto `[EST]` con precedentes | docs/FRAGILITY.md; type3-ladder §5 |
 | Experiments 12–16 (ROADMAP.md) | **PROPUESTAS** — cada una entra por claim→probe→bundle | docs/ROADMAP.md |
