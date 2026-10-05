@@ -2,9 +2,9 @@
 
 [[rung]]
 id = "k073"
-power_watts = 2.0e13
+power_watts = 1.877e13
 name = "Today"
-gate = "First off-world industrial chain"                # OIKOUMENE §2
+gate = "First off-world industrial chain"                # OIKOUMENE §2; measured 2024 baseline
 
 [[rung]]
 id = "k1"
