@@ -125,13 +125,27 @@ elements_drain = {}
 source = "ORPHEUS §8.2"
 
 [[program]]
+id = "assay-jupiter-he3"
+name = "Jupiter He-3/He-4 ratio probe (TANTALUS P0)"
+era = 1
+class = "Reference"
+power_watts = 0.0
+build_years = 0.0
+available_from_year = 2040.0
+requires = []
+elements_drain = {}
+source = "TANTALUS §8.1 P0 / FM-11 — ratio assumed protosolar 1.6e-4, never measured in situ; x2 error rescales the whole route"
+
+[[program]]
 id = "jupiter-hive-1"
 name = "TANTALUS hive-1 — 1 kg/s He-3"
 era = 1
 class = "Extraction"
 power_watts = 5.9e14
 build_years = 15.0
-requires = ["mercury-forge", "ceres-dopant-tail"]
+requires = ["mercury-forge", "ceres-dopant-tail", "assay-jupiter-he3"]
+# AUDIT finding B: the 5.9e14 W-equivalent is DELIVERED power only with
+# downstream D-He3 reactors listed as explicit consumers of the product.
 elements_drain = { deuterium = 1.6e7 }
 source = "TANTALUS §2.4 / §8.1 P1-P2"
 
