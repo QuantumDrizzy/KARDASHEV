@@ -86,3 +86,24 @@ fn deuterium_stock_covers_millennium_at_era1_demand() {
         "deuterium horizon {horizon:.0} yr < 500 yr at Era I net demand"
     );
 }
+
+#[test]
+fn deuterium_stock_matches_derivation() {
+    // STANDARD.md worked chain: the stock in elements.toml is not free —
+    // it is [DERIVED] from measured ratios. Re-derive and pin (±10 %,
+    // the chain's rounding level).
+    //  column mass  = P/g           = 1.467e5 / 1.352      = 1.085e5 kg/m²  [Huygens]
+    //  area         = 4πR²          = 8.33e13 m²            (R = 2,574.7 km)
+    //  atm mass     = 9.04e18 kg
+    //  × CH4 frac   ~2 %                                     [Huygens GCMS profile]
+    //  → m_CH4      = 1.8e17 kg
+    //  × D mass fr  = 4 × 1.35e-4 × 2.014/16.043 = 6.78e-5   [Cassini D/H]
+    //  → stock      = 1.22e13 kg
+    let derived = 1.8e17 * 6.78e-5;
+    let data = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../data");
+    let elements = kardashev_core::load_elements(&data.join("elements.toml"))
+        .expect("elements.toml");
+    let stock = elements["deuterium"].stock_kg;
+    let rel = (stock - derived).abs() / derived * 100.0;
+    assert!(rel < 10.0, "stock {stock:.3e} deviates {rel:.1} pct from the derived chain {derived:.3e} — change the chain, not just the number");
+}
