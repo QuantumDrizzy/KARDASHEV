@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: ["22", "24"]
+        node: ["24"]   # the lockfile is npm 11's; npm 10 (Node 22) refuses it in `npm ci`
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
