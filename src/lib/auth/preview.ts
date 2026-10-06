@@ -17,8 +17,9 @@
  * broker env var and this constant together.
  */
 export const PREVIEW_CLIENT_ID = "grok_preview";
-export const PREVIEW_CLIENT_SECRET =
-  "REMOVED-preview-client-secret";
+// Not in the repository: the value comes from the environment, where the sandbox injects it.
+// Without it the live-preview sign-in is simply off -- the product runs with auth disabled.
+export const PREVIEW_CLIENT_SECRET = process.env.GROK_PREVIEW_CLIENT_SECRET ?? "";
 
 /** The shared auth broker issuer (OIDC discovery lives under it). */
 export const GROK_ISSUER_DEFAULT = "https://auth.grok.me";
