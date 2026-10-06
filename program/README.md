@@ -17,5 +17,5 @@ instruments, fallbacks and stated confidence.
 cd program/game && cargo test     # the ladder's arithmetic and the ledger's integrity
 ```
 
-Some anchors cite the author's solar-system whitepaper series by volume and section; those volumes
-are not part of this repository. Where a number rests on one, the dossier says so.
+Anchors cite the studies by name and section (KRAKEN §3.2, OIKOUMENE §2, …): they are in
+[`series/`](../series/), indexed in reading order.

@@ -22,7 +22,16 @@ progress bar from 0.73 to 1.00 hides all of them. KARDASHEV is the instrument th
 It answers one question with arithmetic instead of slogans: **what has to be built, in watts, for a
 civilization to climb, and where does each step break?**
 
-It does three things:
+It is four pieces, one argument:
+
+| | | |
+|---|---|---|
+| **the instrument** | `src/` | where we are, and the first-order physics of every rung -- the web you run |
+| **the series** | [`series/`](series/) | fifteen studies: what each world, from Venus to the rim and to the first stars, can give and what it costs |
+| **the program** | [`program/`](program/) | the ladder K0.73 → K3 built from those budgets: gates, fallbacks, confidence, and a simulator |
+| **the game** | separate | the same numbers, played |
+
+The instrument does three things:
 
 - **Measures.** Where we are, from public energy data (IEA TES), not from a feeling.
 - **Models.** Every rung of the climb as first-order physics: capturing the watts (solar on the crust and
@@ -67,6 +76,7 @@ public/media/     local video/poster (no CDN)
 docs/             thesis, numbers, sources, roadmap -- read before editing
 core/             the ledger in Rust
 program/          the plan: the ladder K0.73 → K3, its dossiers, and the ladder simulator (Rust)
+series/           the studies: the Solar System Series, the Interstellar Series, GAEA
 ```
 
 ## Doctrine
