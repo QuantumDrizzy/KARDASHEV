@@ -14,11 +14,12 @@
     "preview": "node scripts/with-app-env.mjs vite preview",
     "typecheck": "tsc --noEmit",
     "check:auth": "node scripts/check-auth-invariant.mjs",
-    "test": "node --test 'scripts/**/*.test.mjs' && node --experimental-strip-types --test src/lib/app-data/app-data.test.ts src/lib/auth/gate-identity.test.ts src/lib/kardashev.test.ts src/lib/orbit.test.ts src/lib/research.test.ts src/lib/grid.test.ts src/lib/grid-cost.test.ts src/lib/grid-qubo.test.ts src/lib/compute-energy.test.ts src/lib/grid-reliability.test.ts src/lib/qsim.test.ts src/lib/pqc.test.ts src/lib/operator.test.ts src/lib/thermal.test.ts src/lib/lift.test.ts src/lib/collector.test.ts src/lib/beam.test.ts src/lib/reject.test.ts src/lib/consistency.test.ts src/lib/findings.test.ts src/lib/isru.test.ts src/lib/environment.test.ts src/lib/placement.test.ts src/lib/transfer.test.ts src/lib/load.test.ts src/lib/substitution.test.ts src/lib/industry.test.ts src/lib/signature.test.ts src/lib/sequence.test.ts src/lib/engine.test.ts src/lib/staging.test.ts src/lib/density.test.ts src/lib/acceleration.test.ts src/lib/qualification.test.ts src/lib/learning.test.ts src/lib/route.test.ts src/lib/bootstrap.test.ts src/lib/closure.test.ts src/lib/volatiles.test.ts src/lib/surface.test.ts src/lib/synthesis.test.ts src/lib/play.test.ts",
+    "test": "node --experimental-strip-types --test src/lib/app-data/app-data.test.ts src/lib/auth/gate-identity.test.ts src/lib/kardashev.test.ts src/lib/orbit.test.ts src/lib/research.test.ts src/lib/grid.test.ts src/lib/grid-cost.test.ts src/lib/grid-qubo.test.ts src/lib/compute-energy.test.ts src/lib/grid-reliability.test.ts src/lib/qsim.test.ts src/lib/pqc.test.ts src/lib/operator.test.ts src/lib/thermal.test.ts src/lib/lift.test.ts src/lib/collector.test.ts src/lib/beam.test.ts src/lib/reject.test.ts src/lib/consistency.test.ts src/lib/findings.test.ts src/lib/isru.test.ts src/lib/environment.test.ts src/lib/placement.test.ts src/lib/transfer.test.ts src/lib/load.test.ts src/lib/substitution.test.ts src/lib/industry.test.ts src/lib/signature.test.ts src/lib/sequence.test.ts src/lib/engine.test.ts src/lib/staging.test.ts src/lib/density.test.ts src/lib/acceleration.test.ts src/lib/qualification.test.ts src/lib/learning.test.ts src/lib/route.test.ts src/lib/bootstrap.test.ts src/lib/closure.test.ts src/lib/volatiles.test.ts src/lib/surface.test.ts src/lib/synthesis.test.ts src/lib/play.test.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
     "findings": "node --experimental-strip-types scripts/findings.mjs",
-    "synthesis": "node --experimental-strip-types scripts/sync-synthesis.mjs"
+    "synthesis": "node --experimental-strip-types scripts/sync-synthesis.mjs",
+    "test:sandbox": "node --test \"scripts/**/*.test.mjs\""
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.4",

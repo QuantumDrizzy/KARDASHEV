@@ -53,6 +53,10 @@ npm run dev       # the instrument, locally (port 8080)
 
 Node 22.6+ (the tests run TypeScript with `--experimental-strip-types`). Offline: no auth, no external APIs, no CDN.
 
+`[KNOWN_LIMIT]` `npm run test:sandbox` runs the tests of the app-builder template's own tooling
+(`scripts/`: PWA metadata, auth wiring, migration plans), separate from the physics. 15 of its 149 fail,
+and failed before this repository changed them; they belong to the template, not to KARDASHEV.
+
 ## Layout
 
 ```
