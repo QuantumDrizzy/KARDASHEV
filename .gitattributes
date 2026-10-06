@@ -1,0 +1,10 @@
+# LF everywhere: tests compare generated documents byte for byte (docs/SYNTHESIS.md).
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.png binary
+*.jpg binary
+*.gif binary
+*.mp4 binary
+*.pdf binary
+*.npy binary
