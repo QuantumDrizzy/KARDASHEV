@@ -19,14 +19,15 @@ it.
 
 ## Where we are
 
-**K ≈ 0.73.** Humanity runs on about 2×10¹³ W. Type I is not 27 % away: it is **×509 in watts**, nine
-doublings, and a progress bar from 0.73 to 1.00 hides all of them.
+**K ≈ 0.727.** Humanity runs on **592 EJ a year, 1.88×10¹³ W** (Energy Institute, *Statistical Review
+of World Energy* 2025, for 2024). Type I is not 27 % away: it is **×533 in watts**, nine doublings, and a
+progress bar from 0.73 to 1.00 hides all of them.
 
 ```
 K = (log10(P_watts) − 6) / 10
 ```
 
-At today's measured growth (1.8 %/year), Type I arrives around **2374**. If the doors of this decade
+At today's measured growth (1.8 %/year), Type I arrives in the **2370s**. If the doors of this decade
 open, around **2153–2236**. Which one it is gets decided by what is built now, and the program
 re-publishes that date every year from data, not from faith.
 
@@ -140,6 +141,10 @@ series/           the studies: the Solar System Series, the Interstellar Series,
 ### Tests that matter
 
 `src/lib/kardashev.test.ts` — TES ~20 TW, Sagan rungs, gap ×509, λ=0.62 ~100 yr, AM0, Earth disk, kW/s.
+
+`[KNOWN_LIMIT]` The instrument still runs on IEA 2023 (620 EJ, ×509); the project's reference is now
+EI 2025 (592.2 EJ, ×533). The migration crosses the core, its wasm build, the golden tests and the game,
+and is planned in [`docs/ADR-EI-2025.md`](docs/ADR-EI-2025.md).
 
 If a number changes, the test must change with a source citation in the comment.
 
