@@ -61,8 +61,8 @@ export function SiteFooter() {
             </a>
           </FooterCol>
           <FooterCol title="Contact">
-            <a href="https://x.com/QuantumDrizzy" className="hover:text-warn">
-              X · QuantumDrizzy
+            <a href="https://x.com/Anthonyrdrgz" className="hover:text-warn">
+              X · @Anthonyrdrgz
             </a>
             <a href="https://github.com/QuantumDrizzy" className="hover:text-warn">
               GitHub

@@ -11,7 +11,7 @@ K = (log10(P_watts) − 6) / 10
 
 Energy · AI · Biology · Health · Space · Quantum. First-order physics. Labeled assumptions. No partners. No cloud.
 
-Author: [QuantumDrizzy](https://github.com/QuantumDrizzy) · [X](https://x.com/QuantumDrizzy)
+Author: [QuantumDrizzy](https://github.com/QuantumDrizzy) · [X @Anthonyrdrgz](https://x.com/Anthonyrdrgz)
 
 ---
 
@@ -62,6 +62,7 @@ src/components/   Stage, benches, charts, HUD
 public/media/     local video/poster (no CDN)
 docs/             thesis, numbers, sources, roadmap -- read before editing
 core/             the ledger in Rust
+program/          the plan: the ladder K0.73 → K3, its dossiers, and the ladder simulator (Rust)
 ```
 
 ## Doctrine

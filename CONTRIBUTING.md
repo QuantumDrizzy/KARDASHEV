@@ -33,4 +33,9 @@ npm test          # every physics lock must stay green
 ## Licence and ownership
 
 KARDASHEV is maintained by its author, who sets its doctrine and direction and decides what is
-merged. Contributions are accepted under the project's licence, MIT OR Apache-2.0 (see `README.md`).
+merged. The project is published under MIT OR Apache-2.0 (see `README.md`).
+
+Before a first pull request is merged, its author signs the [Contributor License Agreement](CLA.md)
+by posting one comment on the pull request; the CLA assistant asks for it and records it. You keep the
+rights to your work; the agreement lets the maintainer license the project as a whole, including your
+contribution, in one place.
