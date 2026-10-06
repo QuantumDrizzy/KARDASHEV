@@ -1,0 +1,23 @@
+name: A number is wrong
+description: A value, a source or an assumption that does not hold.
+labels: [numbers]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Where (file and line, or the page)
+      placeholder: src/lib/kardashev.ts:42, or /energia
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What it says, and what it should say
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source (dataset, paper, report, with year)
+    validations:
+      required: true

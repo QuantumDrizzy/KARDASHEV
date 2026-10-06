@@ -1,0 +1,20 @@
+name: A missing module or a better model
+description: Something the climb to Type I depends on that the instrument does not model yet, or models too crudely.
+labels: [module]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What should be modeled, and why it matters for K
+    validations:
+      required: true
+  - type: textarea
+    id: physics
+    attributes:
+      label: The first-order physics, and its sources
+    validations:
+      required: true
+  - type: textarea
+    id: limits
+    attributes:
+      label: What the model would leave out (its known limits)
