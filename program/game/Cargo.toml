@@ -1,0 +1,4 @@
+[workspace]
+resolver = "2"
+members = ["crates/kardashev-core", "crates/kardashev-app"]
+default-members = ["crates/kardashev-core", "crates/kardashev-app"]

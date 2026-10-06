@@ -1,0 +1,37 @@
+# KARDASHEV ladder — K = log10(P)/10 (Sagan). Anchored on the series' ledgers.
+
+[[rung]]
+id = "k073"
+power_watts = 1.877e13
+name = "Today"
+gate = "First off-world industrial chain"                # OIKOUMENE §2; measured 2024 baseline
+
+[[rung]]
+id = "k1"
+power_watts = 1.0e16
+name = "Planetary Era (Type I)"
+gate = "Command of one planet's full energy budget"       # ORPHEUS/TANTALUS/KRAKEN
+
+[[rung]]
+id = "k15"
+power_watts = 1.0e20
+name = "The Bloom"
+gate = "The exponential fed: 5 doublings at tau <= 3 yr"  # INVICTUS §3.4
+
+[[rung]]
+id = "k2"
+power_watts = 1.0e26
+name = "Stellar Era (Type II)"
+gate = "The Shell Referendum"                             # INVICTUS §4.3, FM-13
+
+[[rung]]
+id = "k25"
+power_watts = 1.0e30
+name = "The Seeding"
+gate = "A seed survives its first other-star climb"       # series endgame
+
+[[rung]]
+id = "k3"
+power_watts = 1.0e36
+name = "Galactic Era (Type III)"
+gate = "The galaxy's stars, metered"

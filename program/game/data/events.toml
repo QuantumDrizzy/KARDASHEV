@@ -1,0 +1,97 @@
+# Era I event deck — drawn from the ten volumes' FM catalogs.
+
+[[event]]
+id = "scream-mode"
+era = 1
+name = "The Scream Mode"
+severity = "nuisance"
+physics = "Whisper-mode firing pumps a global Lamb wave; tomography phase polluted (ORPHEUS FM-01)"
+mitigation = "Auto-detune; interlock on mode-Q estimate"
+
+[[event]]
+id = "surface-duct-ring"
+era = 1
+name = "Surface-Duct Ringing"
+severity = "nuisance"
+physics = "L1 standing field rings ~100 s after a source glitch; unplanned fatigue cycles (ORPHEUS FM-02)"
+mitigation = "Ramp-down protocols; Q-spoiling chirps"
+
+[[event]]
+id = "commanded-downpour"
+era = 1
+name = "Commanded-Downpour Accident"
+severity = "serious"
+physics = "A CHORUS cell loses phase control while seeded; localized 1e3 kg/s/km2 acid flux (ORPHEUS FM-06)"
+mitigation = "Seed-flow interlock; acid-rated surface assets"
+
+[[event]]
+id = "jet-drift"
+era = 1
+name = "Jet Migration"
+severity = "serious"
+physics = "The jet a Jupiter hive rides wanders; station-keeping budget blown (TANTALUS FM-08)"
+mitigation = "Hive hopping; GCM nowcasting"
+
+[[event]]
+id = "neighborhood-depletion"
+era = 1
+name = "Neighborhood Depletion"
+severity = "serious"
+physics = "Hive ingests its own He-3-poor wake; diffusive refill 1e15 s (TANTALUS FM-06)"
+mitigation = "Jet-riding station-keeping; inter-hive spacing rules"
+
+[[event]]
+id = "the-long-fall"
+era = 1
+name = "The Long Fall"
+severity = "critical"
+physics = "Titan habitat loses buoyancy; descends to its isopycnal at 300 K (KRAKEN FM-01)"
+mitigation = "Waterline rescue hives; cellular lift isolation"
+
+[[event]]
+id = "lake-fizz"
+era = 1
+name = "Lake Fizz (N2 Exsolution)"
+severity = "serious"
+physics = "Dissolved nitrogen exsolves on warming; floating assets lose buoyancy (KRAKEN FM-02)"
+mitigation = "Shoreline-only doctrine; ballast design for 78 K liquids"
+
+[[event]]
+id = "bore-refreeze"
+era = 1
+name = "Bore Refreeze Cascade"
+severity = "critical"
+physics = "Ocean well loses heat during a power dip; shaft grips the casing (KRAKEN FM-04)"
+mitigation = "Never-blackout rule for the Well; redundant heat lines"
+
+[[event]]
+id = "global-dust"
+era = 1
+name = "Global Dust Entrapment"
+severity = "serious"
+physics = "2018-class storm: tau > 5 planet-wide for weeks; solar collapses (DEIMOS FM-01)"
+mitigation = "Fission baseload margin x2; cache discipline"
+
+[[event]]
+id = "window-stranded"
+era = 1
+name = "Window-Stranded Asset"
+severity = "serious"
+physics = "Asset failure at end-of-cycle; 25.6 months to spare parts (DEIMOS FM-06)"
+mitigation = "Redundancy at the window timescale, not the failure timescale"
+
+[[event]]
+id = "closure-illusion"
+era = 1
+name = "Closure Illusion"
+severity = "critical"
+physics = "Colony claims closure; critical sectors secretly Earth-dependent (DEIMOS FM-10)"
+mitigation = "Sector audits with humans in the loop"
+
+[[event]]
+id = "dust-flux"
+era = 1
+name = "Belt Dust Flux"
+severity = "nuisance"
+physics = "Cascade products sandblast infrastructure at km/s (CERES FM-03)"
+mitigation = "Whipple shielding; replacement rate exceeds loss rate"
