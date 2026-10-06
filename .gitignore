@@ -18,3 +18,4 @@ public/media/*.mp4
 # ledger batches (regenerate: cd core && cargo run --release --bin ledger)
 out/
 core/target/
+program/game/target/
